@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+using KoitanLib;
+using UnityEditor;
+using System.Linq;
+
+public class JoyconRotator : Mover
+{
+
+    private Joycon m_joyconR;
+
+    private void Update()
+    {
+        if(m_joyconR == null)
+        {
+            var joycons = JoyconManager.Instance.j;
+            m_joyconR = joycons.Find(c => !c.isLeft);
+            return;
+        }
+        var orientation = m_joyconR.GetVector().eulerAngles;
+        var angles = transform.localEulerAngles;
+        angles.z = orientation.y;
+        transform.localEulerAngles = angles;
+
+        if (m_joyconR.GetButtonDown(Joycon.Button.SHOULDER_2))
+        {
+            m_joyconR.Recenter();
+        }
+    }
+    // Update is called once per frame
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
+    }
+}
