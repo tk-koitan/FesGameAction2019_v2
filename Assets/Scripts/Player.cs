@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //左右移動
         if (Input.GetKey(KeyCode.RightArrow))
