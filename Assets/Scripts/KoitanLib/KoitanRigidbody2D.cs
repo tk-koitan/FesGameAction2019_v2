@@ -111,11 +111,11 @@ namespace KoitanLib
 
             if (Input.GetKey(KeyCode.D))
             {
-                vx = 1;
+                vx = 0.1f;
             }
             else if (Input.GetKey(KeyCode.A))
             {
-                vx = -1;
+                vx = -0.1f;
             }
             else
             {
@@ -124,7 +124,7 @@ namespace KoitanLib
 
             Move(new Vector2(vx, vy));
             // 可視化
-            //Debug.DrawLine(groundPoint, groundPoint + velocity, Color.white);
+            Debug.DrawLine(groundPoint, groundPoint + velocity, Color.white);
         }
 
         public void Move(Vector2 v)
@@ -148,7 +148,7 @@ namespace KoitanLib
                 Vector2 start = raycastOrigins.bottomRight + new Vector2(-verticalRaySpacing * cnt, horizontalRaySpacing * i);
                 Vector2 end = start + new Vector2(vx + skinWidth,0);
                 RaycastHit2D hit = Physics2D.Linecast(start, end);
-                Debug.DrawLine(start, end, Color.black);
+                Debug.DrawLine(start, end, Color.white);
                 if (hit)
                 {
                     while(hit.point == start && cnt < verticalRayCount)
@@ -156,7 +156,7 @@ namespace KoitanLib
                         cnt++;
                         start.x -= verticalRaySpacing;
                         hit = Physics2D.Linecast(start, end);
-                        Debug.DrawLine(start, end, Color.black);
+                        Debug.DrawLine(start, end, Color.white);
                     }
                     float slopeMaxY = Mathf.Sin((90 - maxSlopeAngle) * Mathf.Deg2Rad);
                     if (hit.normal.y < slopeMaxY)
@@ -174,7 +174,7 @@ namespace KoitanLib
                 Vector2 start = raycastOrigins.bottomLeft + new Vector2(verticalRaySpacing * cnt, horizontalRaySpacing * i);
                 Vector2 end = start + new Vector2(vx - skinWidth, 0);
                 RaycastHit2D hit = Physics2D.Linecast(start, end);
-                Debug.DrawLine(start, end, Color.black);
+                Debug.DrawLine(start, end, Color.white);
                 if (hit)
                 {
                     while (hit.point == start && cnt < verticalRayCount)
@@ -182,7 +182,7 @@ namespace KoitanLib
                         cnt++;
                         start.x += verticalRaySpacing;
                         hit = Physics2D.Linecast(start, end);
-                        Debug.DrawLine(start, end, Color.black);
+                        Debug.DrawLine(start, end, Color.white);
                     }
                     float slopeMaxY = Mathf.Sin((90 - maxSlopeAngle) * Mathf.Deg2Rad);
                     if (hit.normal.y <= slopeMaxY)
@@ -202,7 +202,7 @@ namespace KoitanLib
                 Vector2 start = raycastOrigins.bottomLeft + new Vector2(vx + verticalRaySpacing * i, horizontalRaySpacing * cnt);
                 Vector2 end = start + new Vector2(0, vy - skinWidth);
                 RaycastHit2D hit = Physics2D.Linecast(start, end);
-                Debug.DrawLine(start, end, Color.black);
+                Debug.DrawLine(start, end, Color.white);
                 if (hit)
                 {
                     while (hit.point == start && cnt < horizontalRayCount)
@@ -210,13 +210,17 @@ namespace KoitanLib
                         cnt++;
                         start.y += horizontalRaySpacing;
                         hit = Physics2D.Linecast(start, end);
-                        Debug.DrawLine(start, end, Color.black);
+                        Debug.DrawLine(start, end, Color.white);
                     }
                     float slopeMaxY = Mathf.Sin((90 - maxSlopeAngle) * Mathf.Deg2Rad);
                     if (hit.normal.y > slopeMaxY)
                     {
                         vy = hit.point.y - contactPointY;
                         isGround = true;
+                    }
+                    else
+                    {
+                        vy *= hit.normal.y;
                     }
                 }
             }
@@ -228,7 +232,7 @@ namespace KoitanLib
                 Vector2 start = raycastOrigins.topLeft + new Vector2(vx + verticalRaySpacing * i, horizontalRaySpacing * cnt);
                 Vector2 end = start + new Vector2(0, vy + skinWidth);
                 RaycastHit2D hit = Physics2D.Linecast(start, end);
-                Debug.DrawLine(start, end, Color.black);
+                Debug.DrawLine(start, end, Color.white);
                 if (hit)
                 {
                     while (hit.point == start && cnt < horizontalRayCount)
@@ -236,13 +240,17 @@ namespace KoitanLib
                         cnt++;
                         start.y -= horizontalRaySpacing;
                         hit = Physics2D.Linecast(start, end);
-                        Debug.DrawLine(start, end, Color.black);
+                        Debug.DrawLine(start, end, Color.white);
                     }
                     float slopeMaxY = Mathf.Sin((90 - maxSlopeAngle) * Mathf.Deg2Rad);
                     if (hit.normal.y < -slopeMaxY)
                     {
                         vy = hit.point.y - contactPointY;
                         //isGround = true;
+                    }
+                    else
+                    {
+                        vy *= hit.normal.y;
                     }
                 }
             }
@@ -259,6 +267,7 @@ namespace KoitanLib
             raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
             raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
             raycastOrigins.center = bounds.center;
+            groundPoint = new Vector2((bounds.min.x + bounds.max.x)/2, bounds.min.y);
         }
 
         public void CalculateRaySpacing()

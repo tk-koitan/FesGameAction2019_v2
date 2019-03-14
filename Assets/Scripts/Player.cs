@@ -7,11 +7,11 @@ using DG.Tweening;
 public class Player : MonoBehaviour
 {
     public Vector2 v;
-    public float vxMax = 12f;
-    public float vyMax = 60;
-    public float g = -1.2f;
-    public float slopeMaxDeg;
-    public int defaultAirJumpTimes = 0;
+    public float vxMax = 0.2f;
+    public float vyMax = 0.5f;
+    public float g = -0.05f;
+    public float slopeMaxDeg = 50;
+    public int defaultAirJumpTimes = 1;
     private int airJumpTimes = 0;
     public int defaultJumpFrames = 8;
     private int jumpFrames = 0;
