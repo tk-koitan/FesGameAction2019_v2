@@ -23,9 +23,9 @@ public class SimpleMover : Mover
     }
 
     // Update is called once per frame
-    protected override void LateUpdate()
+    protected override void FixedUpdate()
     {
-        base.LateUpdate();
+        base.FixedUpdate();
     }
 
 #if UNITY_EDITOR

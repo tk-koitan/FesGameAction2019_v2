@@ -28,17 +28,10 @@ public class CircleMover : Mover
         DOTween.To(() => angle,t => angle = t,maxAngle,duration).SetRelative().SetEase(ease).SetLoops(-1,loopType).SetDelay(delay);
     }
 
-    protected override void LateUpdate()
+    protected override void FixedUpdate()
     {
         transform.position = pivot + new Vector3(radius * Mathf.Cos(angle * Mathf.Deg2Rad), radius * Mathf.Sin(angle * Mathf.Deg2Rad));
-        v = (Vector2)transform.position - beforePos;
-        beforePos = transform.position;
-        for (int i = 0; i < ridingPlayers.Count; i++)
-        {
-            ridingPlayers[i].PositionSet(v);
-            Debug.DrawLine(transform.position, ridingPlayers[i].transform.position, Color.gray);
-        }
-        ridingPlayers.Clear();
+        base.FixedUpdate();
     }
 
 #if UNITY_EDITOR

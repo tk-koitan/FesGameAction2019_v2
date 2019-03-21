@@ -293,7 +293,7 @@ public class Player : MonoBehaviour
             {
                 ridingTr = tmpObj.transform;
                 //v += tmpObj.GetComponent<Mover>().Velocity;
-                tmpObj.GetComponent<Mover>().ridingPlayers.Add(this);
+                //tmpObj.GetComponent<Mover>().ridingPlayers.Add(this);
                 //Debug.Log(tmpObj.GetComponent<PlatformEffector2D>().ToString());
             }
             else

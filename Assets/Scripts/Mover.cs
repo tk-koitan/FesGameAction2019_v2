@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Mover : MonoBehaviour
 {
-    public List<Player> ridingPlayers = new List<Player>(1);
+    public List<PlayerRB> ridingPlayers = new List<PlayerRB>(1);
     protected Vector2 v, beforePos, currentPos;
     protected float angleSpeed, beforeAngle, currentAngle;
     public virtual Vector2 Velocity { get; set; }
@@ -17,7 +17,8 @@ public abstract class Mover : MonoBehaviour
         angleSpeed = 0;
         beforeAngle = currentAngle;
     }
-    protected virtual void LateUpdate()
+
+    protected virtual void FixedUpdate()
     {
         currentPos = transform.position;
         v = currentPos - beforePos;

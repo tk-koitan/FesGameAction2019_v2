@@ -40,9 +40,9 @@ public class MoveBlockGyro : Mover
     }
 
     // Update is called once per frame
-    protected override void LateUpdate()
+    protected override void FixedUpdate()
     {
-        base.LateUpdate();
+        base.FixedUpdate();
     }
 
     private void OnDrawGizmos()

@@ -39,8 +39,10 @@ public class JoyconRotator : Mover
         }
     }
     // Update is called once per frame
+    /*
     protected override void LateUpdate()
     {
         base.LateUpdate();
     }
+    */
 }

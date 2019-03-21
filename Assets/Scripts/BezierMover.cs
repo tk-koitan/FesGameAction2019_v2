@@ -28,10 +28,10 @@ public class BezierMover : Mover
     }
 
     // Update is called once per frame
-    protected override void LateUpdate()
+    protected override void FixedUpdate()
     {
         transform.position = CubicBezier.GetPoint(startPoint.Anchore, startPoint.Anchore + startPoint.Handle2, startPoint.Anchore + endPoint.Anchore + endPoint.Handle1, startPoint.Anchore + endPoint.Anchore, t);
-        base.LateUpdate();
+        base.FixedUpdate();
     }
 
 #if UNITY_EDITOR

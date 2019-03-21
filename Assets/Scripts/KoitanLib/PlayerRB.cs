@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RBTest : MonoBehaviour
+public class PlayerRB : MonoBehaviour
 {
     private Rigidbody2D rb;
     private BoxCollider2D box;
@@ -13,9 +13,11 @@ public class RBTest : MonoBehaviour
     public bool isGround;
 
     private Vector2 v = Vector2.zero;
+    private Vector2 rv = Vector2.zero;
     private Vector2 power = Vector2.zero;
-    private Vector2 groundPoint;
+    public Vector2 groundPoint;
     private Vector2 groundNormal;
+    private GameObject groundObj;
     public float slopeMaxDeg = 50;
 
     private bool isContactRight;
@@ -84,10 +86,22 @@ public class RBTest : MonoBehaviour
             v = power;
         }
 
-        //rb.velocity = v;
-        rb.MovePosition(transform.position + (Vector3)v);
+        rb.velocity = v + rv;
+        //rb.MovePosition(transform.position + (Vector3)v);
+        rv = Vector2.zero;
+        //transform.position += (Vector3)v;
         Debug.DrawRay(transform.position, v, Color.white);
-        Debug.Log("速さ:"+v.magnitude);
+        //Debug.Log("速さ:"+v.magnitude);
+    }
+
+    public void PositionSet(Vector2 velocity)
+    {
+        //rb.MovePosition(transform.position + (Vector3)velocity);
+        transform.position += (Vector3)velocity;
+        //v += velocity;
+        rv = velocity;
+        //rb.velocity += velocity;
+        Debug.Log(velocity);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -98,6 +112,7 @@ public class RBTest : MonoBehaviour
 
         groundPoint = collision.contacts[0].point;
         groundNormal = collision.contacts[0].normal;
+        GameObject groundObj = collision.contacts[0].collider.gameObject;
         Vector2 center = transform.position;
         float dir = (v  + center - collision.contacts[0].point).magnitude;
 
@@ -109,27 +124,37 @@ public class RBTest : MonoBehaviour
             {
                 groundPoint = collision.contacts[i].point;
                 groundNormal = collision.contacts[i].normal;
+                groundObj = collision.contacts[i].collider.gameObject;
             }
             Debug.DrawRay(collision.contacts[i].point, collision.contacts[i].normal);
         }
 
-        /*
-        RaycastHit2D hit = Physics2D.Raycast(center, Vector2.down * (v.magnitude + box.bounds.size.y));
-        Debug.DrawRay(center, Vector2.down * (v.magnitude + box.bounds.size.y));
-        if (hit)
+        if(isGround)
         {
-            float tmpDir = (v + center - hit.point).magnitude;
-            if (tmpDir < dir)
+
+            RaycastHit2D hit = Physics2D.Raycast(center, Vector2.down * (v.magnitude + box.bounds.size.y));
+            Debug.DrawRay(center, Vector2.down * (v.magnitude + box.bounds.size.y));
+            if (hit)
             {
-                groundPoint = hit.point;
-                groundNormal = hit.normal;
+                float tmpDir = (v + center - hit.point).magnitude;
+                if (tmpDir < dir)
+                {
+                    groundPoint = hit.point;
+                    groundNormal = hit.normal;
+                    groundObj = hit.collider.gameObject;
+                }
             }
         }
-        */
+
 
         if (groundNormal.y >= slopeMinY)
         {
             isGround = true;
+            if(groundObj.layer == (int)LayerName.MovingPlatform)
+            {
+                groundObj.GetComponent<Mover>().ridingPlayers.Add(this);
+                Debug.Log(groundObj);
+            }
             Debug.DrawRay(groundPoint, groundNormal);
             Debug.Log(groundNormal + ">=" + slopeMinY);
         }
