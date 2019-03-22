@@ -5,9 +5,10 @@ using UnityEngine;
 public abstract class Mover : MonoBehaviour
 {
     public List<PlayerRB> ridingPlayers = new List<PlayerRB>(1);
-    protected Vector2 v, beforePos, currentPos;
-    protected float angleSpeed, beforeAngle, currentAngle;
-    public virtual Vector2 Velocity { get; set; }
+    public Vector2 v, beforePos, currentPos;
+    protected float beforeAngle, currentAngle;
+    public float angleSpeed { private set; get; }
+    public virtual Vector2 Velocity { private set; get; }
     protected virtual void Start()
     {
         currentPos = transform.position;
@@ -18,7 +19,7 @@ public abstract class Mover : MonoBehaviour
         beforeAngle = currentAngle;
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         currentPos = transform.position;
         v = currentPos - beforePos;
@@ -28,7 +29,7 @@ public abstract class Mover : MonoBehaviour
         beforeAngle = currentAngle;
         for (int i = 0; i < ridingPlayers.Count; i++)
         {
-            ridingPlayers[i].PositionSet(v);
+            //ridingPlayers[i].PositionSet(v);
             Vector2 fromPos = ridingPlayers[i].groundPoint - (Vector2)transform.position;
             Vector2 toPos = Quaternion.Euler(0, 0, angleSpeed) * fromPos;
             Vector2 tmpV = toPos - fromPos;
@@ -44,7 +45,7 @@ public abstract class Mover : MonoBehaviour
                 ridingPlayers[i].PositionSet(tmpV);
             }
             */
-            ridingPlayers[i].PositionSet(tmpV);
+            //ridingPlayers[i].PositionSet(tmpV);
             Debug.DrawLine(transform.position, ridingPlayers[i].transform.position, Color.gray);
             if (i == 1) Debug.Log("同時接触");
         }
