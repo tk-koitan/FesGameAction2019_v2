@@ -35,10 +35,12 @@ public class trampoline : Mover
         transform.position = defaultPos + Vector2.up * m_joyconR.GetAccel().magnitude;
     }
     // Update is called once per frame
-    protected override void FixedUpdate()
+    /*
+    protected override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
     }
+    */
 
     public override Vector2 Velocity
     {

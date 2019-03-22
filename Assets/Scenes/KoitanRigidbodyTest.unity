@@ -549,7 +549,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236618942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 2d5da0aa7beab48f1ab571d394c64391, type: 2}
   m_IsTrigger: 0
@@ -565,7 +565,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236618942}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 2d5da0aa7beab48f1ab571d394c64391, type: 2}
   m_IsTrigger: 0
@@ -616,6 +616,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
   maxAngle: 360
   duration: 3
   ease: 1
@@ -829,6 +832,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
   xAmount: 6
   yAmount: 0
   duration: 3
@@ -948,6 +954,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
 --- !u!61 &2065768719
 BoxCollider2D:
   m_ObjectHideFlags: 0

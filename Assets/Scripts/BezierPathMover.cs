@@ -64,7 +64,7 @@ public class BezierPathMover : Mover
     }
 
     // Update is called once per frame
-    protected override void FixedUpdate()
+    protected override void Update()
     {
         t = overTime % 1;
         index = (int)overTime - loopTime * (maxIndex);
@@ -80,7 +80,7 @@ public class BezierPathMover : Mover
         to = pivot + (Vector3)path[tmpIndex].Anchore;
         toHandle = to + (Vector3)path[tmpIndex].Handle1;
         transform.position = CubicBezier.GetPoint(from, fromHandle, toHandle, to, t);
-        base.FixedUpdate();
+        base.Update();
     }
 
 #if UNITY_EDITOR

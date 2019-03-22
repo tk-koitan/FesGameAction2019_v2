@@ -86,9 +86,10 @@ public class PlayerRB : MonoBehaviour
             v = power;
         }
 
-        rb.velocity = v + rv;
-        //rb.MovePosition(transform.position + (Vector3)v);
-        rv = Vector2.zero;
+        //rb.velocity = v + rv;
+        rb.MovePosition(transform.position + (Vector3)(v + rv));
+        //rv = Vector2.zero;
+        //rv = Vector2.zero;
         //transform.position += (Vector3)v;
         Debug.DrawRay(transform.position, v, Color.white);
         //Debug.Log("速さ:"+v.magnitude);
@@ -99,7 +100,7 @@ public class PlayerRB : MonoBehaviour
         //rb.MovePosition(transform.position + (Vector3)velocity);
         transform.position += (Vector3)velocity;
         //v += velocity;
-        rv = velocity;
+        //rv = velocity;
         //rb.velocity += velocity;
         Debug.Log(velocity);
     }
@@ -112,7 +113,7 @@ public class PlayerRB : MonoBehaviour
 
         groundPoint = collision.contacts[0].point;
         groundNormal = collision.contacts[0].normal;
-        GameObject groundObj = collision.contacts[0].collider.gameObject;
+        groundObj = collision.contacts[0].collider.gameObject;
         Vector2 center = transform.position;
         float dir = (v  + center - collision.contacts[0].point).magnitude;
 
@@ -152,8 +153,18 @@ public class PlayerRB : MonoBehaviour
             isGround = true;
             if(groundObj.layer == (int)LayerName.MovingPlatform)
             {
-                groundObj.GetComponent<Mover>().ridingPlayers.Add(this);
+                Mover tmpM = groundObj.GetComponent<Mover>();
+                //tmpM.ridingPlayers.Add(this);
+                Vector2 fromPos = groundPoint - (Vector2)tmpM.transform.position;
+                Vector2 toPos = Quaternion.Euler(0, 0, tmpM.angleSpeed) * fromPos;
+                Vector2 tmpV = toPos - fromPos;
+                Debug.Log(gameObject.name + ":" + tmpV.magnitude);
+                rv = tmpM.v + tmpV;
                 Debug.Log(groundObj);
+            }
+            else
+            {
+                rv = Vector2.zero;
             }
             Debug.DrawRay(groundPoint, groundNormal);
             Debug.Log(groundNormal + ">=" + slopeMinY);
@@ -177,5 +188,6 @@ public class PlayerRB : MonoBehaviour
     {
         isGround = isContactLeft = isContactRight = false;
         groundNormal = Vector2.up;
+        rv = Vector2.zero;
     }
 }
