@@ -11,6 +11,8 @@ public class PlayerRB : MonoBehaviour
     public float gravity = -0.2f;
     public float maxVy = 10;
     public bool isGround;
+    public int direction = 1;//右1,左-1
+    private Vector3 defaultScale;
 
     private Vector2 v = Vector2.zero;
     private Vector2 rv = Vector2.zero;
@@ -31,6 +33,7 @@ public class PlayerRB : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        defaultScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
     }
@@ -42,11 +45,15 @@ public class PlayerRB : MonoBehaviour
         {
             power.x += accelVx;
             power.x = Mathf.Min(power.x, maxVx);
+            direction = 1;
+            transform.localScale = defaultScale * direction;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             power.x -= accelVx;
             power.x = Mathf.Max(power.x, -maxVx);
+            direction = -1;
+            transform.localScale = defaultScale * direction;
         }
         else
         {
