@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1709,6 +1709,7 @@ GameObject:
   - component: {fileID: 480017485}
   - component: {fileID: 480017486}
   - component: {fileID: 480017487}
+  - component: {fileID: 480017488}
   m_Layer: 2
   m_Name: KawazTanParts
   m_TagString: Player
@@ -1786,8 +1787,8 @@ MonoBehaviour:
   - {fileID: 868198753}
   - {fileID: 1384314248}
   m_Bounds:
-    m_Center: {x: 2.2133994, y: 0.16287422, z: 0}
-    m_Extent: {x: 3.9254313, y: 4.215596, z: 0}
+    m_Center: {x: 1.64534, y: 0.2904799, z: 0}
+    m_Extent: {x: 4.633746, y: 1.9512393, z: 0}
 --- !u!212 &480017483
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1877,7 +1878,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 3}
+  m_Size: {x: 2, y: 7}
   m_EdgeRadius: 0
 --- !u!114 &480017486
 MonoBehaviour:
@@ -1893,7 +1894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxVx: 0.4
   accelVx: 0.1
-  gravity: -0.02
+  gravity: -0.03
   maxVy: 0.5
   isGround: 0
   direction: 1
@@ -1934,6 +1935,53 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!331 &480017488
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480017479}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
+  m_MaskAlphaCutoff: 0.2
+  m_FrontSortingLayerID: 0
+  m_BackSortingLayerID: 0
+  m_FrontSortingLayer: 0
+  m_BackSortingLayer: 0
+  m_FrontSortingOrder: 0
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &514029287
 GameObject:
   m_ObjectHideFlags: 0
@@ -7342,7 +7390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875503570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0153847, y: 0.5760536, z: -0.26926002}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 480017484}
@@ -7385,15 +7433,15 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_MaskAlphaCutoff: 0
+  m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
+  m_MaskAlphaCutoff: 0.212
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
   m_FrontSortingOrder: 0
   m_BackSortingOrder: 0
-  m_IsCustomRangeActive: 1
+  m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
 --- !u!1 &911977348
 GameObject:
@@ -8700,6 +8748,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2136228058}
+  - {fileID: 1933799242}
   - {fileID: 1873915783}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -9894,7 +9943,6 @@ GameObject:
   - component: {fileID: 1873915786}
   - component: {fileID: 1873915785}
   - component: {fileID: 1873915784}
-  - component: {fileID: 1873915787}
   m_Layer: 2
   m_Name: fadeBlock
   m_TagString: Untagged
@@ -9912,10 +9960,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1933799242}
+  m_Children: []
   m_Father: {fileID: 1563753781}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1873915784
 BoxCollider2D:
@@ -9987,7 +10034,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!1839735485 &1873915786
 Tilemap:
   m_ObjectHideFlags: 0
@@ -10606,19 +10653,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1873915787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873915782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dc11cea0cdf0a54087817127fa9c384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  feedTime: 0.4
 --- !u!1 &1913637275
 GameObject:
   m_ObjectHideFlags: 0
@@ -10794,11 +10828,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933799241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1873915783}
-  m_RootOrder: 0
+  m_Father: {fileID: 1563753781}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1933799243
 TilemapRenderer:
@@ -10844,7 +10878,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
 --- !u!1839735485 &1933799244
 Tilemap:
   m_ObjectHideFlags: 0

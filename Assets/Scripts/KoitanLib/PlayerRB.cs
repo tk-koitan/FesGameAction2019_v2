@@ -12,7 +12,7 @@ public class PlayerRB : MonoBehaviour
     public float maxVy = 10;
     public bool isGround;
     public int direction = 1;//右1,左-1
-    private Vector3 defaultScale;
+    private float defaultScaleX;
 
     private Vector2 v = Vector2.zero;
     private Vector2 rv = Vector2.zero;
@@ -26,6 +26,9 @@ public class PlayerRB : MonoBehaviour
     private bool isContactLeft;
     private bool isContactUp;
 
+    // キャッシュ by tada
+    Animator animator;
+
 
     [SerializeField] ContactFilter2D filter2d;
     [SerializeField] ContactPoint2D[] contacts;
@@ -33,9 +36,15 @@ public class PlayerRB : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        defaultScale = transform.localScale;
+        direction = (transform.localScale.x > 0.0f) ? 1 : -1; // tada
+        defaultScaleX = transform.localScale.x * direction;
+        transform.localScale = new Vector3(
+            defaultScaleX, transform.localScale.y, transform.localScale.z);
+
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
+
+        animator = GetComponent<Animator>(); // tada
     }
 
     // Update is called once per frame
@@ -46,21 +55,23 @@ public class PlayerRB : MonoBehaviour
             power.x += accelVx;
             power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
-            transform.localScale = defaultScale * direction;
+            transform.localScale = new Vector3(
+                 defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             power.x -= accelVx;
             power.x = Mathf.Max(power.x, -maxVx);
             direction = -1;
-            transform.localScale = defaultScale * direction;
+            transform.localScale = new Vector3(
+                 defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
         }
         else
         {
             power.x *= 0.8f;
         }
 
-        if(isContactRight)
+        if (isContactRight)
         {
             power.x = Mathf.Min(power.x, 0);
         }
@@ -74,12 +85,14 @@ public class PlayerRB : MonoBehaviour
         {
             power.y = maxVy;
             isGround = false;
+            animator.SetBool("Jump", true); // tada
         }
 
         if (isGround)
         {
             power.y = 0;
-            if(power.magnitude<0.01f)
+            animator.SetBool("Jump", false); // tada
+            if (power.magnitude<0.01f)
             {
                 v = Vector2.zero;
             }
@@ -100,6 +113,9 @@ public class PlayerRB : MonoBehaviour
         //transform.position += (Vector3)v;
         Debug.DrawRay(transform.position, v, Color.white);
         //Debug.Log("速さ:"+v.magnitude);
+
+        // tada
+        animator.SetFloat("MoveSpeed", Mathf.Abs(v.x));
     }
 
     public void PositionSet(Vector2 velocity)

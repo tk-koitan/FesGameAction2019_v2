@@ -46,27 +46,25 @@ public class CameraFollow : MonoBehaviour
     // ====== キャッシュ ===============================
     Camera cam;
     Transform playerTrfm;
-    Player player;
+    PlayerRB player;
 
     private float screenOGSizeAdd = 0.0f;
     private float screenPSSizeAdd = 0.0f;
 
     public float firstDir = 1.0f; // プレイヤーの向いている方向
-    private float dir;
 
     // ====== コード(Monobehaviour基本機能の実装) =========
     void Awake()
     {
         cam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player").
-                    GetComponent<Player>();
+                    GetComponent<PlayerRB>();
         playerTrfm = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Use this for initialization
     void Start()
     {
-        dir = firstDir;
     }
 
     void LateUpdate()
@@ -78,10 +76,6 @@ public class CameraFollow : MonoBehaviour
         float screenOGSize = cam.orthographicSize;
         float screenPSSize = cam.fieldOfView;
 
-        // v.x==0の時はそのまま
-        if (player.v.x > 0) dir = 1.0f;
-        else if (player.v.x < 0) dir = -1.0f;
-
         // ターゲットの設定
         switch (param.targetType)
         {
@@ -90,11 +84,11 @@ public class CameraFollow : MonoBehaviour
                 targetY = playerTrfm.position.y;
                 break;
             case CAMERATARGET.PLAYER_MARGIN:
-                targetX = playerTrfm.position.x + param.margin.x * dir;
+                targetX = playerTrfm.position.x + param.margin.x * player.direction;
                 targetY = playerTrfm.position.y + param.margin.y;
                 break;
             case CAMERATARGET.PLAYER_GROUND: // 今回は使えない
-                targetX = playerTrfm.position.x + param.margin.x * dir;
+                targetX = playerTrfm.position.x + param.margin.x * player.direction;
                 //targetY = playerCtrl.groundY + param.margin.y;
                 break;
         }
