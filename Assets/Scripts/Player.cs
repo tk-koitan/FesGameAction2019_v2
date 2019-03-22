@@ -44,11 +44,16 @@ public class Player : MonoBehaviour
     Vector2 topRightPoint;
     Vector2 topLeftPoint;
 
+    // キャッシュ by tada
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         //sprite = GetComponent<SpriteRenderer>();
         hitBox = GetComponent<BoxCollider2D>();
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -70,6 +75,9 @@ public class Player : MonoBehaviour
             v.x *= 0.80f;
         }
 
+        // tada
+        animator.SetFloat("MoveSpeed", Mathf.Abs(v.x));
+
         //上下移動
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -83,6 +91,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    animator.SetBool("Jump", true); // tada
                     v.y = vyMax;
                     isGround = false;
                     jumpFrames = defaultJumpFrames;
@@ -95,6 +104,7 @@ public class Player : MonoBehaviour
                 airJumpTimes--;
                 jumpFrames = defaultJumpFrames;
                 isJumping = true;
+                animator.Play("PlayerJump", 0, 0.0f); // tada
             }
         }
 
@@ -110,6 +120,7 @@ public class Player : MonoBehaviour
 
         if (isGround)
         {
+            animator.SetBool("Jump", false); // tada
             isJumping = false;
             airJumpTimes = defaultAirJumpTimes;
             //v.y = -hitBox.size.y/4;
