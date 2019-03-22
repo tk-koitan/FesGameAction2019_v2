@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -223,6 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
   moveAngle: 0.5
   moveDistanceMax: 8
   moveSpeed: 0.05
@@ -436,6 +439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
   moveAngle: 0
   moveDistanceMax: 8
   moveSpeed: 0.05
@@ -1549,6 +1555,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
 --- !u!61 &394652902
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1698,6 +1707,8 @@ GameObject:
   - component: {fileID: 480017481}
   - component: {fileID: 480017480}
   - component: {fileID: 480017485}
+  - component: {fileID: 480017486}
+  - component: {fileID: 480017487}
   m_Layer: 2
   m_Name: KawazTanParts
   m_TagString: Player
@@ -1712,7 +1723,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480017479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca1a8334054bb4edb9746286ad21fcf3, type: 3}
   m_Name: 
@@ -1868,6 +1879,61 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &480017486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480017479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df17fa687e10247ad86f78a29f86711c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxVx: 0.4
+  accelVx: 0.1
+  gravity: -0.02
+  maxVy: 0.5
+  isGround: 0
+  direction: 1
+  groundPoint: {x: 0, y: 0}
+  slopeMaxDeg: 50
+  filter2d:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+--- !u!50 &480017487
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480017479}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &514029287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,6 +2242,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
   moveAngle: 2.64
   moveDistanceMax: 8
   moveSpeed: 0.05
@@ -7847,6 +7916,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
 --- !u!61 &1238697924
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8000,7 +8072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1265355881
 Transform:
   m_ObjectHideFlags: 0
@@ -8286,6 +8358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
 --- !u!61 &1433584813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8649,7 +8724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1596670848
 Rigidbody2D:
   serializedVersion: 4
@@ -8684,6 +8759,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
 --- !u!61 &1596670850
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9267,6 +9345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ridingPlayers: []
+  v: {x: 0, y: 0}
+  beforePos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
 --- !u!50 &1677785846
 Rigidbody2D:
   serializedVersion: 4

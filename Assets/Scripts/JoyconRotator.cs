@@ -18,8 +18,9 @@ public class JoyconRotator : Mover
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if(m_joyconR == null)
         {
             var joycons = JoyconManager.Instance.j;

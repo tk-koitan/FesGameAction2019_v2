@@ -13,8 +13,9 @@ public class MoveBlockGyro : Mover
 
     private Joycon m_joyconR;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (m_joyconR == null)
         {
             var joycons = JoyconManager.Instance.j;
