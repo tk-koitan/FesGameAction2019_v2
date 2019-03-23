@@ -55,21 +55,19 @@ public class PlayerRB : MonoBehaviour
             power.x += accelVx;
             power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
-            transform.localScale = new Vector3(
-                 defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             power.x -= accelVx;
             power.x = Mathf.Max(power.x, -maxVx);
             direction = -1;
-            transform.localScale = new Vector3(
-                 defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
         }
         else
         {
             power.x *= 0.8f;
         }
+        transform.localScale = new Vector3(
+            defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
 
         if (isContactRight)
         {
@@ -212,5 +210,19 @@ public class PlayerRB : MonoBehaviour
         isGround = isContactLeft = isContactRight = false;
         groundNormal = Vector2.up;
         rv = Vector2.zero;
+    }
+
+    // 以下 tada 
+    public void Goaled() // ゴールした時に実行
+    {
+        animator.SetTrigger("Clear");
+        // 動けなくする処理
+
+        // n秒後にシーン遷移
+        Invoke("GoStageSelect", 10.0f);
+    }
+    private void GoStageSelect()
+    {
+        // SceneManager.LoadScene("StageSelect");
     }
 }
