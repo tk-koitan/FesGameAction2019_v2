@@ -577,8 +577,8 @@ MonoBehaviour:
   - {fileID: 2133159008}
   - {fileID: 500935918}
   m_Bounds:
-    m_Center: {x: 2.2133994, y: 0.16287422, z: 0}
-    m_Extent: {x: 3.9254313, y: 4.215596, z: 0}
+    m_Center: {x: 0.599856, y: -1.3116441, z: 0}
+    m_Extent: {x: 2.7560058, y: 3.1509728, z: 0}
 --- !u!212 &853574765
 SpriteRenderer:
   m_ObjectHideFlags: 0

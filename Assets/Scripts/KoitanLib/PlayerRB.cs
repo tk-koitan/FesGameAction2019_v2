@@ -11,6 +11,7 @@ public class PlayerRB : MonoBehaviour
     public float gravity = -0.2f;
     public float maxVy = 10;
     public bool isGround;
+    public bool isSquat;
     public int direction = 1;//右1,左-1
     private float defaultScaleX;
 
@@ -68,6 +69,15 @@ public class PlayerRB : MonoBehaviour
         }
         transform.localScale = new Vector3(
             defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
+
+        if(Input.GetKey(KeyCode.DownArrow))
+        {
+            animator.SetBool("squat", true);
+        }
+        else
+        {
+            animator.SetBool("squat", false);
+        }
 
         if (isContactRight)
         {
