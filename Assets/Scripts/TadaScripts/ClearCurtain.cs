@@ -8,17 +8,17 @@ public class ClearCurtain : MonoBehaviour
     public float animTime = 3.0f;
 
     private bool isDone = false;
-    GameObject clearCurtain;
+    [SerializeField] private GameObject clearCurtain;
 
     private void Start()
     {
-        clearCurtain = gameObject.transform.Find("ClearCurtain").gameObject;
+        //clearCurtain = gameObject.transform.Find("ClearCurtain").gameObject;
     }
-
+    /*
     private void Update() // デバッグで付け加えただけ
     {
         if (Input.GetKeyDown(KeyCode.B)) EndCurtain();
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -33,7 +33,7 @@ public class ClearCurtain : MonoBehaviour
         }
     }
 
-    public void EndCurtain()
+    private void EndCurtain()
     {
         // 幕をカメラの位置にする
         clearCurtain.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0f);
