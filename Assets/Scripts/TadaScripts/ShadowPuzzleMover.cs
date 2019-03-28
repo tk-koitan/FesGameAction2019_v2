@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using KoitanLib;
 
-public class ShadowPuzzleMover : IsActionEnabled
+public class ShadowPuzzleMover : Mover
 {
     public float moveAngle = 0f;
     public float moveDistanceMax = 5.0f;
     public float moveSpeed = 0.05f;
     private float moveDistance = 0.0f;
+
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+    }
 
     protected override void UpdatedAction()
     {

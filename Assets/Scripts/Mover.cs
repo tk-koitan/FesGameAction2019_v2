@@ -4,6 +4,14 @@ using UnityEngine;
 
 public abstract class Mover : MonoBehaviour
 {
+    // === tada ============================
+    public bool actionEnabled = false;
+
+    // isTriggerがtrueだと、一度でもactionEnabledがtrueになったらずっと実行する
+    [SerializeField] private bool isTrigger = false;
+    private bool reallyEnabled = false;
+    // =====================================
+
     public List<PlayerRB> ridingPlayers = new List<PlayerRB>(1);
     public Vector2 v, beforePos, currentPos;
     protected float beforeAngle, currentAngle;
@@ -21,6 +29,8 @@ public abstract class Mover : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (GetIFActionEnabled()) UpdatedAction();
+
         currentPos = transform.position;
         v = currentPos - beforePos;
         beforePos = currentPos;
@@ -50,6 +60,23 @@ public abstract class Mover : MonoBehaviour
             if (i == 1) Debug.Log("同時接触");
         }
         ridingPlayers.Clear();
+    }
+
+    protected virtual void UpdatedAction()
+    {
+        // 派生クラスで実装
+        // この処理は画面外で起こしたくない
+        // 取りあえず、プレイヤーもこのギミックの始動要員として画面内のみで可能な処理にしてる
+    }
+
+    private bool GetIFActionEnabled()
+    {
+        if (!actionEnabled && !isTrigger) return false;
+
+        if (!reallyEnabled || !isTrigger)
+            reallyEnabled = actionEnabled;
+
+        return reallyEnabled;
     }
 }
 

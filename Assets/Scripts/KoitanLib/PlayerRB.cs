@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRB : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class PlayerRB : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             power.x += accelVx;
@@ -233,6 +235,6 @@ public class PlayerRB : MonoBehaviour
     }
     private void GoStageSelect()
     {
-        // SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("StageSelect");
     }
 }

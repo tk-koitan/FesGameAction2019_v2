@@ -36,7 +36,7 @@ public class ShadowPuzzle : MonoBehaviour
         {
             foreach (GameObject actionObj in actionObjects)
             {
-                actionObj.GetComponent<IsActionEnabled>().actionEnabled = actionEnabled;
+                actionObj.GetComponent<Mover>().actionEnabled = actionEnabled;
             }
         }
 
