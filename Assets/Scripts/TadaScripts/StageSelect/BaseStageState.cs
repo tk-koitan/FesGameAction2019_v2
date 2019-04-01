@@ -5,6 +5,7 @@ using UnityEngine;
 public class BaseStageState : MonoBehaviour
 {
     public int stageId = 0;
+    public string stageSceneName = "CamTestStage";
     public string stageName = "";
     public Sprite stageSprite;
     public Transform stageTransform;
