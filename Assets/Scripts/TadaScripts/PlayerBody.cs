@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBody : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerBody : MonoBehaviour
         {
             Camera.main.GetComponent<CameraFollow>().SetCamera(
                 collision.GetComponent<StageTrigger_Camera>().param); // カメラの情報をセット
+        }
+
+        if(collision.tag == "DeadTrigger")
+        {
+            Debug.Log("死亡しました");
         }
     }
 }
