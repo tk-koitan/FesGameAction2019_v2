@@ -31,15 +31,17 @@ public abstract class Mover : MonoBehaviour
     {
         if (GetIFActionEnabled()) UpdatedAction();
 
+
         currentPos = transform.position;
         v = currentPos - beforePos;
         beforePos = currentPos;
         currentAngle = transform.rotation.eulerAngles.z;
         angleSpeed = currentAngle - beforeAngle;
         beforeAngle = currentAngle;
+           
         for (int i = 0; i < ridingPlayers.Count; i++)
         {
-            //ridingPlayers[i].PositionSet(v);
+            ridingPlayers[i].PositionSet(v);
             Vector2 fromPos = ridingPlayers[i].groundPoint - (Vector2)transform.position;
             Vector2 toPos = Quaternion.Euler(0, 0, angleSpeed) * fromPos;
             Vector2 tmpV = toPos - fromPos;
@@ -55,7 +57,7 @@ public abstract class Mover : MonoBehaviour
                 ridingPlayers[i].PositionSet(tmpV);
             }
             */
-            //ridingPlayers[i].PositionSet(tmpV);
+            ridingPlayers[i].PositionSet(tmpV);
             Debug.DrawLine(transform.position, ridingPlayers[i].transform.position, Color.gray);
             if (i == 1) Debug.Log("同時接触");
         }

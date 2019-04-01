@@ -15,7 +15,6 @@ public class MoveBlockGyro : Mover
 
     protected override void Update()
     {
-        base.Update();
         if (m_joyconR == null)
         {
             var joycons = JoyconManager.Instance.j;
@@ -37,6 +36,7 @@ public class MoveBlockGyro : Mover
         moveDistance += gyroZ;
         transform.position += new Vector3(gyroZ * Mathf.Cos(moveAngle), gyroZ * Mathf.Sin(moveAngle));
 
+        base.Update();
         // 画面外にいるときは処理を行わないようにしたい 出来れば基底クラスで
     }
 

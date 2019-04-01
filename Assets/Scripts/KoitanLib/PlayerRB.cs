@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerRB : MonoBehaviour
 {
     private Rigidbody2D rb;
+    [SerializeField]
     private BoxCollider2D box;
     public float maxVx = 5;
     public float accelVx = 1;
@@ -27,10 +28,12 @@ public class PlayerRB : MonoBehaviour
     private bool isContactRight;
     private bool isContactLeft;
     private bool isContactUp;
+    private BoxCollider2D groundTrigger;
+    private Vector2 riderBeforePos;
 
     // キャッシュ by tada
     Animator animator;
-
+    GroundChecker groundChecker;
 
     [SerializeField] ContactFilter2D filter2d;
     [SerializeField] ContactPoint2D[] contacts;
@@ -45,7 +48,7 @@ public class PlayerRB : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
-
+        groundChecker = GetComponentInChildren<GroundChecker>();
         animator = GetComponent<Animator>(); // tada
     }
 
@@ -114,9 +117,43 @@ public class PlayerRB : MonoBehaviour
         {
             power.y += gravity;
             v = power;
+            rv = Vector2.zero;
         }
 
+
+        foreach(Mover mover in groundChecker.riders)
+        {
+            /*
+            if(groundChecker.rideOn)
+            {
+                groundChecker.rideOn = false;
+                riderBeforePos = mover.transform.position;
+            }
+            */
+            Vector2 fromPos = groundPoint - (Vector2)mover.transform.position;
+            Vector2 toPos = Quaternion.Euler(0, 0, mover.angleSpeed) * fromPos;
+            Vector2 tmpV = toPos - fromPos;
+            //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
+
+            //いらない
+            //rv = mover.v + tmpV;
+
+            /*
+            Vector2 tmpPos = mover.transform.position;
+            rv = tmpPos - riderBeforePos;
+            riderBeforePos = tmpPos;
+            */           
+        }
+
+        //riders更新
+        foreach(Mover mover in groundChecker.rmRiders)
+        {
+            groundChecker.riders.Remove(mover);
+        }
+        groundChecker.rmRiders.Clear();
+
         //rb.velocity = v + rv;
+        rv = Vector2.zero;
         rb.MovePosition(transform.position + (Vector3)(v + rv));
         //rv = Vector2.zero;
         //rv = Vector2.zero;
@@ -128,6 +165,13 @@ public class PlayerRB : MonoBehaviour
         animator.SetFloat("MoveSpeed", Mathf.Abs(v.x));
     }
 
+    /*
+    private void LateUpdate()
+    {
+        rb.MovePosition(transform.position + (Vector3)(v + rv));
+    }
+    */
+   
     public void PositionSet(Vector2 velocity)
     {
         //rb.MovePosition(transform.position + (Vector3)velocity);
@@ -191,7 +235,7 @@ public class PlayerRB : MonoBehaviour
                 Vector2 fromPos = groundPoint - (Vector2)tmpM.transform.position;
                 Vector2 toPos = Quaternion.Euler(0, 0, tmpM.angleSpeed) * fromPos;
                 Vector2 tmpV = toPos - fromPos;
-                Debug.Log(gameObject.name + ":" + tmpV.magnitude);
+                //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
                 rv = tmpM.v + tmpV;
                 Debug.Log(groundObj);
             }
