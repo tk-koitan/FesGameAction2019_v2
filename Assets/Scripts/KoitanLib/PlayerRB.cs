@@ -55,7 +55,7 @@ public class PlayerRB : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         if (Input.GetKey(KeyCode.RightArrow))
         {
             power.x += accelVx;

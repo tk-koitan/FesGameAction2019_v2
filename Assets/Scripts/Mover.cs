@@ -57,8 +57,9 @@ public abstract class Mover : MonoBehaviour
                 ridingPlayers[i].PositionSet(tmpV);
             }
             */
+            Debug.DrawLine(ridingPlayers[i].groundPoint, ridingPlayers[i].groundPoint + tmpV, Color.yellow);
             ridingPlayers[i].PositionSet(tmpV);
-            Debug.DrawLine(transform.position, ridingPlayers[i].transform.position, Color.gray);
+            //Debug.DrawLine(transform.position, ridingPlayers[i].transform.position, Color.gray);
             if (i == 1) Debug.Log("同時接触");
         }
         ridingPlayers.Clear();
