@@ -9,6 +9,15 @@ public class StageState : BaseStageState
     // ステージの画像(名前)、座標、上下左右押したときの遷移先ステート
     // 道のりも必要？
 
+    private void Start()
+    {
+        if (StageSelect.StageTable.stageClearedList[stageId])
+        {
+            GetComponent<SpriteRenderer>().color =
+                new Color(0.2f, 0f, 0f, 1f);
+        }
+    }
+
     public override bool goRightStage(ref StageState _nowStage)
     {
         if (rightStage == null) return false;

@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class StageStateManager : MonoBehaviour
 {
-    //public static StageStateManager instance;
     public static int nowStageId = 0;
     private StageState nowStageState;
     [SerializeField]
@@ -28,9 +27,6 @@ public class StageStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if (instance == null) instance = this;
-        //else Destroy(gameObject);
-
         // すべてのstageStateから現在のステージ場所を全探索する テーブル作るより楽で簡潔になった
         foreach (Transform child in stageObjectList.transform) // 少し重そうなのが欠点
         {
@@ -46,8 +42,6 @@ public class StageStateManager : MonoBehaviour
         transform.position = nowStageState.stageTransform.position;
         // ついでにカメラの位置も変える
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
-
-        //DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -141,6 +135,8 @@ public class StageStateManager : MonoBehaviour
     // 目的のステージへ遷移する
     private void GoNextStage()
     {
+        // 挑戦するステージのidを保存しておく
+        StageSelect.StageTable.challengeStageId = nowStageId;
         SceneManager.LoadScene(nowStageState.stageSceneName);
     }
 }

@@ -2,24 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace stageSelect
+namespace StageSelect
 {
     public class StageTable : MonoBehaviour
     {
-        public enum StageName{
-            Elementary = 1,
-            b = 2,
-            c = 3,
-            d = 4,
-            e = 5,
-            f = 6,
-            g = 7,
-            h = 8,
-            i = 9,
-            j = 10,
-            k = 11
-        };
+        public static StageTable instance;
 
-        public StageState[] stageStateTable;
+        public static bool[] stageClearedList = new bool[1];
+
+        public static int challengeStageId = 0;
+
+        int stageNum;
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                stageNum = GameObject.Find("StageList").transform.childCount;
+                stageClearedList = new bool[stageNum];
+                DontDestroyOnLoad(this);
+            }
+            else Destroy(gameObject);
+
+            //Debug.Log("<color=red>" + stageClearedList[challengeStageId] + "</color>");
+        }
     }
 }

@@ -26,10 +26,15 @@ public class ClearCurtain : MonoBehaviour
 
         if(collision.tag == "Player")
         {
+            // ステージのクリアをtrueにする
+
+            StageSelect.StageTable.stageClearedList[StageSelect.StageTable.challengeStageId] = true;
+            //Debug.Log("<color=red>" + StageTable.stageClearedList[StageTable.challengeStageId] + "</color>");
+
             isDone = true;
             GetComponent<Animator>().SetTrigger("Clear");
             collision.GetComponent<PlayerRB>().Goaled();
-            Invoke("EndCurtain", 3.0f);
+            Invoke("EndCurtain", 2.0f);
         }
     }
 
