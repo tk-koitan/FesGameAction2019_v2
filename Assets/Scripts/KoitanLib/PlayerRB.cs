@@ -55,6 +55,7 @@ public class PlayerRB : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -75,7 +76,9 @@ public class PlayerRB : MonoBehaviour
         transform.localScale = new Vector3(
             defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
 
-        if(Input.GetKey(KeyCode.DownArrow))
+        isSquat = stateInfo.IsName("squat");
+
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             animator.SetBool("squat", true);
         }

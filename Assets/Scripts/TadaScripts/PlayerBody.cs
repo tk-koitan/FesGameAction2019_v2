@@ -15,7 +15,9 @@ public class PlayerBody : MonoBehaviour
 
         if(collision.tag == "DeadTrigger")
         {
-            Debug.Log("死亡しました");
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            //Debug.Log("死亡しました");
+            SceneManager.LoadScene(currentSceneIndex);
         }
     }
 }

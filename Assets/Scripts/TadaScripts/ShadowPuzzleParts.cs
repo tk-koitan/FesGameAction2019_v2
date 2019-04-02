@@ -56,7 +56,8 @@ public class ShadowPuzzleParts : MonoBehaviour
         { // スケール.xも合わせる(向いている方向)
             if (Mathf.Sign(transform.localScale.x) == Mathf.Sign(playerTrfm.localScale.x))
             {
-                if (Vector2.Distance(transform.position, playerTrfm.position) < matchRange) SetLight();
+                if (Vector2.Distance(transform.position, playerTrfm.position) < matchRange && 
+                    !playerTrfm.GetComponent<PlayerRB>().isSquat) SetLight();
                 else DeleteLight();
             }
             else DeleteLight();
