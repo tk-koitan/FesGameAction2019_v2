@@ -271,6 +271,18 @@ public class PlayerRB : MonoBehaviour
         rv = Vector2.zero;
     }
 
+    public void StartDeadAnimtion()
+    {
+        animator.SetTrigger("Death");
+        Invoke("Retry", 2.0f);
+    }
+
+    public void Retry()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
     // 以下 tada 
     public void Goaled() // ゴールした時に実行
     {

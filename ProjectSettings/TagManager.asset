@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraTrigger
   - DeadTrigger
+  - DropTrigger
   layers:
   - Default
   - TransparentFX

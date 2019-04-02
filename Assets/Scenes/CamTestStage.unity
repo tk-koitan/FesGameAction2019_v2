@@ -8133,8 +8133,8 @@ GameObject:
   - component: {fileID: 1442428537}
   - component: {fileID: 1442428536}
   m_Layer: 0
-  m_Name: DeadZone
-  m_TagString: DeadTrigger
+  m_Name: DropZone
+  m_TagString: DropTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
