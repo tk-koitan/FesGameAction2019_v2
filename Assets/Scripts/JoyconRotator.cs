@@ -12,6 +12,7 @@ public class JoyconRotator : Mover
     private Joycon m_joyconR;
     private Rigidbody2D rb;
     private float startAngle;
+    private ActionInput actionInput;
 
     protected override void Start()
     {
@@ -19,23 +20,21 @@ public class JoyconRotator : Mover
         rb = GetComponent<Rigidbody2D>();
         startAngle = transform.localEulerAngles.z;
         Debug.Log(startAngle);
+        actionInput = ActionInput.Instatnce;
     }
 
     protected override void Update()
     {
         base.Update();
-        if(m_joyconR == null)
+
+        rb.MoveRotation(actionInput.GetJoyconAngle() + startAngle);
+
+        if (m_joyconR == null)
         {
             var joycons = JoyconManager.Instance.j;
             m_joyconR = joycons.Find(c => !c.isLeft);
             return;
         }
-        var orientation = m_joyconR.GetVector().eulerAngles;
-        var angles = transform.localEulerAngles;
-        angles.z = orientation.y + startAngle;
-        //transform.localEulerAngles = angles;
-
-        rb.MoveRotation(orientation.y + startAngle);
 
         if (m_joyconR.GetButtonDown(Joycon.Button.SHOULDER_2))
         {

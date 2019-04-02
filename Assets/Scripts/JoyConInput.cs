@@ -74,4 +74,14 @@ public class JoyConInput : ActionInput
         }
         return false;
     }
+
+    public override float GetJoyconAngle()
+    {
+        return m_joyconR.GetVector().eulerAngles.y;
+    }
+
+    public override Vector3 GetJoyconGyro()
+    {
+        return m_joyconR.GetGyro();
+    }
 }

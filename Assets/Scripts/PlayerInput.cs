@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInput : ActionInput
 {
+    private float joyconAngle = 0;
+
     public override bool GetButton(ButtonCode code)
     {
         if (!actionEnabled) return false;
@@ -59,5 +61,19 @@ public class PlayerInput : ActionInput
                 return Input.GetKeyUp(KeyCode.RightArrow);
         }
         return false;
+    }
+
+    public override float GetJoyconAngle()
+    {
+        if (Input.GetKey(KeyCode.D)) joyconAngle--;
+        if (Input.GetKey(KeyCode.A)) joyconAngle++;
+        return joyconAngle;
+    }
+
+    public override Vector3 GetJoyconGyro()
+    {
+        if (Input.GetKey(KeyCode.D)) return new Vector3(0, 0, -5);
+        if (Input.GetKey(KeyCode.A)) return new Vector3(0, 0, 5);
+        return Vector3.zero;
     }
 }

@@ -9,6 +9,9 @@ abstract public class ActionInput : MonoBehaviour
     public abstract bool GetButton(ButtonCode code);
     public abstract bool GetButtonUp(ButtonCode code);
 
+    public abstract float GetJoyconAngle();
+    public abstract Vector3 GetJoyconGyro();
+
     static ActionInput instance;
     public static ActionInput Instatnce
     {
