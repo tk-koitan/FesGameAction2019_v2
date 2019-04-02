@@ -11,18 +11,17 @@ public class MoveBlockGyro : Mover
     public float moveSpeed = 0.05f;
     private float moveDistance = 0.0f;
 
-    private Joycon m_joyconR;
+    private ActionInput actionInput;
+
+    protected override void Start()
+    {
+        actionInput = ActionInput.Instatnce;
+        base.Start();
+    }
 
     protected override void Update()
     {
-        if (m_joyconR == null)
-        {
-            var joycons = JoyconManager.Instance.j;
-            m_joyconR = joycons.Find(c => !c.isLeft);
-            return;
-        }
-
-        float gyroZ = m_joyconR.GetGyro().z * moveSpeed;
+        float gyroZ = actionInput.GetJoyconGyro().z * moveSpeed;
 
         foreach (Transform child in transform)
         {
