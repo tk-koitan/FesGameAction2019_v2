@@ -28,15 +28,13 @@ public class PlayerRB : MonoBehaviour
     private bool isContactRight;
     private bool isContactLeft;
     private bool isContactUp;
-    private BoxCollider2D groundTrigger;
     private Vector2 riderBeforePos;
+
+    private ActionInput actionInput;
 
     // キャッシュ by tada
     Animator animator;
     GroundChecker groundChecker;
-
-    [SerializeField] ContactFilter2D filter2d;
-    [SerializeField] ContactPoint2D[] contacts;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +48,7 @@ public class PlayerRB : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         groundChecker = GetComponentInChildren<GroundChecker>();
         animator = GetComponent<Animator>(); // tada
+        actionInput = ActionInput.Instatnce;
     }
 
     // Update is called once per frame
@@ -57,13 +56,13 @@ public class PlayerRB : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (actionInput.GetButton(ButtonCode.RightArrow))
         {
             power.x += accelVx;
             power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (actionInput.GetButton(ButtonCode.LeftArrow))
         {
             power.x -= accelVx;
             power.x = Mathf.Max(power.x, -maxVx);
@@ -78,7 +77,7 @@ public class PlayerRB : MonoBehaviour
 
         isSquat = stateInfo.IsName("squat");
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (actionInput.GetButton(ButtonCode.DownArrow))
         {
             animator.SetBool("squat", true);
         }
@@ -97,7 +96,7 @@ public class PlayerRB : MonoBehaviour
             power.x = Mathf.Max(power.x, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (actionInput.GetButtonDown(ButtonCode.Jump) && isGround)
         {
             power.y = maxVy;
             isGround = false;
@@ -123,38 +122,6 @@ public class PlayerRB : MonoBehaviour
             rv = Vector2.zero;
         }
 
-
-        foreach(Mover mover in groundChecker.riders)
-        {
-            /*
-            if(groundChecker.rideOn)
-            {
-                groundChecker.rideOn = false;
-                riderBeforePos = mover.transform.position;
-            }
-            */
-            Vector2 fromPos = groundPoint - (Vector2)mover.transform.position;
-            Vector2 toPos = Quaternion.Euler(0, 0, mover.angleSpeed) * fromPos;
-            Vector2 tmpV = toPos - fromPos;
-            //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
-
-            //いらない
-            //rv = mover.v + tmpV;
-
-            /*
-            Vector2 tmpPos = mover.transform.position;
-            rv = tmpPos - riderBeforePos;
-            riderBeforePos = tmpPos;
-            */           
-        }
-
-        //riders更新
-        foreach(Mover mover in groundChecker.rmRiders)
-        {
-            groundChecker.riders.Remove(mover);
-        }
-        groundChecker.rmRiders.Clear();
-
         //rb.velocity = v + rv;
         rv = Vector2.zero;
         rb.MovePosition(transform.position + (Vector3)(v + rv));
@@ -168,12 +135,6 @@ public class PlayerRB : MonoBehaviour
         animator.SetFloat("MoveSpeed", Mathf.Abs(v.x));
     }
 
-    /*
-    private void LateUpdate()
-    {
-        rb.MovePosition(transform.position + (Vector3)(v + rv));
-    }
-    */
    
     public void PositionSet(Vector2 velocity)
     {
