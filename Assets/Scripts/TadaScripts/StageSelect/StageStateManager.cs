@@ -118,8 +118,8 @@ public class StageStateManager : MonoBehaviour
     {
         stageImageFlame.gameObject.SetActive(true);
         stageImageFlame.rectTransform.localPosition = new Vector3(0f, -1000f, 0f); // 見えない位置に配置
-        stageImageFlame.rectTransform.DOMove(
-            stageImageFlame.rectTransform.position + new Vector3(0, 900f, 0),
+        stageImageFlame.rectTransform.DOLocalMoveY(
+            -100f,
             stageAnimSpeed
             )
             .SetEase(Ease.OutBack);
