@@ -32,6 +32,20 @@ public class PlayerRB : MonoBehaviour
 
     private ActionInput actionInput;
 
+    public bool jumpEnabled = false;
+
+    //ジャンプ猶予
+    private float jumpCooltime = 0;
+    private float jumpDefaultCooltime = 0.07f;
+
+    //ジャンプ回数
+    public int defaultAirJumpTimes = 1;
+    private int airJumpTimes = 0;
+    public int defaultJumpFrames = 8;
+    private int jumpFrames = 0;
+    private bool isJumping;
+
+
     // キャッシュ by tada
     Animator animator;
     GroundChecker groundChecker;
@@ -96,8 +110,18 @@ public class PlayerRB : MonoBehaviour
             power.x = Mathf.Max(power.x, 0);
         }
 
-        if (actionInput.GetButtonDown(ButtonCode.Jump) && isGround)
+        if (actionInput.GetButtonDown(ButtonCode.Jump) && jumpEnabled)
         {
+            if(!isGround)
+            {
+                airJumpTimes--;
+                if(airJumpTimes==0)
+                {
+                    jumpEnabled = false;
+                }
+            }
+            isJumping = true;
+            jumpFrames = defaultJumpFrames;
             power.y = maxVy;
             isGround = false;
             animator.SetBool("Jump", true); // tada
@@ -105,6 +129,11 @@ public class PlayerRB : MonoBehaviour
 
         if (isGround)
         {
+            airJumpTimes = defaultAirJumpTimes;
+            jumpEnabled = true;
+            jumpCooltime = jumpDefaultCooltime;
+            isJumping = false;
+            jumpFrames = defaultJumpFrames;
             power.y = 0;
             animator.SetBool("Jump", false); // tada
             if (power.magnitude<0.01f)
@@ -117,7 +146,35 @@ public class PlayerRB : MonoBehaviour
         }
         else
         {
+            //ジャンプ
+            if(jumpCooltime>0)
+            {
+                jumpCooltime -= Time.deltaTime;
+            }
+            else
+            {
+                if(airJumpTimes==0)
+                {
+                    jumpEnabled = false;
+                }
+            }
+
+            if(isJumping && jumpFrames>0)
+            {
+                if(actionInput.GetButton(ButtonCode.Jump))
+                {
+                    jumpFrames--;
+                    power.y = maxVy;
+                    isGround = false;
+                }
+                else
+                {
+                    isJumping = false;
+                }
+            }
+
             power.y += gravity;
+            power.y = Mathf.Clamp(power.y, -maxVy, maxVy);
             v = power;
             rv = Vector2.zero;
         }

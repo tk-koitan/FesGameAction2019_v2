@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/JoyconLib/Scenes/Scene1.unity
-    guid: 9b1befe983bd3db4a986f979bc44853d
-  - enabled: 1
-    path: Assets/JoyconLib/Scenes/Scene2.unity
-    guid: 32ca70a5b8e1c44d496f7fca50fe6f47
-  - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: 74b22b7174fcae74980313ee6c646f3e
   - enabled: 1
@@ -20,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CamTestStage.unity
     guid: 0691aa11ad5b1454a84c04d3bdd942f1
+  - enabled: 1
+    path: Assets/JoyconLib/Scenes/Scene1.unity
+    guid: 9b1befe983bd3db4a986f979bc44853d
+  - enabled: 1
+    path: Assets/JoyconLib/Scenes/Scene2.unity
+    guid: 32ca70a5b8e1c44d496f7fca50fe6f47
   m_configObjects: {}

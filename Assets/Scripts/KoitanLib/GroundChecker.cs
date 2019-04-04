@@ -19,16 +19,29 @@ public class GroundChecker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*
         GameObject groundObj = collision.gameObject;
         if(groundObj.layer == (int)LayerName.MovingPlatform)
         {
             riders.Add(groundObj.GetComponent<Mover>());
             rideOn = true;
         }
+        */
+
+        GameObject groundObj = collision.gameObject;
+        Mover tmpM = groundObj.GetComponent<Mover>();
+        if (groundObj.layer == (int)LayerName.MovingPlatform)
+        {
+            if (!tmpM.ridingPlayers.Contains(playerRB))
+            {
+                tmpM.ridingPlayers.Add(playerRB);
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        /*
         GameObject groundObj = collision.gameObject;
         Mover tmpM = groundObj.GetComponent<Mover>();
         if (groundObj.layer == (int)LayerName.MovingPlatform)
@@ -38,15 +51,28 @@ public class GroundChecker : MonoBehaviour
                 tmpM.ridingPlayers.Add(playerRB);
             }
         }
+        */
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        /*
         GameObject groundObj = collision.gameObject;
         if (groundObj.layer == (int)LayerName.MovingPlatform)
         {
             rmRiders.Add(groundObj.GetComponent<Mover>());
             //riders.Remove(groundObj.GetComponent<Mover>());
+        }
+        */
+
+        GameObject groundObj = collision.gameObject;
+        Mover tmpM = groundObj.GetComponent<Mover>();
+        if (groundObj.layer == (int)LayerName.MovingPlatform)
+        {
+            if (tmpM.ridingPlayers.Contains(playerRB))
+            {
+                tmpM.ridingPlayers.Remove(playerRB);
+            }
         }
     }
 }
