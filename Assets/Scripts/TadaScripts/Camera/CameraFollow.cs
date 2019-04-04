@@ -98,6 +98,8 @@ public class CameraFollow : MonoBehaviour
         {
             // 画面の高さ、幅の半分
             float height = screenOGSize;
+            if (!param.orthographicEnabled)
+                height = screenPSSize / 10f;
             float width = height * cam.aspect;
 
             targetX = Mathf.Max(targetX, param.borderLeftTop.position.x + width);
