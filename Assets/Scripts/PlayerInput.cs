@@ -76,4 +76,9 @@ public class PlayerInput : ActionInput
         if (Input.GetKey(KeyCode.A)) return new Vector3(0, 0, 5);
         return Vector3.zero;
     }
+
+    public override Vector3 GetJoyconAccel()
+    {
+        return new Vector3(Input.GetAxis("Horizontal") * 10, 1, 0);
+    }
 }

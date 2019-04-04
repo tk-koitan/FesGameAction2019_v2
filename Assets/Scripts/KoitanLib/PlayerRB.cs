@@ -19,7 +19,7 @@ public class PlayerRB : MonoBehaviour
 
     private Vector2 v = Vector2.zero;
     private Vector2 rv = Vector2.zero;
-    private Vector2 power = Vector2.zero;
+    public Vector2 power = Vector2.zero;
     public Vector2 groundPoint;
     private Vector2 groundNormal;
     private GameObject groundObj;
@@ -174,7 +174,7 @@ public class PlayerRB : MonoBehaviour
             }
 
             power.y += gravity;
-            power.y = Mathf.Clamp(power.y, -maxVy, maxVy);
+            power.y = Mathf.Clamp(power.y, -maxVy, maxVy * 2);
             v = power;
             rv = Vector2.zero;
         }
