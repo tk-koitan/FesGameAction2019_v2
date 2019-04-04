@@ -11,6 +11,7 @@ abstract public class ActionInput : MonoBehaviour
 
     public abstract float GetJoyconAngle();
     public abstract Vector3 GetJoyconGyro();
+    public abstract Vector3 GetJoyconAccel();
 
     static ActionInput instance;
     public static ActionInput Instatnce

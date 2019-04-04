@@ -11,28 +11,31 @@ public class trampoline : Mover
 
     private Joycon m_joyconR;
     private Vector2 defaultPos;
+    private ActionInput actionInput;
+    private Vector2 targetPos;
+    public float kakerukazu = 0.9f;
 
     protected override void Start()
     {
         base.Start();
         defaultPos = currentPos;
+        actionInput = ActionInput.Instatnce;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if (m_joyconR == null)
+        float speed = actionInput.GetJoyconAccel().magnitude;
+        targetPos = defaultPos + Vector2.up * speed;
+        transform.position += ((Vector3)targetPos - transform.position) * kakerukazu;
+        base.Update();
+        if(speed>5)
         {
-            var joycons = JoyconManager.Instance.j;
-            m_joyconR = joycons.Find(c => !c.isLeft);
-            return;
+            foreach(PlayerRB player in ridingPlayers)
+            {
+                player.power.y = speed * 2;
+                player.isGround = false;
+            }
         }
-
-        if (m_joyconR.GetButtonDown(Joycon.Button.SHOULDER_2))
-        {
-            m_joyconR.Recenter();
-        }
-
-        transform.position = defaultPos + Vector2.up * m_joyconR.GetAccel().magnitude;
     }
     // Update is called once per frame
     /*
