@@ -73,19 +73,66 @@ public class PlayerRB : MonoBehaviour
         if (actionInput.GetButton(ButtonCode.RightArrow))
         {
             power.x += accelVx;
-            power.x = Mathf.Min(power.x, maxVx);
+            //power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
         }
         else if (actionInput.GetButton(ButtonCode.LeftArrow))
         {
             power.x -= accelVx;
-            power.x = Mathf.Max(power.x, -maxVx);
+            //power.x = Mathf.Max(power.x, -maxVx);
             direction = -1;
         }
         else
         {
-            power.x *= 0.8f;
+            if(isGround)
+            {
+                if (power.x > 0)
+                {
+                    power.x -= accelVx * 2;
+                    power.x = Mathf.Max(0, power.x);
+                }
+                else if (power.x < 0)
+                {
+                    power.x += accelVx * 2;
+                    power.x = Mathf.Min(0, power.x);
+                }
+            }
+            else
+            {
+                //スピードが早すぎるときは減速しない
+                if (Mathf.Abs(v.x) < maxVx * 2)
+                {
+                    if (power.x > 0)
+                    {
+                        power.x -= accelVx;
+                        power.x = Mathf.Max(0, power.x);
+                    }
+                    else if (power.x < 0)
+                    {
+                        power.x += accelVx;
+                        power.x = Mathf.Min(0, power.x);
+                    }
+                }
+            }
         }
+
+        //スピードが早いときは減速しない
+        if(Mathf.Abs(v.x)<maxVx*2)
+        {
+            if (power.x > maxVx)
+            {
+                power.x -= accelVx;
+                power.x = Mathf.Max(power.x, maxVx);
+            }
+            else if (power.x < -maxVx)
+            {
+                power.x += accelVx;
+                power.x = Mathf.Min(power.x, -maxVx);
+            }
+        }
+
+
+
         transform.localScale = new Vector3(
             defaultScaleX * direction, transform.localScale.y, transform.localScale.x);
 
@@ -105,17 +152,17 @@ public class PlayerRB : MonoBehaviour
             power.x = Mathf.Min(power.x, 0);
         }
 
-        if(isContactLeft)
+        if (isContactLeft)
         {
             power.x = Mathf.Max(power.x, 0);
         }
 
         if (actionInput.GetButtonDown(ButtonCode.Jump) && jumpEnabled)
         {
-            if(!isGround)
+            if (!isGround)
             {
                 airJumpTimes--;
-                if(airJumpTimes==0)
+                if (airJumpTimes == 0)
                 {
                     jumpEnabled = false;
                 }
@@ -136,32 +183,33 @@ public class PlayerRB : MonoBehaviour
             jumpFrames = defaultJumpFrames;
             power.y = 0;
             animator.SetBool("Jump", false); // tada
-            if (power.magnitude<0.01f)
+            if (power.magnitude < 0.01f)
             {
                 v = Vector2.zero;
             }
             v = Vector3.ProjectOnPlane(power, groundNormal);
+            v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
             Debug.DrawRay(groundPoint, groundNormal, Color.red);
             //Debug.DrawRay(groundPoint, v, Color.red);
         }
         else
         {
             //ジャンプ
-            if(jumpCooltime>0)
+            if (jumpCooltime > 0)
             {
                 jumpCooltime -= Time.deltaTime;
             }
             else
             {
-                if(airJumpTimes==0)
+                if (airJumpTimes == 0)
                 {
                     jumpEnabled = false;
                 }
             }
 
-            if(isJumping && jumpFrames>0)
+            if (isJumping && jumpFrames > 0)
             {
-                if(actionInput.GetButton(ButtonCode.Jump))
+                if (actionInput.GetButton(ButtonCode.Jump))
                 {
                     jumpFrames--;
                     power.y = maxVy;
@@ -176,6 +224,7 @@ public class PlayerRB : MonoBehaviour
             power.y += gravity;
             power.y = Mathf.Clamp(power.y, -maxVy, maxVy * 2);
             v = power;
+            v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
             rv = Vector2.zero;
         }
 
@@ -192,7 +241,7 @@ public class PlayerRB : MonoBehaviour
         animator.SetFloat("MoveSpeed", Mathf.Abs(v.x));
     }
 
-   
+
     public void PositionSet(Vector2 velocity)
     {
         //rb.MovePosition(transform.position + (Vector3)velocity);
@@ -200,7 +249,7 @@ public class PlayerRB : MonoBehaviour
         //v += velocity;
         //rv = velocity;
         //rb.velocity += velocity;
-        Debug.Log(velocity);
+        //Debug.Log(velocity);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -213,13 +262,13 @@ public class PlayerRB : MonoBehaviour
         groundNormal = collision.contacts[0].normal;
         groundObj = collision.contacts[0].collider.gameObject;
         Vector2 center = transform.position;
-        float dir = (v  + center - collision.contacts[0].point).magnitude;
+        float dir = (v + center - collision.contacts[0].point).magnitude;
 
         float slopeMinY = Mathf.Sin((90 - slopeMaxDeg) * Mathf.Deg2Rad);
         for (int i = 1; i < collision.contacts.Length; i++)
         {
             float tmpDir = (v + center - collision.contacts[i].point).magnitude;
-            if(tmpDir < dir)
+            if (tmpDir < dir)
             {
                 groundPoint = collision.contacts[i].point;
                 groundNormal = collision.contacts[i].normal;
@@ -228,7 +277,7 @@ public class PlayerRB : MonoBehaviour
             Debug.DrawRay(collision.contacts[i].point, collision.contacts[i].normal);
         }
 
-        if(isGround)
+        if (isGround)
         {
 
             RaycastHit2D hit = Physics2D.Raycast(center, Vector2.down * (v.magnitude + box.bounds.size.y));
@@ -249,7 +298,7 @@ public class PlayerRB : MonoBehaviour
         if (groundNormal.y >= slopeMinY)
         {
             isGround = true;
-            if(groundObj.layer == (int)LayerName.MovingPlatform)
+            if (groundObj.layer == (int)LayerName.MovingPlatform)
             {
                 Mover tmpM = groundObj.GetComponent<Mover>();
                 //tmpM.ridingPlayers.Add(this);
@@ -258,23 +307,23 @@ public class PlayerRB : MonoBehaviour
                 Vector2 tmpV = toPos - fromPos;
                 //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
                 rv = tmpM.v + tmpV;
-                Debug.Log(groundObj);
+                //Debug.Log(groundObj);
             }
             else
             {
                 rv = Vector2.zero;
             }
             Debug.DrawRay(groundPoint, groundNormal);
-            Debug.Log(groundNormal + ">=" + slopeMinY);
+            //Debug.Log(groundNormal + ">=" + slopeMinY);
         }
         else
         {
             isGround = false;
-            if(groundNormal.x<0)
+            if (groundNormal.x < 0)
             {
                 isContactRight = true;
             }
-            else if(groundNormal.x>0)
+            else if (groundNormal.x > 0)
             {
                 isContactLeft = true;
             }

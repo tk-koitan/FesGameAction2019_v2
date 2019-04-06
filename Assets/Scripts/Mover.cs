@@ -45,7 +45,7 @@ public abstract class Mover : MonoBehaviour
             Vector2 fromPos = ridingPlayers[i].groundPoint - (Vector2)transform.position;
             Vector2 toPos = Quaternion.Euler(0, 0, angleSpeed) * fromPos;
             Vector2 tmpV = toPos - fromPos;
-            Debug.Log(gameObject.name + ":" + tmpV.magnitude);
+            //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
             /*
             if (tmpV.magnitude >= 1f)
             {

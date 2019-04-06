@@ -10,29 +10,34 @@ public class trampoline : Mover
 {
 
     private Joycon m_joyconR;
-    private Vector2 defaultPos;
+    private Vector3 defaultPos;
     private ActionInput actionInput;
-    private Vector2 targetPos;
+    private Vector3 targetPos;
     public float kakerukazu = 0.9f;
+    private float startAngle;
+    public float maxSpeed = 3;
 
     protected override void Start()
     {
         base.Start();
         defaultPos = currentPos;
+        startAngle = transform.rotation.eulerAngles.z;
         actionInput = ActionInput.Instatnce;
     }
 
     protected override void Update()
     {
         float speed = actionInput.GetJoyconAccel().magnitude;
-        targetPos = defaultPos + Vector2.up * speed;
-        transform.position += ((Vector3)targetPos - transform.position) * kakerukazu;
+        if (speed < 1.2f) speed = 1f;
+        speed = Mathf.Min(speed, maxSpeed);
+        targetPos = defaultPos + transform.up * speed;
+        transform.position += (targetPos - transform.position) * kakerukazu;
         base.Update();
-        if(speed>5)
+        if(speed>=maxSpeed)
         {
             foreach(PlayerRB player in ridingPlayers)
             {
-                player.power.y = speed * 2;
+                player.power = transform.up * maxSpeed;
                 player.isGround = false;
             }
         }
