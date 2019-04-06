@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SpriteGlow;
+using DG.Tweening;
 
 public class ShadowPuzzleParts : MonoBehaviour
 {
-    [System.NonSerialized] public bool lightExist = false;
+    public bool LightExist { get; private set;}
     public bool isPlayer = false;
     public bool useRotation = true;
 
@@ -18,6 +20,7 @@ public class ShadowPuzzleParts : MonoBehaviour
      
 
     Transform playerTrfm;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +39,6 @@ public class ShadowPuzzleParts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DeleteLight();
         //Debug.LogFormat("child.x:{0}, my.x:{1}", childTrfm.eulerAngles.z, transform.eulerAngles.z);
         if (!isPlayer)
         {
@@ -66,19 +68,63 @@ public class ShadowPuzzleParts : MonoBehaviour
 
     private void SetLight()
     {
-        if (!lightExist)
+        if (!LightExist)
         {
-            childLightObject.SetActive(true);
-            lightExist = true;
+            LightExist = true;
+
+            if (isPlayer)
+            {
+                playerTrfm.GetComponent<SpriteGlowEffect>().DOKill();
+                //playerTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = false;
+                DOTween.To(
+                    () => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = 0,
+                    num => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = num,
+                    5,
+                    1.0f
+                    ).SetLoops(-1, LoopType.Yoyo);
+                return;
+            }
+
+            childObjectTrfm.GetComponent<SpriteGlowEffect>().DOKill();
+            childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = false;
+            DOTween.To(
+                () => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = 2f,
+                num => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = num,
+                5f,
+                1.0f
+                ).SetLoops(-1, LoopType.Yoyo);
+            // childLightObject.SetActive(true);
         }
     }
 
     private void DeleteLight()
     {
-        if (lightExist)
+        if (LightExist)
         {
-            childLightObject.SetActive(false);
-            lightExist = false;
+            LightExist = false;
+
+            if (isPlayer)
+            {
+                // うまくDOKillで消せないバグが起きているので後で修正
+                playerTrfm.GetComponent<SpriteGlowEffect>().DOKill();
+                DOTween.To(
+                    () => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth,
+                    num => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = num,
+                    0,
+                    0.2f
+                    );//.OnComplete(() => playerTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true);
+                return;
+            }
+
+            childObjectTrfm.GetComponent<SpriteGlowEffect>().DOKill();
+            DOTween.To(
+                () => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness,
+                num => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = num,
+                2f,
+                0.2f
+                ).OnComplete(() => childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true);
+            //childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true;
+            //childLightObject.SetActive(false);
         }
     }
 }

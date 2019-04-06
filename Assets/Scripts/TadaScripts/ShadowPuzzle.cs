@@ -25,7 +25,7 @@ public class ShadowPuzzle : MonoBehaviour
 
         foreach(GameObject shadowObj in shadowObjects)
         {
-            if (shadowObj.GetComponent<ShadowPuzzleParts>().lightExist == false)
+            if (shadowObj.GetComponent<ShadowPuzzleParts>().LightExist == false)
             {
                 actionEnabled = false;
                 break;

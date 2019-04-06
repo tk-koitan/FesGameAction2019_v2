@@ -65,10 +65,12 @@ public class FollowEnemy : MonoBehaviour
     private void Attack()
     {
         //Debug.Log("attack");
-        GameObject waterStrObject = Instantiate(attackBullet,
+        GameObject waterObject = Instantiate(attackBullet,
         transform.position, Quaternion.identity);
+        // 子要素にする
+        waterObject.transform.parent = transform;
 
         // 後ろ側を向いていてもプレイヤーの方へ撃たせる
-        waterStrObject.GetComponent<BeamController>().dir = actionInput.GetJoyconAngle() + startAngle;
+        waterObject.GetComponent<BeamController>().dir = actionInput.GetJoyconAngle() + startAngle;
     }
 }
