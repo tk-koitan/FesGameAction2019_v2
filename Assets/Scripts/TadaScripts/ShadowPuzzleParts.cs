@@ -11,120 +11,133 @@ public class ShadowPuzzleParts : MonoBehaviour
     public bool useRotation = true;
 
     public float matchRange = 3f;
-    //Transform childTrfm;
-    //GameObject lightObjct;
 
-    // childをFindするのと public or [SerializeField] で取得するのどっちが良いんですかね？
     [SerializeField] private Transform childObjectTrfm;
     [SerializeField] private GameObject childLightObject;
      
 
-    Transform playerTrfm;
+    private Transform playerTrfm;
+
+    private Tween lightTween;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!isPlayer)
-        {
-            //childTrfm = gameObject.transform.Find("Child").transform;
-        }
-        else
-        {
+        if (isPlayer)
             playerTrfm = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-        //lightObject = gameObject.transform.Find("Light").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.LogFormat("child.x:{0}, my.x:{1}", childTrfm.eulerAngles.z, transform.eulerAngles.z);
+        // Debug.Log("LightExist" + LightExist);
         if (!isPlayer)
         {
             if (useRotation)
             {
-                if (Mathf.Abs(transform.eulerAngles.z % 180f - (childObjectTrfm.eulerAngles.z) % 180f) < matchRange)
+                if (IsMatchAngle(childObjectTrfm.eulerAngles.z))
+                {
                     SetLight();
-                else DeleteLight();
+                    return;
+                }
             }
             else // 距離を使う
             {
-                if (Vector2.Distance(transform.position, childObjectTrfm.position) < matchRange) SetLight();
-                else DeleteLight();
+                if (IsMatchDistance(childObjectTrfm.position))
+                {
+                    SetLight();
+                    return;
+                }
             }
         }
         else
         { // スケール.xも合わせる(向いている方向)
-            if (Mathf.Sign(transform.localScale.x) == Mathf.Sign(playerTrfm.localScale.x))
+            if (IsMatchDirection() && IsMatchDistance(playerTrfm.position))
             {
-                if (Vector2.Distance(transform.position, playerTrfm.position) < matchRange && 
-                    !playerTrfm.GetComponent<PlayerRB>().isSquat) SetLight();
-                else DeleteLight();
+                if (!playerTrfm.GetComponent<PlayerRB>().isSquat)
+                {
+                    SetLight();
+                    return;
+                }
             }
-            else DeleteLight();
         }
+
+        DeleteLight();
     }
 
     private void SetLight()
     {
-        if (!LightExist)
+        if (LightExist) return;
+
+        LightExist = true;
+
+        if (lightTween != null)
+            lightTween.Kill();
+
+        if (isPlayer)
         {
-            LightExist = true;
-
-            if (isPlayer)
-            {
-                playerTrfm.GetComponent<SpriteGlowEffect>().DOKill();
-                //playerTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = false;
-                DOTween.To(
-                    () => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = 0,
-                    num => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = num,
-                    5,
-                    1.0f
-                    ).SetLoops(-1, LoopType.Yoyo);
-                return;
-            }
-
-            childObjectTrfm.GetComponent<SpriteGlowEffect>().DOKill();
-            childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = false;
-            DOTween.To(
-                () => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = 2f,
-                num => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = num,
-                5f,
+            lightTween = DOTween.To(
+                () => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = 0,
+                num => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = num,
+                4,
                 1.0f
                 ).SetLoops(-1, LoopType.Yoyo);
-            // childLightObject.SetActive(true);
+            return;
         }
+
+        childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = false;
+        lightTween = DOTween.To(
+            () => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = 2f,
+            num => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = num,
+            5f,
+            1.0f
+            ).SetLoops(-1, LoopType.Yoyo);
+        // childLightObject.SetActive(true);
     }
 
     private void DeleteLight()
     {
-        if (LightExist)
+
+        if (!LightExist) return;
+
+        LightExist = false;
+
+        if (lightTween != null)
+            lightTween.Kill();
+
+        if (isPlayer)
         {
-            LightExist = false;
-
-            if (isPlayer)
-            {
-                // うまくDOKillで消せないバグが起きているので後で修正
-                playerTrfm.GetComponent<SpriteGlowEffect>().DOKill();
-                DOTween.To(
-                    () => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth,
-                    num => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = num,
-                    0,
-                    0.2f
-                    );//.OnComplete(() => playerTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true);
-                return;
-            }
-
-            childObjectTrfm.GetComponent<SpriteGlowEffect>().DOKill();
-            DOTween.To(
-                () => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness,
-                num => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = num,
-                2f,
+            lightTween = DOTween.To(
+                () => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth,
+                num => playerTrfm.GetComponent<SpriteGlowEffect>().OutlineWidth = num,
+                0,
                 0.2f
-                ).OnComplete(() => childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true);
-            //childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true;
-            //childLightObject.SetActive(false);
+                );
+            return;
         }
+
+        lightTween = DOTween.To(
+            () => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness,
+            num => childObjectTrfm.GetComponent<SpriteGlowEffect>().GlowBrightness = num,
+            2f,
+            0.2f
+            ).OnComplete(() => childObjectTrfm.GetComponent<SpriteGlowEffect>().DrawOutside = true);
+        //childLightObject.SetActive(false);
+    }
+
+    private bool IsMatchAngle(float targetAngleZ)
+    {
+        return Mathf.Abs(transform.eulerAngles.z % 180f - (targetAngleZ) % 180f) < matchRange;
+    }
+
+    private bool IsMatchDistance(Vector3 targetPos)
+    {
+        return Vector2.Distance(transform.position, targetPos) < matchRange;
+    }
+
+    private bool IsMatchDirection()
+    {
+        return Mathf.Sign(transform.localScale.x) == Mathf.Sign(playerTrfm.localScale.x);
     }
 }

@@ -24,9 +24,13 @@ public class StageStateManager : MonoBehaviour
     private float playerX, playerY;
     private float targetX, targetY;
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         // すべてのstageStateから現在のステージ場所を全探索する テーブル作るより楽で簡潔になった
         foreach (Transform child in stageObjectList.transform) // 少し重そうなのが欠点
         {
@@ -53,8 +57,9 @@ public class StageStateManager : MonoBehaviour
         playerX = Mathf.Lerp(transform.position.x, targetX, moveHoming.x);
         playerY = Mathf.Lerp(transform.position.y, targetY, moveHoming.y);
 
-        transform.position = new Vector3(playerX, playerY, 0f);
+        animator.SetFloat("MoveSpeed", Vector2.Distance(transform.position, new Vector2(playerX, playerY)));
 
+        transform.position = new Vector3(playerX, playerY, 0f);
 
         if (IsStageSpriteEnabled())
         {
