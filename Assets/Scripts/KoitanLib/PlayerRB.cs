@@ -342,6 +342,7 @@ public class PlayerRB : MonoBehaviour
     {
         animator.SetTrigger("Death");
         Invoke("Retry", 2.0f);
+        ActionInput.actionEnabled = false;
     }
 
     public void Retry()
@@ -355,6 +356,9 @@ public class PlayerRB : MonoBehaviour
     {
         animator.SetTrigger("Clear");
         // 動けなくする処理
+        ActionInput.actionEnabled = false; // koitan
+        ScoreManager.Instatnce.TimerStop();
+        ScoreManager.Instatnce.canvasAnimator.Play("GoalText");
 
         // n秒後にシーン遷移
         Invoke("GoStageSelect", 10.0f);
