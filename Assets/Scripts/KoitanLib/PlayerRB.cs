@@ -213,7 +213,7 @@ public class PlayerRB : MonoBehaviour
             if (isJumping && jumpFrames > 0)
             {
                 if (ActionInput.GetButtonDown(ButtonCode.Jump))
-                    animator.Play("PlayerJump", 0, 0.0f); // tada
+                                        animator.Play("PlayerJump", 0, 0.0f); // tada
                 if (ActionInput.GetButton(ButtonCode.Jump))
                 {
                     jumpFrames--;
@@ -370,6 +370,7 @@ public class PlayerRB : MonoBehaviour
     }
     private void GoStageSelect()
     {
+        ActionInput.actionEnabled = true;
         SceneManager.LoadScene("StageSelect");
     }
 }
