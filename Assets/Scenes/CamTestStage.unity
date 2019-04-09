@@ -9609,6 +9609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   tmproText: {fileID: 1199621328}
+  canvasAnimator: {fileID: 0}
 --- !u!114 &1704111339
 MonoBehaviour:
   m_ObjectHideFlags: 0

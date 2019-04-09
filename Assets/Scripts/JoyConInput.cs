@@ -4,39 +4,58 @@ using UnityEngine;
 
 public class JoyConInput : ActionInput
 {
-    private Joycon m_joycon;
+    private Joycon stickJoycon;
+    private Joycon gyroJoycon;
 
     protected override void Update()
     {
-        if (m_joycon == null)
+        if (stickJoycon == null)
         {
             var joycons = JoyconManager.Instance.j;
-            m_joycon = joycons.Find(c => !c.isLeft);
-            if(m_joycon == null)
+            stickJoycon = joycons.Find(c => c.isLeft);
+            if(stickJoycon == null)
             {
-                m_joycon = joycons.Find(c => c.isLeft);
+                stickJoycon = joycons.Find(c => !c.isLeft);
             }
-            return;
         }
+
+        if (gyroJoycon == null)
+        {
+            var joycons = JoyconManager.Instance.j;
+            gyroJoycon = joycons.Find(c => !c.isLeft);
+            if (gyroJoycon == null)
+            {
+                gyroJoycon = joycons.Find(c => c.isLeft);
+            }
+        }
+
+        foreach(Joycon joycon in JoyconManager.Instance.j)
+        {
+            if(joycon.GetButton(Joycon.Button.SL) && joycon.GetButton(Joycon.Button.SR))
+            {
+                gyroJoycon = joycon;
+            }
+        }
+
         base.Update();
     }
 
-
+    /*
     public override bool GetButton(ButtonCode code)
     {
         if (!actionEnabled) return false;
         switch (code)
         {
             case ButtonCode.Jump:
-                return m_joycon.GetButton(Joycon.Button.DPAD_RIGHT);
+                return stickJoycon.GetButton(Joycon.Button.DPAD_LEFT);
             case ButtonCode.UpArrow:
-                return m_joycon.GetStick()[0] < 0;
+                return stickJoycon.GetStick()[0] > 0;
             case ButtonCode.DownArrow:
-                return m_joycon.GetStick()[0] > 0;
+                return stickJoycon.GetStick()[0] < 0;
             case ButtonCode.LeftArrow:
-                return m_joycon.GetStick()[1] < 0;
+                return stickJoycon.GetStick()[1] > 0;
             case ButtonCode.RightArrow:
-                return m_joycon.GetStick()[1] > 0;
+                return stickJoycon.GetStick()[1] < 0;
         }
         return false;
     }
@@ -47,15 +66,15 @@ public class JoyConInput : ActionInput
         switch (code)
         {
             case ButtonCode.Jump:
-                return m_joycon.GetButtonDown(Joycon.Button.DPAD_RIGHT);
+                return stickJoycon.GetButtonDown(Joycon.Button.DPAD_LEFT);
             case ButtonCode.UpArrow:
-                return m_joycon.GetStick()[0] < 0;
+                return stickJoycon.GetStick()[0] > 0;
             case ButtonCode.DownArrow:
-                return m_joycon.GetStick()[0] > 0;
+                return stickJoycon.GetStick()[0] < 0;
             case ButtonCode.LeftArrow:
-                return m_joycon.GetStick()[1] < 0;
+                return stickJoycon.GetStick()[1] > 0;
             case ButtonCode.RightArrow:
-                return m_joycon.GetStick()[1] > 0;
+                return stickJoycon.GetStick()[1] < 0;
         }
         return false;
     }
@@ -66,31 +85,32 @@ public class JoyConInput : ActionInput
         switch (code)
         {
             case ButtonCode.Jump:
-                return m_joycon.GetButtonUp(Joycon.Button.DPAD_RIGHT);
+                return stickJoycon.GetButtonUp(Joycon.Button.DPAD_LEFT);
             case ButtonCode.UpArrow:
-                return m_joycon.GetStick()[0] < 0;
+                return stickJoycon.GetStick()[0] > 0;
             case ButtonCode.DownArrow:
-                return m_joycon.GetStick()[0] > 0;
+                return stickJoycon.GetStick()[0] < 0;
             case ButtonCode.LeftArrow:
-                return m_joycon.GetStick()[1] < 0;
+                return stickJoycon.GetStick()[1] > 0;
             case ButtonCode.RightArrow:
-                return m_joycon.GetStick()[1] > 0;
+                return stickJoycon.GetStick()[1] < 0;
         }
         return false;
     }
 
     public override float GetJoyconAngle()
     {
-        return m_joycon.GetVector().eulerAngles.y;
+        return gyroJoycon.GetVector().eulerAngles.y;
     }
 
     public override Vector3 GetJoyconGyro()
     {
-        return m_joycon.GetGyro();
+        return gyroJoycon.GetGyro();
     }
 
     public override Vector3 GetJoyconAccel()
     {
-        return m_joycon.GetAccel();
+        return gyroJoycon.GetAccel();
     }
+    */
 }

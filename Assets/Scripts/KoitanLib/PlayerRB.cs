@@ -70,13 +70,13 @@ public class PlayerRB : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (actionInput.GetButton(ButtonCode.RightArrow))
+        if (ActionInput.GetButton(ButtonCode.RightArrow))
         {
             power.x += accelVx;
             //power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
         }
-        else if (actionInput.GetButton(ButtonCode.LeftArrow))
+        else if (ActionInput.GetButton(ButtonCode.LeftArrow))
         {
             power.x -= accelVx;
             //power.x = Mathf.Max(power.x, -maxVx);
@@ -138,7 +138,7 @@ public class PlayerRB : MonoBehaviour
 
         isSquat = stateInfo.IsName("squat");
 
-        if (actionInput.GetButton(ButtonCode.DownArrow))
+        if (ActionInput.GetButton(ButtonCode.DownArrow))
         {
             animator.SetBool("squat", true);
         }
@@ -157,7 +157,7 @@ public class PlayerRB : MonoBehaviour
             power.x = Mathf.Max(power.x, 0);
         }
 
-        if (actionInput.GetButtonDown(ButtonCode.Jump) && jumpEnabled)
+        if (ActionInput.GetButtonDown(ButtonCode.Jump) && jumpEnabled)
         {
             if (!isGround)
             {
@@ -209,7 +209,7 @@ public class PlayerRB : MonoBehaviour
 
             if (isJumping && jumpFrames > 0)
             {
-                if (actionInput.GetButton(ButtonCode.Jump))
+                if (ActionInput.GetButton(ButtonCode.Jump))
                 {
                     jumpFrames--;
                     power.y = maxVy;

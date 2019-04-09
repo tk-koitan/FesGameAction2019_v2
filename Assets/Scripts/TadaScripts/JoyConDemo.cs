@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class JoyConDemo : MonoBehaviour
 {
-    Joycon m_joyconR;
-
     Camera cam;
 
     // Start is called before the first frame update
@@ -24,18 +22,12 @@ public class JoyConDemo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_joyconR == null)
-        {
-            var joycons = JoyconManager.Instance.j;
-            m_joyconR = joycons.Find(c => !c.isLeft);
-            return;
-        }
 
         //Quaternion orientation = m_joyconR.GetVector();
         //orientation = new Quaternion(orientation.w, orientation.y, orientation.z, orientation.x);
 
         // eulerAnglesで3次元に変換してから
-        Vector3 orientation = m_joyconR.GetVector().eulerAngles;
+        Vector3 orientation = ActionInput.GetJoyconVector();
         Vector3 angles = transform.localEulerAngles;
         //angles.x = -orientation.x;
         //angles.y = orientation.z + 180;

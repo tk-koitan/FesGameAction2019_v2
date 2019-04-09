@@ -27,7 +27,7 @@ public class trampoline : Mover
 
     protected override void Update()
     {
-        float speed = actionInput.GetJoyconAccel().magnitude;
+        float speed = ActionInput.GetJoyconAccel().magnitude;
         if (speed < 1.2f) speed = 1f;
         speed = Mathf.Min(speed, maxSpeed);
         targetPos = defaultPos + transform.up * speed;
