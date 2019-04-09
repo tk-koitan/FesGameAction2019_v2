@@ -40,6 +40,11 @@ public class JoyConInput : ActionInput
         base.Update();
     }
 
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
+    }
+
     /*
     public override bool GetButton(ButtonCode code)
     {
