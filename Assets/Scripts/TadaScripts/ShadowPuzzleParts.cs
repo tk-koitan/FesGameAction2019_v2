@@ -36,7 +36,7 @@ public class ShadowPuzzleParts : MonoBehaviour
         {
             if (useRotation)
             {
-                if (IsMatchAngle(childObjectTrfm.eulerAngles.z))
+                if (IsMatchAngle(transform.eulerAngles.z, childObjectTrfm.eulerAngles.z, matchRange))
                 {
                     SetLight();
                     return;
@@ -44,7 +44,7 @@ public class ShadowPuzzleParts : MonoBehaviour
             }
             else // 距離を使う
             {
-                if (IsMatchDistance(childObjectTrfm.position))
+                if (IsMatchDistance(transform.position, childObjectTrfm.position, matchRange))
                 {
                     SetLight();
                     return;
@@ -53,7 +53,8 @@ public class ShadowPuzzleParts : MonoBehaviour
         }
         else
         { // スケール.xも合わせる(向いている方向)
-            if (IsMatchDirection() && IsMatchDistance(playerTrfm.position))
+            if (IsMatchDirection(transform.localScale.x, playerTrfm.localScale.x) &&
+                IsMatchDistance(transform.position, playerTrfm.position, matchRange))
             {
                 if (!playerTrfm.GetComponent<PlayerRB>().isSquat)
                 {
@@ -126,18 +127,18 @@ public class ShadowPuzzleParts : MonoBehaviour
         //childLightObject.SetActive(false);
     }
 
-    private bool IsMatchAngle(float targetAngleZ)
+    private bool IsMatchAngle(float myAngleZ, float targetAngleZ, float _matchRange)
     {
-        return Mathf.Abs(transform.eulerAngles.z % 180f - (targetAngleZ) % 180f) < matchRange;
+        return Mathf.Abs(myAngleZ % 180f - targetAngleZ % 180f) < _matchRange;
     }
 
-    private bool IsMatchDistance(Vector3 targetPos)
+    private bool IsMatchDistance(Vector3 myPos, Vector3 targetPos, float _matchRange)
     {
-        return Vector2.Distance(transform.position, targetPos) < matchRange;
+        return Vector2.Distance(myPos, targetPos) < _matchRange;
     }
 
-    private bool IsMatchDirection()
+    private bool IsMatchDirection(float myScaleX, float targetScaleX)
     {
-        return Mathf.Sign(transform.localScale.x) == Mathf.Sign(playerTrfm.localScale.x);
+        return Mathf.Sign(myScaleX) == Mathf.Sign(targetScaleX);
     }
 }

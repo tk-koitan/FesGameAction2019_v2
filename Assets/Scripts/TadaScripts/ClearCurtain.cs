@@ -12,13 +12,8 @@ public class ClearCurtain : MonoBehaviour
 
     private void Start()
     {
-        //clearCurtain = gameObject.transform.Find("ClearCurtain").gameObject;
+
     }
-    /*
-    private void Update() // デバッグで付け加えただけ
-    {
-        if (Input.GetKeyDown(KeyCode.B)) EndCurtain();
-    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,7 +24,6 @@ public class ClearCurtain : MonoBehaviour
             // ステージのクリアをtrueにする
 
             StageSelect.StageTable.stageClearedList[StageSelect.StageTable.challengeStageId] = true;
-            //Debug.Log("<color=red>" + StageTable.stageClearedList[StageTable.challengeStageId] + "</color>");
 
             isDone = true;
             GetComponent<Animator>().SetTrigger("Clear");

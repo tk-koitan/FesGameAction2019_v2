@@ -35,8 +35,12 @@ public class BeamController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveX = -speed * actionSpeed * Time.deltaTime * Mathf.Cos(dir / 180f * Mathf.PI);
-        float moveY = -speed * actionSpeed * Time.deltaTime * Mathf.Sin(dir / 180f * Mathf.PI);
+        dir = transform.eulerAngles.z;
+
+        float moveSpeed = speed * actionSpeed * Time.deltaTime;
+
+        float moveX = -moveSpeed * Mathf.Cos(dir / 180f * Mathf.PI);
+        float moveY = -moveSpeed * Mathf.Sin(dir / 180f * Mathf.PI);
 
         transform.position += new Vector3(moveX, moveY);
 
@@ -45,7 +49,7 @@ public class BeamController : MonoBehaviour
         else pompScaleY = maxScaleY;
         transform.localScale = new Vector2(transform.localScale.x, pompScaleY);
 
-        pompScaleX += moveX * 2.0f * 6.0f;
+        pompScaleX += moveSpeed * 2.0f;
 
         // 見た目の大きさとあたり判定の大きさを変える x軸
         GetComponent<SpriteRenderer>().size = new Vector2(pompScaleX, 1.5f);

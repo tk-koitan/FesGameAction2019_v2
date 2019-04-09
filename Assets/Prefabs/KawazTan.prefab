@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 6041591132897854971}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 6041591133535156032}
   m_RootOrder: 2
@@ -328,7 +328,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b9e9fdfa748ff524a837f650619fb0c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
   m_MaskAlphaCutoff: 0.2
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -756,29 +756,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 6041591133535156033}
-  maxVx: 0.4
-  accelVx: 0.1
+  maxVx: 0.3
+  accelVx: 0.05
   gravity: -0.025
-  maxVy: 0.5
+  maxVy: 0.3
   isGround: 0
   isSquat: 0
   direction: 1
+  power: {x: 0, y: 0}
   groundPoint: {x: 0, y: 0}
   slopeMaxDeg: 50
-  filter2d:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  jumpEnabled: 0
+  defaultAirJumpTimes: 1
+  defaultJumpFrames: 15
 --- !u!50 &6041591133535156035
 Rigidbody2D:
   serializedVersion: 4

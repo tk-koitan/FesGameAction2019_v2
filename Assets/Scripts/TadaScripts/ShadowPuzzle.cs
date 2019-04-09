@@ -13,32 +13,29 @@ public class ShadowPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 子要素がすべて光っていたらギミック始動
-        /*foreach(Transform childTransform in transform)
-        {
-            if (childTransform.GetComponent<MatchPuzzle>().lightExist == false)
-                return;
-        }*/
-
         actionEnabledPrev = actionEnabled;
-        actionEnabled = true;
-
-        foreach(GameObject shadowObj in shadowObjects)
-        {
-            if (shadowObj.GetComponent<ShadowPuzzleParts>().LightExist == false)
-            {
-                actionEnabled = false;
-                break;
-            }
-        }
+        actionEnabled = IsLightAllLamped();
 
         if (actionEnabled != actionEnabledPrev)
         {
-            foreach (GameObject actionObj in actionObjects)
-            {
-                actionObj.GetComponent<Mover>().actionEnabled = actionEnabled;
-            }
+            SetActionEnabled(actionEnabled);
         }
+    }
 
+    private bool IsLightAllLamped()
+    {
+        foreach(GameObject shadowObj in shadowObjects){
+            if (shadowObj.GetComponent<ShadowPuzzleParts>().LightExist == false)
+                return false;
+        }
+        return true;
+    }
+
+    private void SetActionEnabled(bool isEnabled)
+    {
+        foreach(GameObject actionObje in actionObjects)
+        {
+            actionObje.GetComponent<Mover>().actionEnabled = isEnabled;
+        }
     }
 }
