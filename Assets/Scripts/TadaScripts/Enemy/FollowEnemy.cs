@@ -47,7 +47,8 @@ public class FollowEnemy : MonoBehaviour
         }
 
         // ジョイコンで回転させる
-        rb.MoveRotation(actionInput.GetJoyconAngle() + startAngle);
+        //rb.MoveRotation(actionInput.GetJoyconAngle() + startAngle);
+        //koitan
 
         if (m_joyconR == null)
         {
@@ -71,6 +72,7 @@ public class FollowEnemy : MonoBehaviour
         waterObject.transform.parent = transform;
 
         // 後ろ側を向いていてもプレイヤーの方へ撃たせる
-        waterObject.GetComponent<BeamController>().dir = actionInput.GetJoyconAngle() + startAngle;
+        //waterObject.GetComponent<BeamController>().dir = actionInput.GetJoyconAngle() + startAngle;
+        //kotian
     }
 }

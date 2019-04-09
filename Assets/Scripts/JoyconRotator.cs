@@ -27,8 +27,9 @@ public class JoyconRotator : Mover
     {
         base.Update();
 
-        rb.MoveRotation(actionInput.GetJoyconAngle() + startAngle);
+        rb.MoveRotation(ActionInput.GetJoyconVector().y + startAngle);
 
+        /*
         if (m_joyconR == null)
         {
             var joycons = JoyconManager.Instance.j;
@@ -40,6 +41,7 @@ public class JoyconRotator : Mover
         {
             m_joyconR.Recenter();
         }
+        */
     }
     // Update is called once per frame
     /*

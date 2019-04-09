@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInput : ActionInput
 {
     private float joyconAngle = 0;
-
+    /*
     public override bool GetButton(ButtonCode code)
     {
         if (!actionEnabled) return false;
@@ -81,4 +81,5 @@ public class PlayerInput : ActionInput
     {
         return new Vector3(Input.GetAxis("Horizontal") * 10, 1, 0);
     }
+    */
 }
