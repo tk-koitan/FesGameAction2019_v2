@@ -45,6 +45,9 @@ public class PlayerRB : MonoBehaviour
     private int jumpFrames = 0;
     private bool isJumping;
 
+    [SerializeField]
+    private float sceneWaitTime = 5.0f;
+
 
     // キャッシュ by tada
     Animator animator;
@@ -209,6 +212,8 @@ public class PlayerRB : MonoBehaviour
 
             if (isJumping && jumpFrames > 0)
             {
+                if (ActionInput.GetButtonDown(ButtonCode.Jump))
+                    animator.Play("PlayerJump", 0, 0.0f); // tada
                 if (ActionInput.GetButton(ButtonCode.Jump))
                 {
                     jumpFrames--;
@@ -361,7 +366,7 @@ public class PlayerRB : MonoBehaviour
         ScoreManager.Instatnce.canvasAnimator.Play("GoalText");
 
         // n秒後にシーン遷移
-        Invoke("GoStageSelect", 10.0f);
+        Invoke("GoStageSelect", sceneWaitTime);
     }
     private void GoStageSelect()
     {

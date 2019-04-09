@@ -63,7 +63,7 @@ public class StageStateManager : MonoBehaviour
 
         if (IsStageSpriteEnabled())
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if(ActionInput.GetButtonDown(ButtonCode.Jump))
             {
                 GoNextStage();
                 return;
@@ -74,24 +74,24 @@ public class StageStateManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (ActionInput.GetButtonDown(ButtonCode.Jump))
             DisplayStageSprite();
 
         if (IsStageSpriteEnabled()) return;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (ActionInput.GetButtonDown(ButtonCode.RightArrow))
         {
             if (!nowStageState.goRightStage(ref nowStageState)) return;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (ActionInput.GetButtonDown(ButtonCode.LeftArrow))
         {
             if (!nowStageState.goLeftStage(ref nowStageState)) return;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (ActionInput.GetButtonDown(ButtonCode.DownArrow))
         {
             if (!nowStageState.goDownStage(ref nowStageState)) return;
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (ActionInput.GetButtonDown(ButtonCode.UpArrow))
         {
             if (!nowStageState.goUpStage(ref nowStageState)) return;
         }
