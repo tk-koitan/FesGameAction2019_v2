@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   v: {x: 0, y: 0}
-  vxMax: 0.2
+  vxMax: 0.16
   vyMax: 0.5
   g: -0.05
   slopeMaxDeg: 50
@@ -756,8 +756,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 6041591133535156033}
-  maxVx: 0.3
-  accelVx: 0.05
+  maxVx: 0.25
+  accelVx: 0.04
   gravity: -0.025
   maxVy: 0.3
   isGround: 0
@@ -767,8 +767,9 @@ MonoBehaviour:
   groundPoint: {x: 0, y: 0}
   slopeMaxDeg: 50
   jumpEnabled: 0
-  defaultAirJumpTimes: 1
+  defaultAirJumpTimes: 0
   defaultJumpFrames: 15
+  sceneWaitTime: 5
 --- !u!50 &6041591133535156035
 Rigidbody2D:
   serializedVersion: 4

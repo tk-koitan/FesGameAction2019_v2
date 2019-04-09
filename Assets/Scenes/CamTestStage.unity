@@ -16528,10 +16528,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6041591133535156034, guid: 01ae1285c5a53bf44a6e36190bda6d6f,
-        type: 3}
-      propertyPath: defaultAirJumpTimes
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae1285c5a53bf44a6e36190bda6d6f, type: 3}
