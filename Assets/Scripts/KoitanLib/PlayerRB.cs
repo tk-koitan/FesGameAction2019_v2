@@ -75,44 +75,44 @@ public class PlayerRB : MonoBehaviour
 
         if (ActionInput.GetButton(ButtonCode.RightArrow))
         {
-            power.x += accelVx;
+            power.x += accelVx * Time.deltaTime * 60;
             //power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
         }
         else if (ActionInput.GetButton(ButtonCode.LeftArrow))
         {
-            power.x -= accelVx;
+            power.x -= accelVx * Time.deltaTime * 60;
             //power.x = Mathf.Max(power.x, -maxVx);
             direction = -1;
         }
         else
         {
-            if(isGround)
+            if (isGround)
             {
                 if (power.x > 0)
                 {
-                    power.x -= accelVx * 2;
+                    power.x -= accelVx * 2 * Time.deltaTime * 60;
                     power.x = Mathf.Max(0, power.x);
                 }
                 else if (power.x < 0)
                 {
-                    power.x += accelVx * 2;
+                    power.x += accelVx * 2 * Time.deltaTime * 60;
                     power.x = Mathf.Min(0, power.x);
                 }
             }
             else
             {
                 //スピードが早すぎるときは減速しない
-                if (Mathf.Abs(v.x) < maxVx * 2)
+                if (Mathf.Abs(power.x) < maxVx * 2 * Time.deltaTime * 60)
                 {
                     if (power.x > 0)
                     {
-                        power.x -= accelVx;
+                        power.x -= accelVx * Time.deltaTime * 60;
                         power.x = Mathf.Max(0, power.x);
                     }
                     else if (power.x < 0)
                     {
-                        power.x += accelVx;
+                        power.x += accelVx * Time.deltaTime * 60;
                         power.x = Mathf.Min(0, power.x);
                     }
                 }
@@ -120,17 +120,17 @@ public class PlayerRB : MonoBehaviour
         }
 
         //スピードが早いときは減速しない
-        if(Mathf.Abs(v.x)<maxVx*2)
+        if (Mathf.Abs(power.x) < maxVx * 2 * Time.deltaTime * 60)
         {
-            if (power.x > maxVx)
+            if (power.x > maxVx * Time.deltaTime * 60)
             {
-                power.x -= accelVx;
-                power.x = Mathf.Max(power.x, maxVx);
+                power.x -= accelVx * Time.deltaTime * 60;
+                power.x = Mathf.Max(power.x, maxVx * Time.deltaTime * 60);
             }
-            else if (power.x < -maxVx)
+            else if (power.x < -maxVx * Time.deltaTime * 60)
             {
-                power.x += accelVx;
-                power.x = Mathf.Min(power.x, -maxVx);
+                power.x += accelVx * Time.deltaTime * 60;
+                power.x = Mathf.Min(power.x, -maxVx * Time.deltaTime * 60);
             }
         }
 
@@ -165,7 +165,7 @@ public class PlayerRB : MonoBehaviour
             if (!isGround)
             {
                 airJumpTimes--;
-                if (airJumpTimes == 0)
+                if (airJumpTimes <= 0)
                 {
                     jumpEnabled = false;
                 }
@@ -191,7 +191,7 @@ public class PlayerRB : MonoBehaviour
                 v = Vector2.zero;
             }
             v = Vector3.ProjectOnPlane(power, groundNormal);
-            v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
+            v.x = Mathf.Clamp(v.x, -maxVx * 2 * Time.deltaTime * 60, maxVx * 2 * Time.deltaTime * 60);
             Debug.DrawRay(groundPoint, groundNormal, Color.red);
             //Debug.DrawRay(groundPoint, v, Color.red);
         }
@@ -213,7 +213,7 @@ public class PlayerRB : MonoBehaviour
             if (isJumping && jumpFrames > 0)
             {
                 if (ActionInput.GetButtonDown(ButtonCode.Jump))
-                                        animator.Play("PlayerJump", 0, 0.0f); // tada
+                    animator.Play("PlayerJump", 0, 0.0f); // tada
                 if (ActionInput.GetButton(ButtonCode.Jump))
                 {
                     jumpFrames--;
@@ -226,16 +226,14 @@ public class PlayerRB : MonoBehaviour
                 }
             }
 
-            power.y += gravity;
-            power.y = Mathf.Clamp(power.y, -maxVy, maxVy * 2);
+            power.y += gravity * Time.deltaTime * 60;
+            power.y = Mathf.Clamp(power.y, -maxVy * Time.deltaTime * 60, maxVy * 2 * Time.deltaTime * 60);
             v = power;
-            v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
-            rv = Vector2.zero;
+            v.x = Mathf.Clamp(v.x, -maxVx * 2 * Time.deltaTime * 60, maxVx * 2 * Time.deltaTime * 60);
         }
 
         //rb.velocity = v + rv;
-        rv = Vector2.zero;
-        rb.MovePosition(transform.position + (Vector3)(v + rv));
+        rb.MovePosition(transform.position + (Vector3)v);
         //rv = Vector2.zero;
         //rv = Vector2.zero;
         //transform.position += (Vector3)v;

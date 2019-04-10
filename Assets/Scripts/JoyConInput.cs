@@ -7,8 +7,14 @@ public class JoyConInput : ActionInput
     private Joycon stickJoycon;
     private Joycon gyroJoycon;
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     protected override void Update()
     {
+        /*
         if (stickJoycon == null)
         {
             var joycons = JoyconManager.Instance.j;
@@ -36,6 +42,7 @@ public class JoyConInput : ActionInput
                 gyroJoycon = joycon;
             }
         }
+        */
 
         base.Update();
     }

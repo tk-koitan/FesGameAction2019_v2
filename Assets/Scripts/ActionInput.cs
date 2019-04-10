@@ -37,8 +37,41 @@ abstract public class ActionInput : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
 
+        Debug.Log("コントローラーにキーボードが設定されました");
         SetControllerKeyboard();
         SetSensorKeyboard();
+
+        Debug.Log("ActionInoput.Awake()");
+        var joycons = JoyconManager.Instance.j;
+        stickJoycon = joycons.Find(c => c.isLeft);
+        if (stickJoycon == null)
+        {
+            stickJoycon = joycons.Find(c => !c.isLeft);
+            if (stickJoycon != null)
+            {
+                Debug.Log("コントローラーにジョイコンが設定されました");
+                SetControllerJoycon(stickJoycon);
+            }
+        }
+        else
+        {
+            SetControllerJoycon(stickJoycon);
+        }
+
+        gyroJoycon = joycons.Find(c => !c.isLeft);
+        if (gyroJoycon == null)
+        {
+            gyroJoycon = joycons.Find(c => c.isLeft);
+            if (gyroJoycon != null)
+            {
+                SetSensorJoycon(gyroJoycon);
+            }
+        }
+        else
+        {
+            SetSensorJoycon(gyroJoycon);
+        }
+
     }
 
     protected virtual void Start()
@@ -48,28 +81,6 @@ abstract public class ActionInput : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (stickJoycon == null)
-        {
-            var joycons = JoyconManager.Instance.j;
-            stickJoycon = joycons.Find(c => c.isLeft);
-            if (stickJoycon == null)
-            {
-                stickJoycon = joycons.Find(c => !c.isLeft);
-                SetControllerJoycon(stickJoycon);
-            }
-        }
-
-        if (gyroJoycon == null)
-        {
-            var joycons = JoyconManager.Instance.j;
-            gyroJoycon = joycons.Find(c => !c.isLeft);
-            if (gyroJoycon == null)
-            {
-                gyroJoycon = joycons.Find(c => c.isLeft);
-                SetSensorJoycon(gyroJoycon);
-            }
-        }
-
         foreach (Joycon joycon in JoyconManager.Instance.j)
         {
             if (joycon.GetButton(Joycon.Button.SL) && joycon.GetButton(Joycon.Button.SR))
