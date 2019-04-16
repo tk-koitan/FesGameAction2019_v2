@@ -16,6 +16,21 @@ public class StageState : BaseStageState
             GetComponent<SpriteRenderer>().color =
                 new Color(0.2f, 0f, 0f, 1f);
         }
+
+        SetStageExist();
+    }
+
+    private void SetStageExist()
+    {
+        if (upStage != null) stageExist[0] = true;
+        if (rightStage != null) stageExist[1] = true;
+        if (downStage != null) stageExist[2] = true;
+        if (leftStage != null) stageExist[3] = true;
+    }
+
+    public bool[] GetStageExist()
+    {
+        return stageExist;
     }
 
     public override bool goRightStage(ref StageState _nowStage)
@@ -46,21 +61,57 @@ public class StageState : BaseStageState
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if(rightStage != null && rightStage.leftStage == this)
+        if (rightStage != null)
         {
-            GizmosExtensions2D.DrawArrow2D(stageTransform.position, rightStage.stageTransform.position);
+            Vector3 from = rightStage.stageTransform.position;
+            Vector3 to;
+            foreach (Transform pathTransform in fromRightPath)
+            {
+                to = pathTransform.position;
+                GizmosExtensions2D.DrawArrow2D(from, to);
+                from = pathTransform.position;
+            }
+            to = stageTransform.position;
+            GizmosExtensions2D.DrawArrow2D(from, to);
         }
-        if(leftStage != null && leftStage.rightStage == this)
+        if (leftStage != null)
         {
-            GizmosExtensions2D.DrawArrow2D(stageTransform.position, leftStage.stageTransform.position);
+            Vector3 from = leftStage.stageTransform.position;
+            Vector3 to;
+            foreach (Transform pathTransform in fromLeftPath)
+            {
+                to = pathTransform.position;
+                GizmosExtensions2D.DrawArrow2D(from, to);
+                from = pathTransform.position;
+            }
+            to = stageTransform.position;
+            GizmosExtensions2D.DrawArrow2D(from, to);
         }
-        if (upStage != null && upStage.downStage == this)
+        if (upStage != null)
         {
-            GizmosExtensions2D.DrawArrow2D(stageTransform.position, upStage.stageTransform.position);
+            Vector3 from = upStage.stageTransform.position;
+            Vector3 to;
+            foreach (Transform pathTransform in fromUpPath)
+            {
+                to = pathTransform.position;
+                GizmosExtensions2D.DrawArrow2D(from, to);
+                from = pathTransform.position;
+            }
+            to = stageTransform.position;
+            GizmosExtensions2D.DrawArrow2D(from, to);
         }
-        if (downStage != null && downStage.upStage == this)
+        if (downStage != null)
         {
-            GizmosExtensions2D.DrawArrow2D(stageTransform.position, downStage.stageTransform.position);
+            Vector3 from = downStage.stageTransform.position;
+            Vector3 to;
+            foreach (Transform pathTransform in fromDownPath)
+            {
+                to = pathTransform.position;
+                GizmosExtensions2D.DrawArrow2D(from, to);
+                from = pathTransform.position;
+            }
+            to = stageTransform.position;
+            GizmosExtensions2D.DrawArrow2D(from, to);
         }
     }
 #endif

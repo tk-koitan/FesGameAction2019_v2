@@ -6,6 +6,14 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
+enum MoveDirection
+{
+    RIGHT,
+    LEFT,
+    UP,
+    DOWN,
+}
+
 public class StageStateManager : MonoBehaviour
 {
     public static int nowStageId = 0;
@@ -18,17 +26,35 @@ public class StageStateManager : MonoBehaviour
     private Image stageImageFlame;
     [SerializeField]
     private GameObject stageObjectList;
+    [SerializeField]
+    private GameObject[] arrowObjectList;
+    [SerializeField]
+    private GameObject arrow;
 
     public Vector2 moveHoming = new Vector2(0.2f,0.2f);
     public float stageAnimSpeed = 1.0f;
     private float playerX, playerY;
     private float targetX, targetY;
 
+    public float speed = 15.0f;
+
+    private int passedNum = 0;
+    private bool isMoving = false;
+
     Animator animator;
+
+    private Vector2 prevPos;
+    private float dir;
+    private float defaultScaleX;
 
     // Start is called before the first frame update
     void Start()
     {
+        dir = (transform.localScale.x > 0.0f) ? 1 : -1; // tada
+        defaultScaleX = transform.localScale.x * dir;
+        transform.localScale = new Vector3(
+            defaultScaleX, transform.localScale.y, transform.localScale.z);
+
         animator = GetComponent<Animator>();
 
         // すべてのstageStateから現在のステージ場所を全探索する テーブル作るより楽で簡潔になった
@@ -42,28 +68,34 @@ public class StageStateManager : MonoBehaviour
         }
 
         ChangeStageInfo();
+        ShowArrow();
 
         transform.position = nowStageState.stageTransform.position;
         // ついでにカメラの位置も変える
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+
+        prevPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(nowStageState.stageName);
-        playerX = transform.position.x;
-        playerY = transform.position.y;
-        playerX = Mathf.Lerp(transform.position.x, targetX, moveHoming.x);
-        playerY = Mathf.Lerp(transform.position.y, targetY, moveHoming.y);
+        // Debug.Log(isMoving);
+        if (transform.position.x - prevPos.x > 0) dir = 1f;
+        else if(transform.position.x - prevPos.x < 0) dir = -1f;
+        animator.SetFloat("MoveSpeed", (isMoving) ? 10 : 0);
+        transform.localScale = new Vector3(
+            defaultScaleX * dir, transform.localScale.y, transform.localScale.z);
 
-        animator.SetFloat("MoveSpeed", Vector2.Distance(transform.position, new Vector2(playerX, playerY)));
+        prevPos = transform.position;
 
-        transform.position = new Vector3(playerX, playerY, 0f);
+        SwitchArrow();
+
+        if (isMoving) return;
 
         if (IsStageSpriteEnabled())
         {
-            if(ActionInput.GetButtonDown(ButtonCode.Jump))
+            if (ActionInput.GetButtonDown(ButtonCode.Jump))
             {
                 GoNextStage();
                 return;
@@ -76,28 +108,83 @@ public class StageStateManager : MonoBehaviour
 
         if (ActionInput.GetButtonDown(ButtonCode.Jump))
             DisplayStageSprite();
+        
 
         if (IsStageSpriteEnabled()) return;
+
+        MoveDirection moveDir;
 
         if (ActionInput.GetButtonDown(ButtonCode.RightArrow))
         {
             if (!nowStageState.goRightStage(ref nowStageState)) return;
+            moveDir = MoveDirection.RIGHT;
         }
         else if (ActionInput.GetButtonDown(ButtonCode.LeftArrow))
         {
             if (!nowStageState.goLeftStage(ref nowStageState)) return;
+            moveDir = MoveDirection.LEFT;
         }
         else if (ActionInput.GetButtonDown(ButtonCode.DownArrow))
         {
             if (!nowStageState.goDownStage(ref nowStageState)) return;
+            moveDir = MoveDirection.DOWN;
         }
         else if (ActionInput.GetButtonDown(ButtonCode.UpArrow))
         {
             if (!nowStageState.goUpStage(ref nowStageState)) return;
+            moveDir = MoveDirection.UP;
         }
         else return;
 
+        MoveAction(moveDir);
         ChangeStageInfo();
+        ShowArrow();
+    }
+
+    // 道のりに沿って移動する
+    private void MoveAction(MoveDirection dir)
+    {
+        isMoving = true;
+
+        switch (dir)
+        {
+            case MoveDirection.RIGHT:
+                MoveAppend(nowStageState.fromLeftPath);
+                break;
+            case MoveDirection.LEFT:
+                MoveAppend(nowStageState.fromRightPath);
+                break;
+            case MoveDirection.UP:
+                MoveAppend(nowStageState.fromDownPath);
+                break;
+            case MoveDirection.DOWN:
+                MoveAppend(nowStageState.fromUpPath);
+                break;
+        }
+    }
+    
+    private void MoveAppend(Transform[] pathTransform)
+    {
+        Sequence moveSequence = DOTween.Sequence();
+        Vector3 from, to;
+        float time;
+        from = transform.position;
+        for (int i = 0; i < pathTransform.Length; i++)
+        {
+            to = pathTransform[i].position;
+            time = Vector2.Distance(from, to) / speed;
+            moveSequence.Append(
+                transform.DOMove(
+                    to,
+                    time));
+            from = to;
+        }
+        to = nowStageState.stageTransform.position;
+        time = Vector2.Distance(from, to) / speed;
+        moveSequence.Append(
+            transform.DOMove(
+                to,
+                time).OnComplete(() => isMoving = false));
     }
 
     // ステージのステート変更に伴う変更
@@ -135,6 +222,22 @@ public class StageStateManager : MonoBehaviour
     private bool IsStageSpriteEnabled()
     {
         return stageImageFlame.gameObject.activeSelf;
+    }
+
+    // 矢印を表示する
+    private void ShowArrow()
+    {
+        bool[] arrowExist = nowStageState.GetStageExist();
+        for(int i = 0; i < 4; i++)
+        {
+            arrowObjectList[i].SetActive(arrowExist[i]);
+        }
+    }
+
+    // 移動中は矢印を消す あとでちゃんと書く
+    private void SwitchArrow()
+    {
+        arrow.SetActive(!isMoving);
     }
 
     // 目的のステージへ遷移する
