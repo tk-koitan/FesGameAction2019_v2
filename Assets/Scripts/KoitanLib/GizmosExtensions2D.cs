@@ -97,6 +97,58 @@ namespace KoitanLib
             to = CubicBezier.GetPoint(p0, p1, p2, p3, 0.5f);
             DrawArrow2D(from, to);
         }
+
+        public static Vector3 GetNearestPointBezierCurveArrow2D(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector2 mousePos)
+        {
+            float distance = float.MaxValue;
+            Vector3 point = p0;
+            int segments = 20;//とりあえず計算量を考慮して固定
+            var step = 1f / segments;
+            Vector3 from = p0;
+            Vector3 to;
+            for (float t = step; t < 1; t += step)
+            {
+                to = CubicBezier.GetPoint(p0, p1, p2, p3, t);
+                Gizmos.DrawLine(from, to);
+                Vector3 tmpVec = MidD2(mousePos, from, to);
+                if(tmpVec.z < distance)
+                {
+                    distance = tmpVec.z;
+                    point = tmpVec;
+                }
+                from = to;
+            }
+            to = p3;
+            Gizmos.DrawLine(from, to);
+            from = CubicBezier.GetPoint(p0, p1, p2, p3, 0.5f - step);
+            to = CubicBezier.GetPoint(p0, p1, p2, p3, 0.5f);
+            DrawArrow2D(from, to);
+            return point;
+        }
+
+        //点と線分の最短距離
+        //1,2に座標,3に距離
+        public static Vector3 MidD2(Vector2 p0, Vector2 p1, Vector2 p2)
+        {
+            float x0 = p0.x, y0 = p0.y, x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y;
+            var a = x2 - x1;
+            var b = y2 - y1;
+            var a2 = a * a;
+            var b2 = b * b;
+            var r2 = a2 + b2;
+            var tt = -(a * (x1 - x0) + b * (y1 - y0));
+            if (tt < 0)
+            {
+                return new Vector3(p1.x, p1.y, (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+            }
+            if (tt > r2)
+            {
+                return new Vector3(p2.x, p2.y, (x2 - x0) * (x2 - x0) + (y2 - y0) * (y2 - y0));
+            }
+            var f1 = a * (y1 - y0) - b * (x1 - x0);
+            return new Vector3(a * tt / r2 + x1,b * tt / r2 + y1, (f1 * f1) / r2);
+        }
+
     }
 }
 

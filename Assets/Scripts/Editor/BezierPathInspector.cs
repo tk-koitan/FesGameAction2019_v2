@@ -21,7 +21,7 @@ public class BezierPathInspector : Editor
         var transform = component.transform;
         var path = component.path;
         Vector2 tmpPos = component.transform.position;
-        for (int i = 0; i < path.Length; i++)
+        for (int i = 0; i < path.Count; i++)
         {
             tmpPos = path[i].Anchore + (Vector2)component.pivot;
             Handles.color = i == editingIndex ? Color.red : Color.white;

@@ -138,8 +138,8 @@ public class CameraFollow : MonoBehaviour
                 break;
 
             case CAMERAHOMING.LERP:
-                pX = Mathf.Lerp(transform.position.x, targetX, param.homing.x);
-                pY = Mathf.Lerp(transform.position.y, targetY, param.homing.y);
+                pX = Mathf.Lerp(transform.position.x, targetX, param.homing.x * Time.deltaTime * 60);
+                pY = Mathf.Lerp(transform.position.y, targetY, param.homing.y * Time.deltaTime * 60);
                 screenOGSize = Mathf.Lerp(screenOGSize, param.screenOGSize,
                             param.screenOGSizeHoming);
                 screenPSSize = Mathf.Lerp(screenPSSize, param.screenPSSize,

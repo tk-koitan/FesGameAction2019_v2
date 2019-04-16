@@ -24,4 +24,9 @@ public class ControlPoint
     public Vector2 Anchore;
     public Vector2 Handle1;
     public Vector2 Handle2;
+
+    public ControlPoint(Vector2 point)
+    {
+        Anchore = point;
+    }
 }
