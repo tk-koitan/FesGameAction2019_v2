@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 0.2}
+  m_Size: {x: 1.8, y: 0.4}
   m_EdgeRadius: 0
 --- !u!114 &1331859424
 MonoBehaviour:
@@ -567,11 +567,12 @@ GameObject:
   - component: {fileID: 6041591133535156039}
   - component: {fileID: 6041591133535156038}
   - component: {fileID: 6041591133535156037}
-  - component: {fileID: 6041591133535156036}
   - component: {fileID: 6041591133535156033}
   - component: {fileID: 6041591133535156034}
   - component: {fileID: 6041591133535156035}
   - component: {fileID: 6041591133535156060}
+  - component: {fileID: 316283089}
+  - component: {fileID: 1505427345}
   m_Layer: 2
   m_Name: KawazTan
   m_TagString: Player
@@ -614,7 +615,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,8 +678,8 @@ MonoBehaviour:
   - {fileID: 6041591134325629549}
   - {fileID: 6041591132698033796}
   m_Bounds:
-    m_Center: {x: 0.59879196, y: -1.3107023, z: 0}
-    m_Extent: {x: 2.7565832, y: 3.1497943, z: 0}
+    m_Center: {x: 1.6454222, y: 0.2894441, z: 0}
+    m_Extent: {x: 4.6336455, y: 1.9525161, z: 0}
 --- !u!95 &6041591133535156037
 Animator:
   serializedVersion: 3
@@ -698,25 +699,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6041591133535156036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041591133535156043}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca1a8334054bb4edb9746286ad21fcf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  v: {x: 0, y: 0}
-  vxMax: 0.16
-  vyMax: 0.5
-  g: -0.05
-  slopeMaxDeg: 50
-  defaultAirJumpTimes: 1
-  defaultJumpFrames: 8
 --- !u!61 &6041591133535156033
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -730,7 +712,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3, y: -0.7}
+  m_Offset: {x: 0.3, y: -0.71}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -759,17 +741,19 @@ MonoBehaviour:
   maxVx: 0.25
   accelVx: 0.04
   gravity: -0.025
-  maxVy: 0.3
+  maxVy: 0.35
   isGround: 0
   isSquat: 0
   direction: 1
   power: {x: 0, y: 0}
+  externalPower: {x: 0, y: 0}
   groundPoint: {x: 0, y: 0}
   slopeMaxDeg: 50
   jumpEnabled: 0
   defaultAirJumpTimes: 0
-  defaultJumpFrames: 15
+  defaultJumpFrames: 0.25
   sceneWaitTime: 5
+  audioJump: {fileID: 8300000, guid: 68756fd9f94084571859b7155628d2a4, type: 3}
 --- !u!50 &6041591133535156035
 Rigidbody2D:
   serializedVersion: 4
@@ -803,6 +787,120 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed95fabc2987e449bcf424d840bec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &316283089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041591133535156043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0.7944628, b: 0, a: 1}
+  glowBrightness: 5
+  outlineWidth: 0
+  alphaThreshold: 0
+  drawOutside: 1
+  enableInstancing: 0
+--- !u!82 &1505427345
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041591133535156043}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6041591133572447723
 GameObject:
   m_ObjectHideFlags: 0

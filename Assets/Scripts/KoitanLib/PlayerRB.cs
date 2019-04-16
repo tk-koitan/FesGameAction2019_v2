@@ -20,6 +20,7 @@ public class PlayerRB : MonoBehaviour
     private Vector2 v = Vector2.zero;
     private Vector2 rv = Vector2.zero;
     public Vector2 power = Vector2.zero;
+    public Vector2 externalPower = Vector2.zero;
     public Vector2 groundPoint;
     private Vector2 groundNormal;
     private GameObject groundObj;
@@ -41,8 +42,8 @@ public class PlayerRB : MonoBehaviour
     //ジャンプ回数
     public int defaultAirJumpTimes = 1;
     private int airJumpTimes = 0;
-    public int defaultJumpFrames = 8;
-    private int jumpFrames = 0;
+    public float defaultJumpFrames = 0.15f;
+    private float jumpFrames = 0;
     private bool isJumping;
 
     [SerializeField]
@@ -52,6 +53,10 @@ public class PlayerRB : MonoBehaviour
     // キャッシュ by tada
     Animator animator;
     GroundChecker groundChecker;
+
+    //音
+    public AudioClip audioJump;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +71,7 @@ public class PlayerRB : MonoBehaviour
         groundChecker = GetComponentInChildren<GroundChecker>();
         animator = GetComponent<Animator>(); // tada
         actionInput = ActionInput.Instatnce;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,13 +82,13 @@ public class PlayerRB : MonoBehaviour
         if (ActionInput.GetButton(ButtonCode.RightArrow))
         {
             power.x += accelVx * Time.deltaTime * 60;
-            //power.x = Mathf.Min(power.x, maxVx);
+            power.x = Mathf.Min(power.x, maxVx);
             direction = 1;
         }
         else if (ActionInput.GetButton(ButtonCode.LeftArrow))
         {
             power.x -= accelVx * Time.deltaTime * 60;
-            //power.x = Mathf.Max(power.x, -maxVx);
+            power.x = Mathf.Max(power.x, -maxVx);
             direction = -1;
         }
         else
@@ -103,7 +109,7 @@ public class PlayerRB : MonoBehaviour
             else
             {
                 //スピードが早すぎるときは減速しない
-                if (Mathf.Abs(power.x) < maxVx * 2 * Time.deltaTime * 60)
+                if (Mathf.Abs(power.x) < maxVx * 2)
                 {
                     if (power.x > 0)
                     {
@@ -120,17 +126,17 @@ public class PlayerRB : MonoBehaviour
         }
 
         //スピードが早いときは減速しない
-        if (Mathf.Abs(power.x) < maxVx * 2 * Time.deltaTime * 60)
+        if (Mathf.Abs(power.x) < maxVx)
         {
-            if (power.x > maxVx * Time.deltaTime * 60)
+            if (power.x > maxVx)
             {
                 power.x -= accelVx * Time.deltaTime * 60;
-                power.x = Mathf.Max(power.x, maxVx * Time.deltaTime * 60);
+                power.x = Mathf.Max(power.x, maxVx);
             }
-            else if (power.x < -maxVx * Time.deltaTime * 60)
+            else if (power.x < -maxVx)
             {
                 power.x += accelVx * Time.deltaTime * 60;
-                power.x = Mathf.Min(power.x, -maxVx * Time.deltaTime * 60);
+                power.x = Mathf.Min(power.x, -maxVx);
             }
         }
 
@@ -175,6 +181,8 @@ public class PlayerRB : MonoBehaviour
             power.y = maxVy;
             isGround = false;
             animator.SetBool("Jump", true); // tada
+            //音
+            audioSource.PlayOneShot(audioJump);
         }
 
         if (isGround)
@@ -191,7 +199,7 @@ public class PlayerRB : MonoBehaviour
                 v = Vector2.zero;
             }
             v = Vector3.ProjectOnPlane(power, groundNormal);
-            v.x = Mathf.Clamp(v.x, -maxVx * 2 * Time.deltaTime * 60, maxVx * 2 * Time.deltaTime * 60);
+            v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
             Debug.DrawRay(groundPoint, groundNormal, Color.red);
             //Debug.DrawRay(groundPoint, v, Color.red);
         }
@@ -213,10 +221,14 @@ public class PlayerRB : MonoBehaviour
             if (isJumping && jumpFrames > 0)
             {
                 if (ActionInput.GetButtonDown(ButtonCode.Jump))
+                {
                     animator.Play("PlayerJump", 0, 0.0f); // tada
+                    //音
+                    audioSource.PlayOneShot(audioJump);
+                }
                 if (ActionInput.GetButton(ButtonCode.Jump))
                 {
-                    jumpFrames--;
+                    jumpFrames -= Time.deltaTime;
                     power.y = maxVy;
                     isGround = false;
                 }
@@ -225,19 +237,21 @@ public class PlayerRB : MonoBehaviour
                     isJumping = false;
                 }
             }
-
-            power.y += gravity * Time.deltaTime * 60;
-            power.y = Mathf.Clamp(power.y, -maxVy * Time.deltaTime * 60, maxVy * 2 * Time.deltaTime * 60);
+            else
+            {
+                power.y += gravity * Time.deltaTime * 60;
+            }
+            power.y = Mathf.Clamp(power.y, -maxVy, maxVy * 2);
             v = power;
-            v.x = Mathf.Clamp(v.x, -maxVx * 2 * Time.deltaTime * 60, maxVx * 2 * Time.deltaTime * 60);
+            v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
         }
 
         //rb.velocity = v + rv;
-        rb.MovePosition(transform.position + (Vector3)v);
+        rb.MovePosition(transform.position + (Vector3)v * Time.deltaTime * 60);
         //rv = Vector2.zero;
         //rv = Vector2.zero;
         //transform.position += (Vector3)v;
-        Debug.DrawRay(transform.position, v, Color.white);
+        Debug.DrawRay(transform.position, v * Time.deltaTime * 60, Color.white);
         //Debug.Log("速さ:"+v.magnitude);
 
         // tada
