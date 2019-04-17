@@ -10,6 +10,8 @@ public class BaseStageState : MonoBehaviour
     public Sprite stageSprite;
     public Transform stageTransform;
 
+    protected bool[] stageExist = new bool[4] {false, false, false, false };
+
     [SerializeField]
     protected StageState rightStage;
     [SerializeField]
@@ -18,6 +20,13 @@ public class BaseStageState : MonoBehaviour
     protected StageState upStage;
     [SerializeField]
     protected StageState downStage;
+
+    // 道のりを取得
+    public Transform[] fromLeftPath;
+    public Transform[] fromRightPath;
+    public Transform[] fromUpPath;
+    public Transform[] fromDownPath;
+
 
     public virtual bool goRightStage(ref StageState _nowStage)
     {
