@@ -9,6 +9,9 @@ public class ScoreManager : MonoBehaviour
     private bool isRunning;
     public TextMeshProUGUI tmproText;
     public Animator canvasAnimator;
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip se;
     static ScoreManager instance;
     public static ScoreManager Instatnce
     {
@@ -25,7 +28,9 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         canvasAnimator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(StageStart());
+        //MusicManager.Play(MusicManager.Instance.bgm1);
     }
 
     // Update is called once per frame
@@ -55,9 +60,13 @@ public class ScoreManager : MonoBehaviour
 
     private IEnumerator StageStart()
     {
+        MusicManager.audioSource.Stop();
         ActionInput.actionEnabled = false;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3.3f);
+        audioSource.PlayOneShot(se);
+        yield return new WaitForSeconds(0.7f);
         ActionInput.actionEnabled = true;
         TimerStart();
+        MusicManager.Play(MusicManager.Instance.bgm1);
     }
 }

@@ -9,7 +9,7 @@ public class RuntimeInitializer
         var manager = new GameObject("JoyconManager", typeof(JoyconManager));
         //manager.AddComponent<Example>();
         //Debug.Log("シーン読み込み前JoyconManagerInstatnce:" + JoyconManager.Instance.j.Count);
-        if(JoyconManager.Instance.j.Count>0)
+        if (JoyconManager.Instance.j.Count > 0)
         {
             manager.AddComponent<JoyConInput>();
         }
@@ -21,6 +21,10 @@ public class RuntimeInitializer
 
         //操作可能
         ActionInput.actionEnabled = true;
+
+        //BGM
+        manager.AddComponent<AudioSource>().playOnAwake = false;
+        manager.AddComponent<MusicManager>();
     }
 
 } // class RuntimeInitializer
