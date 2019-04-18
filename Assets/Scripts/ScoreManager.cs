@@ -11,7 +11,9 @@ public class ScoreManager : MonoBehaviour
     public Animator canvasAnimator;
     private AudioSource audioSource;
     [SerializeField]
-    private AudioClip se;
+    private AudioClip startSE;
+    [SerializeField]
+    private AudioClip countdownSE;
     static ScoreManager instance;
     public static ScoreManager Instatnce
     {
@@ -62,8 +64,14 @@ public class ScoreManager : MonoBehaviour
     {
         MusicManager.audioSource.Stop();
         ActionInput.actionEnabled = false;
-        yield return new WaitForSeconds(3.3f);
-        audioSource.PlayOneShot(se);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.PlayOneShot(countdownSE);
+        yield return new WaitForSeconds(1.0f);
+        audioSource.PlayOneShot(countdownSE);
+        yield return new WaitForSeconds(1.0f);
+        audioSource.PlayOneShot(countdownSE);
+        yield return new WaitForSeconds(1.0f);
+        audioSource.PlayOneShot(startSE);
         yield return new WaitForSeconds(0.7f);
         ActionInput.actionEnabled = true;
         TimerStart();
