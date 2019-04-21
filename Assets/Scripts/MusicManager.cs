@@ -53,4 +53,10 @@ public class MusicManager : MonoBehaviour
         audioSource.Play();
         instance.isIntro = true;
     }
+
+    public static void Stop()
+    {
+        instance.isIntro = true;
+        audioSource.Stop();
+    }
 }

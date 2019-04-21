@@ -62,7 +62,7 @@ public class ScoreManager : MonoBehaviour
 
     private IEnumerator StageStart()
     {
-        MusicManager.audioSource.Stop();
+        MusicManager.Stop();
         ActionInput.actionEnabled = false;
         yield return new WaitForSeconds(0.3f);
         audioSource.PlayOneShot(countdownSE);
