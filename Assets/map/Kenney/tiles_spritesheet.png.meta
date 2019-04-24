@@ -172,7 +172,7 @@ TextureImporter:
     21300334: tiles_spritesheet_167
     21300336: tiles_spritesheet_168
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
