@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class ActionInput : MonoBehaviour
+public class ActionInput : MonoBehaviour
 {
     public static bool actionEnabled;
     //public abstract bool GetButtonDown(ButtonCode code);

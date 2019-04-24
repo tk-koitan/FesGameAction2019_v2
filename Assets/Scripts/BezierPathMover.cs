@@ -99,6 +99,7 @@ public class BezierPathMover : Mover
 
     private void OnDrawGizmos()
     {
+        /*
         //処理中のイベントからマウスの位置取得
         mousePosition = Event.current.mousePosition;
 
@@ -153,6 +154,25 @@ public class BezierPathMover : Mover
                 //今は無理,力が足りない
                 //path.Add(new ControlPoint(point));
             }
+        }
+        */
+
+        Vector3 point = new Vector3(0, 0, float.MaxValue);
+        Vector3 from = pivot + (Vector3)path[0].Anchore;
+        Vector3 to;
+        Gizmos.color = Color.white;
+        for (int i = 1; i < path.Count; i++)
+        {
+            to = pivot + (Vector3)path[i].Anchore;
+            GizmosExtensions2D.DrawBezierCurve2D(from, from + (Vector3)path[i - 1].Handle2, to + (Vector3)path[i].Handle1, to);
+            GizmosExtensions2D.DrawBezierCurveArrow2D(from, from + (Vector3)path[i - 1].Handle2, to + (Vector3)path[i].Handle1, to);
+            Vector3 tmpVec = GizmosExtensions2D.GetNearestPointBezierCurveArrow2D(from, from + (Vector3)path[i - 1].Handle2, to + (Vector3)path[i].Handle1, to, mousePosition);
+            from = to;
+        }
+        if (openEnded)
+        {
+            to = pivot + (Vector3)path[0].Anchore;
+            GizmosExtensions2D.DrawBezierCurveArrow2D(from, from + (Vector3)path[path.Count - 1].Handle2, to + (Vector3)path[0].Handle1, to);
         }
     }
 

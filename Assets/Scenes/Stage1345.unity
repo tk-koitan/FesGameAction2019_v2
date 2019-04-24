@@ -4678,6 +4678,7 @@ MonoBehaviour:
   time: 0
   tmproText: {fileID: 1398712685}
   canvasAnimator: {fileID: 0}
+  se: {fileID: 0}
 --- !u!95 &992287961
 Animator:
   serializedVersion: 3
@@ -6427,7 +6428,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1839735485 &1599809386

@@ -2,6 +2,7 @@
 
 public class RuntimeInitializer
 {
+    /*
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void InitializeBeforeSceneLoad()
     {
@@ -26,5 +27,6 @@ public class RuntimeInitializer
         manager.AddComponent<AudioSource>().playOnAwake = false;
         manager.AddComponent<MusicManager>();
     }
+    */
 
 } // class RuntimeInitializer
