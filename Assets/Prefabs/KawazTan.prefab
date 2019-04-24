@@ -753,7 +753,8 @@ MonoBehaviour:
   defaultAirJumpTimes: 0
   defaultJumpFrames: 0.25
   sceneWaitTime: 5
-  audioJump: {fileID: 8300000, guid: 68756fd9f94084571859b7155628d2a4, type: 3}
+  jumpSE: {fileID: 8300000, guid: 87334d6813d9947da9adf1cd6735d6ad, type: 3}
+  deathSE: {fileID: 8300000, guid: a11b4824d401c40b990563e26fc3cf42, type: 3}
 --- !u!50 &6041591133535156035
 Rigidbody2D:
   serializedVersion: 4

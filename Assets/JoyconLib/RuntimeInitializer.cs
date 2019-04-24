@@ -10,6 +10,7 @@ public class RuntimeInitializer
         var manager = new GameObject("JoyconManager", typeof(JoyconManager));
         //manager.AddComponent<Example>();
         //Debug.Log("シーン読み込み前JoyconManagerInstatnce:" + JoyconManager.Instance.j.Count);
+        manager.AddComponent<FPSCounter>();
         if (JoyconManager.Instance.j.Count > 0)
         {
             manager.AddComponent<JoyConInput>();

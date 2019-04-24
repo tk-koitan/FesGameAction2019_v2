@@ -14,7 +14,7 @@ public class MusicManager : MonoBehaviour
     public BGMSource bgm1, bgm2, bgm3;
     public float startTime, endTime;
     private float currentTime;
-    public bool isLoop = true;
+    public bool isIntro = false;
 
     private void Awake()
     {
@@ -27,7 +27,16 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(audioSource.time>=startTime)
+        {
+            isIntro = false;
+        }
         if (audioSource.time >= endTime)
+        {
+            audioSource.time = startTime;
+            audioSource.Play();
+        }
+        if(!isIntro && audioSource.time<=0)
         {
             audioSource.time = startTime;
             audioSource.Play();
@@ -42,6 +51,12 @@ public class MusicManager : MonoBehaviour
         audioSource.clip = bgm.BGM;
         audioSource.time = 0;
         audioSource.Play();
-        instance.isLoop = true;
+        instance.isIntro = true;
+    }
+
+    public static void Stop()
+    {
+        instance.isIntro = true;
+        audioSource.Stop();
     }
 }

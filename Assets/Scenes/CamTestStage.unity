@@ -9605,7 +9605,8 @@ MonoBehaviour:
   time: 0
   tmproText: {fileID: 1199621328}
   canvasAnimator: {fileID: 0}
-  se: {fileID: 8300000, guid: 970596041e67a4e30819b46a317a7a4b, type: 3}
+  startSE: {fileID: 8300000, guid: 970596041e67a4e30819b46a317a7a4b, type: 3}
+  countdownSE: {fileID: 8300000, guid: 0fce5e05392e24eaf89db8a714a53f94, type: 3}
 --- !u!114 &1704111339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11421,13 +11422,13 @@ MonoBehaviour:
   - duration: 1
     ease: 0
     Anchore: {x: 0, y: 0}
-    Handle1: {x: -4.014896, y: 1.6508954}
-    Handle2: {x: 3.9045744, y: -0.6890433}
+    Handle1: {x: -2.476801, y: -0.14900297}
+    Handle2: {x: 3.2500648, y: -0.0018096864}
   - duration: 1
     ease: 0
-    Anchore: {x: 4.561432, y: 3.803952}
-    Handle1: {x: 4.7545624, y: -0.7193053}
-    Handle2: {x: -8.349407, y: 1.6675439}
+    Anchore: {x: 0.6671076, y: 3.7057762}
+    Handle1: {x: -3.0013614, y: 0.13155484}
+    Handle2: {x: 2.3518066, y: 0.09672427}
 --- !u!61 &2015829462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16629,6 +16630,85 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a797a89534601ac4f96f7ec689a4a62b, type: 3}
+--- !u!1001 &3846914323407673891
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3846914324019097204, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_Name
+      value: Damage Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097209, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324019097210, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846914324455739484, guid: 2aae026b8eacb429492524f2990451b6,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2aae026b8eacb429492524f2990451b6, type: 3}
 --- !u!1001 &4198175575652346792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16770,10 +16850,5 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6041591133535156034, guid: 01ae1285c5a53bf44a6e36190bda6d6f,
-        type: 3}
-      propertyPath: audioJump
-      value: 
-      objectReference: {fileID: 8300000, guid: 87334d6813d9947da9adf1cd6735d6ad, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae1285c5a53bf44a6e36190bda6d6f, type: 3}

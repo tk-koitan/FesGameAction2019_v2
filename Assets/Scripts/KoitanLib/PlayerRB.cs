@@ -55,7 +55,8 @@ public class PlayerRB : MonoBehaviour
     GroundChecker groundChecker;
 
     //音
-    public AudioClip audioJump;
+    public AudioClip jumpSE;
+    public AudioClip deathSE;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -182,7 +183,7 @@ public class PlayerRB : MonoBehaviour
             isGround = false;
             animator.SetBool("Jump", true); // tada
             //音
-            audioSource.PlayOneShot(audioJump);
+            audioSource.PlayOneShot(jumpSE);
         }
 
         if (isGround)
@@ -224,7 +225,7 @@ public class PlayerRB : MonoBehaviour
                 {
                     animator.Play("PlayerJump", 0, 0.0f); // tada
                     //音
-                    audioSource.PlayOneShot(audioJump);
+                    audioSource.PlayOneShot(jumpSE);
                 }
                 if (ActionInput.GetButton(ButtonCode.Jump))
                 {
@@ -268,6 +269,85 @@ public class PlayerRB : MonoBehaviour
         //rb.velocity += velocity;
         //Debug.Log(velocity);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (v.y > 0 && !isGround) return;
+        isContactRight = false;
+        isContactLeft = false;
+
+        groundPoint = collision.contacts[0].point;
+        groundNormal = collision.contacts[0].normal;
+        groundObj = collision.contacts[0].collider.gameObject;
+        Vector2 center = transform.position;
+        float dir = (v + center - collision.contacts[0].point).magnitude;
+
+        float slopeMinY = Mathf.Sin((90 - slopeMaxDeg) * Mathf.Deg2Rad);
+        for (int i = 1; i < collision.contacts.Length; i++)
+        {
+            float tmpDir = (v + center - collision.contacts[i].point).magnitude;
+            if (tmpDir < dir)
+            {
+                groundPoint = collision.contacts[i].point;
+                groundNormal = collision.contacts[i].normal;
+                groundObj = collision.contacts[i].collider.gameObject;
+            }
+            Debug.DrawRay(collision.contacts[i].point, collision.contacts[i].normal);
+        }
+
+        if (isGround)
+        {
+
+            RaycastHit2D hit = Physics2D.Raycast(center, Vector2.down * (v.magnitude + box.bounds.size.y));
+            Debug.DrawRay(center, Vector2.down * (v.magnitude + box.bounds.size.y));
+            if (hit)
+            {
+                float tmpDir = (v + center - hit.point).magnitude;
+                if (tmpDir < dir)
+                {
+                    groundPoint = hit.point;
+                    groundNormal = hit.normal;
+                    groundObj = hit.collider.gameObject;
+                }
+            }
+        }
+
+
+        if (groundNormal.y >= slopeMinY)
+        {
+            isGround = true;
+            if (groundObj.layer == (int)LayerName.MovingPlatform)
+            {
+                Mover tmpM = groundObj.GetComponent<Mover>();
+                //tmpM.ridingPlayers.Add(this);
+                Vector2 fromPos = groundPoint - (Vector2)tmpM.transform.position;
+                Vector2 toPos = Quaternion.Euler(0, 0, tmpM.angleSpeed) * fromPos;
+                Vector2 tmpV = toPos - fromPos;
+                //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
+                rv = tmpM.v + tmpV;
+                //Debug.Log(groundObj);
+            }
+            else
+            {
+                rv = Vector2.zero;
+            }
+            Debug.DrawRay(groundPoint, groundNormal);
+            //Debug.Log(groundNormal + ">=" + slopeMinY);
+        }
+        else
+        {
+            isGround = false;
+            if (groundNormal.x < 0)
+            {
+                isContactRight = true;
+            }
+            else if (groundNormal.x > 0)
+            {
+                isContactLeft = true;
+            }
+            groundNormal = Vector2.up;
+        }
+    }
+
 
     private void OnCollisionStay2D(Collision2D collision)
     {

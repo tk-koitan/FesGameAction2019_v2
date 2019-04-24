@@ -40,6 +40,7 @@ public class StageStateManager : MonoBehaviour
 
     private int passedNum = 0;
     private bool isMoving = false;
+    private bool prevIsMoving = false;
 
     Animator animator;
 
@@ -68,7 +69,8 @@ public class StageStateManager : MonoBehaviour
         }
 
         ChangeStageInfo();
-        ShowArrow();
+        SetArrow();
+        ShowStageName();
 
         transform.position = nowStageState.stageTransform.position;
         // ついでにカメラの位置も変える
@@ -87,9 +89,21 @@ public class StageStateManager : MonoBehaviour
         transform.localScale = new Vector3(
             defaultScaleX * dir, transform.localScale.y, transform.localScale.z);
 
-        prevPos = transform.position;
+        if (isMoving != prevIsMoving)
+        {
+            SwitchArrow();
+            if(!isMoving)
+                ShowStageName();
+        }
 
-        SwitchArrow();
+        prevPos = transform.position;
+        prevIsMoving = isMoving;
+
+
+        if(dir == 1f)
+            arrow.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        else
+            arrow.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
 
         if (isMoving) return;
 
@@ -138,7 +152,7 @@ public class StageStateManager : MonoBehaviour
 
         MoveAction(moveDir);
         ChangeStageInfo();
-        ShowArrow();
+        SwitchArrow();
     }
 
     // 道のりに沿って移動する
@@ -193,10 +207,13 @@ public class StageStateManager : MonoBehaviour
         nowStageId = nowStageState.stageId;
 
         stageImage.sprite = nowStageState.stageSprite;
-        stageNameText.text = nowStageState.stageName;
+        stageNameText.text = "";
+        //stageNameText.text = nowStageState.stageName;
 
         targetX = nowStageState.stageTransform.position.x;
         targetY = nowStageState.stageTransform.position.y;
+
+        SetArrow();
     }
 
     // ステージの画像を表示する
@@ -224,8 +241,8 @@ public class StageStateManager : MonoBehaviour
         return stageImageFlame.gameObject.activeSelf;
     }
 
-    // 矢印を表示する
-    private void ShowArrow()
+    // 左右上下に移動できるかの矢印
+    private void SetArrow()
     {
         bool[] arrowExist = nowStageState.GetStageExist();
         for(int i = 0; i < 4; i++)
@@ -234,10 +251,16 @@ public class StageStateManager : MonoBehaviour
         }
     }
 
-    // 移動中は矢印を消す あとでちゃんと書く
+    // 移動中は矢印を消す
     private void SwitchArrow()
     {
         arrow.SetActive(!isMoving);
+    }
+
+    // ステージ名を表示する
+    private void ShowStageName()
+    {
+        stageNameText.text = nowStageState.stageName;
     }
 
     // 目的のステージへ遷移する
