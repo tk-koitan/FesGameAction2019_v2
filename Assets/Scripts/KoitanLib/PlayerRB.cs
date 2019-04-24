@@ -458,7 +458,7 @@ public class PlayerRB : MonoBehaviour
         ScoreManager.Instatnce.canvasAnimator.Play("GoalText");
 
         //BGM変更
-        //MusicManager.Play(MusicManager.Instance.bgm3);
+        MusicManager.Play(MusicManager.Instance.bgm3);
 
         // n秒後にシーン遷移
         Invoke("GoStageSelect", sceneWaitTime);
