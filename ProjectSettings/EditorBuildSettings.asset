@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StageSelect.unity
-    guid: 74b22b7174fcae74980313ee6c646f3e
-  - enabled: 1
     path: Assets/Scenes/Stage1345.unity
     guid: b898ff9bfbaf586448d8c701384898a8
   - enabled: 1
@@ -26,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KawazStageSelect.unity
     guid: e2cc2c936aca877419a922784b74a641
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: 74b22b7174fcae74980313ee6c646f3e
   m_configObjects: {}
