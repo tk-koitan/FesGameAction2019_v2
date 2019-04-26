@@ -601,10 +601,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 2
-  cloudProjectId: 611bb83e-b75b-45f6-89e3-e03439202299
+  cloudProjectId: 7a0e2a8a-c4cb-445b-abb0-7589b91ce4b6
   framebufferDepthMemorylessMode: 0
-  projectName: JoyconTest
-  organizationId: wormyrocks
+  projectName: FesGameAction2019
+  organizationId: tatatta
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

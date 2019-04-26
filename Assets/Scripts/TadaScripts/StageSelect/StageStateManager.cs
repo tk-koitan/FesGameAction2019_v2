@@ -26,8 +26,16 @@ public class StageStateManager : MonoBehaviour
     private Image stageImageFlame;
     [SerializeField]
     private GameObject stageObjectList;
-    [SerializeField]
-    private GameObject[] arrowObjectList;
+
+    [System.Serializable]
+    public class ArrowList
+    {
+        public GameObject upArrow;
+        public GameObject rightArrow;
+        public GameObject downArrow;
+        public GameObject leftArrow;
+    }
+    public ArrowList arrowList;
     [SerializeField]
     private GameObject arrow;
 
@@ -72,7 +80,7 @@ public class StageStateManager : MonoBehaviour
         SetArrow();
         ShowStageName();
 
-        transform.position = nowStageState.stageTransform.position;
+        transform.position = nowStageState.transform.position;
         // ついでにカメラの位置も変える
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 
@@ -128,31 +136,38 @@ public class StageStateManager : MonoBehaviour
 
         MoveDirection moveDir;
 
-        if (ActionInput.GetButtonDown(ButtonCode.RightArrow))
+        if (ActionInput.GetButtonDown(ButtonCode.UpArrow))
         {
-            if (!nowStageState.goRightStage(ref nowStageState)) return;
-            moveDir = MoveDirection.RIGHT;
+            if (!nowStageState.canMove.up) return;
+            if (nowStageState.nextStage.upStage == null) return;
+            
+            moveDir = MoveDirection.UP;
         }
-        else if (ActionInput.GetButtonDown(ButtonCode.LeftArrow))
+        else if (ActionInput.GetButtonDown(ButtonCode.RightArrow))
         {
-            if (!nowStageState.goLeftStage(ref nowStageState)) return;
-            moveDir = MoveDirection.LEFT;
+            if (!nowStageState.canMove.right) return;
+            if (nowStageState.nextStage.rightStage == null) return;
+
+            moveDir = MoveDirection.RIGHT;
         }
         else if (ActionInput.GetButtonDown(ButtonCode.DownArrow))
         {
-            if (!nowStageState.goDownStage(ref nowStageState)) return;
+            if (!nowStageState.canMove.down) return;
+            if (nowStageState.nextStage.downStage == null) return;
+
             moveDir = MoveDirection.DOWN;
         }
-        else if (ActionInput.GetButtonDown(ButtonCode.UpArrow))
+        else if (ActionInput.GetButtonDown(ButtonCode.LeftArrow))
         {
-            if (!nowStageState.goUpStage(ref nowStageState)) return;
-            moveDir = MoveDirection.UP;
+            if (!nowStageState.canMove.left) return;
+            if (nowStageState.nextStage.leftStage == null) return;
+
+            moveDir = MoveDirection.LEFT;
         }
         else return;
 
         MoveAction(moveDir);
-        ChangeStageInfo();
-        SwitchArrow();
+        ChangeStageState(moveDir);
     }
 
     // 道のりに沿って移動する
@@ -162,43 +177,104 @@ public class StageStateManager : MonoBehaviour
 
         switch (dir)
         {
-            case MoveDirection.RIGHT:
-                MoveAppend(nowStageState.fromLeftPath);
-                break;
-            case MoveDirection.LEFT:
-                MoveAppend(nowStageState.fromRightPath);
-                break;
             case MoveDirection.UP:
-                MoveAppend(nowStageState.fromDownPath);
+                MoveAppend(nowStageState.stagePath.upPath, dir);
+                break;
+            case MoveDirection.RIGHT:
+                MoveAppend(nowStageState.stagePath.rightPath, dir);
                 break;
             case MoveDirection.DOWN:
-                MoveAppend(nowStageState.fromUpPath);
+                MoveAppend(nowStageState.stagePath.downPath, dir);
+                break;
+            case MoveDirection.LEFT:
+                MoveAppend(nowStageState.stagePath.leftPath, dir);
                 break;
         }
     }
     
-    private void MoveAppend(Transform[] pathTransform)
+    private void MoveAppend(Transform[] pathTransform, MoveDirection dir)
     {
-        Sequence moveSequence = DOTween.Sequence();
-        Vector3 from, to;
+        //Sequence moveSequence = DOTween.Sequence();
+        Vector3[] path = new Vector3[pathTransform.Length + 1];
         float time;
-        from = transform.position;
         for (int i = 0; i < pathTransform.Length; i++)
         {
-            to = pathTransform[i].position;
-            time = Vector2.Distance(from, to) / speed;
+            path[i] = pathTransform[i].position;
+            /*
+            time = Vector2.Distance(path[0], path[1]) / speed;
             moveSequence.Append(
-                transform.DOMove(
-                    to,
-                    time));
-            from = to;
+                transform.DOLocalPath(
+                    path,
+                    time,
+                    PathType.CatmullRom).SetEase(Ease.Linear));
+            path[0] = path[1];*/
         }
-        to = nowStageState.stageTransform.position;
-        time = Vector2.Distance(from, to) / speed;
+
+        switch (dir)
+        {
+            case MoveDirection.UP:
+                path[pathTransform.Length] = nowStageState.nextStage.upStage.transform.position;
+                time = Vector2.Distance(transform.position, 
+                    nowStageState.nextStage.upStage.transform.position) / speed;
+                break;
+            case MoveDirection.RIGHT:
+                path[pathTransform.Length] = nowStageState.nextStage.rightStage.transform.position;
+                time = Vector2.Distance(transform.position, 
+                    nowStageState.nextStage.rightStage.transform.position) / speed;
+                break;
+            case MoveDirection.DOWN:
+                path[pathTransform.Length] = nowStageState.nextStage.downStage.transform.position;
+                time = Vector2.Distance(transform.position, 
+                    nowStageState.nextStage.downStage.transform.position) / speed;
+                break;
+            case MoveDirection.LEFT:
+                path[pathTransform.Length] = nowStageState.nextStage.leftStage.transform.position;
+                time = Vector2.Distance(transform.position, 
+                    nowStageState.nextStage.leftStage.transform.position) / speed;
+                break;
+            default: // null以外にしたいため意味なし
+                path[pathTransform.Length] = transform.position;
+                time = 0f;
+                Debug.Log("Stage Path Error");
+                break;
+        }
+        /*
+        time = Vector2.Distance(path[0], path[1]) / speed;
         moveSequence.Append(
-            transform.DOMove(
-                to,
-                time).OnComplete(() => isMoving = false));
+            moveSequence.Append(
+                transform.DOLocalPath(
+                    path,
+                    time,
+                    PathType.CatmullRom).SetEase(Ease.Linear)).OnComplete(() => isMoving = false));
+                    */
+        //moveSequence.Append(
+           // moveSequence.Append(
+            transform.DOLocalPath(
+               path,
+               time,
+               PathType.CatmullRom).SetEase(Ease.Linear).OnComplete(() => isMoving = false);
+    }
+
+    // ステージステートを移動先のにセットする
+    private void ChangeStageState(MoveDirection dir)
+    {
+        switch (dir)
+        {
+            case MoveDirection.UP:
+                nowStageState = nowStageState.nextStage.upStage;
+                break;
+            case MoveDirection.RIGHT:
+                nowStageState = nowStageState.nextStage.rightStage;
+                break;
+            case MoveDirection.DOWN:
+                nowStageState = nowStageState.nextStage.downStage;
+                break;
+            case MoveDirection.LEFT:
+                nowStageState = nowStageState.nextStage.leftStage;
+                break;
+        }
+        ChangeStageInfo();
+        SwitchArrow();
     }
 
     // ステージのステート変更に伴う変更
@@ -209,9 +285,6 @@ public class StageStateManager : MonoBehaviour
         stageImage.sprite = nowStageState.stageSprite;
         stageNameText.text = "";
         //stageNameText.text = nowStageState.stageName;
-
-        targetX = nowStageState.stageTransform.position.x;
-        targetY = nowStageState.stageTransform.position.y;
 
         SetArrow();
     }
@@ -244,11 +317,10 @@ public class StageStateManager : MonoBehaviour
     // 左右上下に移動できるかの矢印
     private void SetArrow()
     {
-        bool[] arrowExist = nowStageState.GetStageExist();
-        for(int i = 0; i < 4; i++)
-        {
-            arrowObjectList[i].SetActive(arrowExist[i]);
-        }
+        arrowList.upArrow.SetActive(nowStageState.canMove.up);
+        arrowList.rightArrow.SetActive(nowStageState.canMove.right);
+        arrowList.downArrow.SetActive(nowStageState.canMove.down);
+        arrowList.leftArrow.SetActive(nowStageState.canMove.left);
     }
 
     // 移動中は矢印を消す

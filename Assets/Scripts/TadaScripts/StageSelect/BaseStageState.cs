@@ -8,35 +8,52 @@ public class BaseStageState : MonoBehaviour
     public string stageSceneName = "CamTestStage";
     public string stageName = "";
     public Sprite stageSprite;
-    public Transform stageTransform;
 
-    protected bool[] stageExist = new bool[4] {false, false, false, false };
-
-    [SerializeField]
-    protected StageState rightStage;
-    [SerializeField]
-    protected StageState leftStage;
-    [SerializeField]
-    protected StageState upStage;
-    [SerializeField]
-    protected StageState downStage;
-
-    // 道のりを取得
-    public Transform[] fromLeftPath;
-    public Transform[] fromRightPath;
-    public Transform[] fromUpPath;
-    public Transform[] fromDownPath;
-
-
-    public virtual bool goRightStage(ref StageState _nowStage)
+    [System.Serializable]
+    public class NextStage
     {
-        return false;
+        [field: SerializeField]
+        public StageState upStage {get; private set; }
+        [field: SerializeField]
+        public StageState rightStage { get; private set; }
+        [field: SerializeField]
+        public StageState downStage { get; private set; }
+        [field: SerializeField]
+        public StageState leftStage { get; private set; }
     }
-    public virtual bool goLeftStage(ref StageState _nowStage)
+
+    [System.Serializable]
+    public class StagePath
     {
-        return false;
+        [field: SerializeField]
+        public Transform[] upPath { get; private set; }
+        [field: SerializeField]
+        public Transform[] rightPath { get; private set; }
+        [field: SerializeField]
+        public Transform[] downPath { get; private set; }
+        [field: SerializeField]
+        public Transform[] leftPath{ get; private set; }
     }
+
+    [System.Serializable]
+    public class CanMove
+    {
+        public bool up; // setをprotectedにしても継承元で変更できなかった・・・
+        public bool right;
+        public bool down;
+        public bool left;
+    }
+
+    public NextStage nextStage;
+    public StagePath stagePath;
+    public CanMove canMove;
+
+    /*
     public virtual bool goUpStage(ref StageState _nowStage)
+    {
+        return false;
+    }
+    public virtual bool goRightStage(ref StageState _nowStage)
     {
         return false;
     }
@@ -44,4 +61,8 @@ public class BaseStageState : MonoBehaviour
     {
         return false;
     }
+    public virtual bool goLeftStage(ref StageState _nowStage)
+    {
+        return false;
+    }*/
 }

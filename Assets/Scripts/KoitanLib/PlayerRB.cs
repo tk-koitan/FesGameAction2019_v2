@@ -461,12 +461,14 @@ public class PlayerRB : MonoBehaviour
         MusicManager.Play(MusicManager.Instance.bgm3);
 
         // n秒後にシーン遷移
-        Invoke("GoStageSelect", sceneWaitTime);
+        StartCoroutine(GoStageState());
     }
-    private void GoStageSelect()
+
+    private IEnumerator GoStageState()
     {
+        yield return new WaitForSeconds(sceneWaitTime);
         ActionInput.actionEnabled = true;
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("KawazStageSelect");
         MusicManager.Play(MusicManager.Instance.bgm2);
     }
 }

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ManagerScene.unity
     guid: 6800a4adf1aaa4a1c868cb00f7f98ccc
+  - enabled: 1
+    path: Assets/Scenes/KawazStageSelect.unity
+    guid: e2cc2c936aca877419a922784b74a641
   m_configObjects: {}
