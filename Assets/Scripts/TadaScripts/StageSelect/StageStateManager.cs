@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 enum MoveDirection
 {
@@ -26,6 +27,10 @@ public class StageStateManager : MonoBehaviour
     private Image stageImageFlame;
     [SerializeField]
     private GameObject stageObjectList;
+    [SerializeField]
+    private CinemachineVirtualCamera vcamera;
+    [SerializeField]
+    private GameObject flogUI;
 
     [System.Serializable]
     public class ArrowList
@@ -41,14 +46,13 @@ public class StageStateManager : MonoBehaviour
 
     public Vector2 moveHoming = new Vector2(0.2f,0.2f);
     public float stageAnimSpeed = 1.0f;
-    private float playerX, playerY;
-    private float targetX, targetY;
 
     public float speed = 15.0f;
+    public float sceneWaitTime = 3.0f;
 
-    private int passedNum = 0;
     private bool isMoving = false;
     private bool prevIsMoving = false;
+    private bool actionEnabled = true;
 
     Animator animator;
 
@@ -82,7 +86,7 @@ public class StageStateManager : MonoBehaviour
 
         transform.position = nowStageState.transform.position;
         // ついでにカメラの位置も変える
-        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+        //Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 
         prevPos = transform.position;
     }
@@ -91,6 +95,10 @@ public class StageStateManager : MonoBehaviour
     void Update()
     {
         // Debug.Log(isMoving);
+        // 後でプレイヤー部分とステージステート部分を分けたい
+
+        if (!actionEnabled) return;
+
         if (transform.position.x - prevPos.x > 0) dir = 1f;
         else if(transform.position.x - prevPos.x < 0) dir = -1f;
         animator.SetFloat("MoveSpeed", (isMoving) ? 10 : 0);
@@ -99,7 +107,7 @@ public class StageStateManager : MonoBehaviour
 
         if (isMoving != prevIsMoving)
         {
-            SwitchArrow();
+            SwitchArrow(!isMoving);
             if(!isMoving)
                 ShowStageName();
         }
@@ -119,17 +127,21 @@ public class StageStateManager : MonoBehaviour
         {
             if (ActionInput.GetButtonDown(ButtonCode.Jump))
             {
-                GoNextStage();
+                StartCoroutine(GoNextStage(sceneWaitTime));
                 return;
             }
-            else if (Input.GetKeyDown(KeyCode.Backspace))
+            else if (ActionInput.GetButtonDown(ButtonCode.Cancel))
             {
                 BlindStageSprite();
+                SwitchArrow(true);
             }
         }
 
         if (ActionInput.GetButtonDown(ButtonCode.Jump))
+        {
             DisplayStageSprite();
+            SwitchArrow(false);
+        }
         
 
         if (IsStageSpriteEnabled()) return;
@@ -178,81 +190,42 @@ public class StageStateManager : MonoBehaviour
         switch (dir)
         {
             case MoveDirection.UP:
-                MoveAppend(nowStageState.stagePath.upPath, dir);
+                MoveAppend(nowStageState.stagePath.upPath,
+                    nowStageState.nextStage.upStage.transform.position);
                 break;
             case MoveDirection.RIGHT:
-                MoveAppend(nowStageState.stagePath.rightPath, dir);
+                MoveAppend(nowStageState.stagePath.rightPath,
+                    nowStageState.nextStage.rightStage.transform.position);
                 break;
             case MoveDirection.DOWN:
-                MoveAppend(nowStageState.stagePath.downPath, dir);
+                MoveAppend(nowStageState.stagePath.downPath,
+                    nowStageState.nextStage.downStage.transform.position);
                 break;
             case MoveDirection.LEFT:
-                MoveAppend(nowStageState.stagePath.leftPath, dir);
+                MoveAppend(nowStageState.stagePath.leftPath,
+                    nowStageState.nextStage.leftStage.transform.position);
                 break;
         }
     }
     
-    private void MoveAppend(Transform[] pathTransform, MoveDirection dir)
+    // DOTweenで移動する
+    private void MoveAppend(Transform[] pathTransform, Vector3 destination)
     {
-        //Sequence moveSequence = DOTween.Sequence();
         Vector3[] path = new Vector3[pathTransform.Length + 1];
         float time;
         for (int i = 0; i < pathTransform.Length; i++)
         {
             path[i] = pathTransform[i].position;
-            /*
-            time = Vector2.Distance(path[0], path[1]) / speed;
-            moveSequence.Append(
-                transform.DOLocalPath(
-                    path,
-                    time,
-                    PathType.CatmullRom).SetEase(Ease.Linear));
-            path[0] = path[1];*/
         }
 
-        switch (dir)
-        {
-            case MoveDirection.UP:
-                path[pathTransform.Length] = nowStageState.nextStage.upStage.transform.position;
-                time = Vector2.Distance(transform.position, 
-                    nowStageState.nextStage.upStage.transform.position) / speed;
-                break;
-            case MoveDirection.RIGHT:
-                path[pathTransform.Length] = nowStageState.nextStage.rightStage.transform.position;
-                time = Vector2.Distance(transform.position, 
-                    nowStageState.nextStage.rightStage.transform.position) / speed;
-                break;
-            case MoveDirection.DOWN:
-                path[pathTransform.Length] = nowStageState.nextStage.downStage.transform.position;
-                time = Vector2.Distance(transform.position, 
-                    nowStageState.nextStage.downStage.transform.position) / speed;
-                break;
-            case MoveDirection.LEFT:
-                path[pathTransform.Length] = nowStageState.nextStage.leftStage.transform.position;
-                time = Vector2.Distance(transform.position, 
-                    nowStageState.nextStage.leftStage.transform.position) / speed;
-                break;
-            default: // null以外にしたいため意味なし
-                path[pathTransform.Length] = transform.position;
-                time = 0f;
-                Debug.Log("Stage Path Error");
-                break;
-        }
-        /*
-        time = Vector2.Distance(path[0], path[1]) / speed;
-        moveSequence.Append(
-            moveSequence.Append(
-                transform.DOLocalPath(
-                    path,
-                    time,
-                    PathType.CatmullRom).SetEase(Ease.Linear)).OnComplete(() => isMoving = false));
-                    */
-        //moveSequence.Append(
-           // moveSequence.Append(
-            transform.DOLocalPath(
-               path,
-               time,
-               PathType.CatmullRom).SetEase(Ease.Linear).OnComplete(() => isMoving = false);
+        path[pathTransform.Length] = destination;
+
+        time = Vector2.Distance(transform.position, destination) / speed; ;
+
+        transform.DOLocalPath(
+           path,
+           time,
+           PathType.CatmullRom).SetEase(Ease.Linear).OnComplete(() => isMoving = false);
     }
 
     // ステージステートを移動先のにセットする
@@ -274,7 +247,7 @@ public class StageStateManager : MonoBehaviour
                 break;
         }
         ChangeStageInfo();
-        SwitchArrow();
+        SwitchArrow(!isMoving);
     }
 
     // ステージのステート変更に伴う変更
@@ -292,10 +265,11 @@ public class StageStateManager : MonoBehaviour
     // ステージの画像を表示する
     private void DisplayStageSprite()
     {
+        vcamera.gameObject.SetActive(false);
         stageImageFlame.gameObject.SetActive(true);
-        stageImageFlame.rectTransform.localPosition = new Vector3(0f, -1000f, 0f); // 見えない位置に配置
-        stageImageFlame.rectTransform.DOLocalMoveY(
-            -100f,
+        stageImageFlame.rectTransform.localPosition = new Vector3(-1600f, -100f, 0f); // 見えない位置に配置
+        stageImageFlame.rectTransform.DOLocalMoveX(
+            -400f,
             stageAnimSpeed
             )
             .SetEase(Ease.OutBack);
@@ -304,6 +278,7 @@ public class StageStateManager : MonoBehaviour
     // ステージの画像を消す
     private void BlindStageSprite()
     {
+        vcamera.gameObject.SetActive(true);
         stageImageFlame.rectTransform.DOKill();
         stageImageFlame.gameObject.SetActive(false);
     }
@@ -324,9 +299,9 @@ public class StageStateManager : MonoBehaviour
     }
 
     // 移動中は矢印を消す
-    private void SwitchArrow()
+    private void SwitchArrow(bool isActive)
     {
-        arrow.SetActive(!isMoving);
+        arrow.SetActive(isActive);
     }
 
     // ステージ名を表示する
@@ -340,6 +315,27 @@ public class StageStateManager : MonoBehaviour
     {
         // 挑戦するステージのidを保存しておく
         StageSelect.StageTable.challengeStageId = nowStageId;
+        SceneManager.LoadScene(nowStageState.stageSceneName);
+    }
+
+    // 目的のステージへ遷移する
+    private IEnumerator GoNextStage(float time)
+    {
+        // 挑戦するステージのidを保存しておく
+        StageSelect.StageTable.challengeStageId = nowStageId;
+        actionEnabled = false;
+        animator.SetTrigger("Clear");
+
+        yield return new WaitForSeconds(time);
+
+        foreach (Transform flogChild in flogUI.transform)
+        {
+            yield return new WaitForSeconds(0.01f);
+            flogChild.gameObject.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
         SceneManager.LoadScene(nowStageState.stageSceneName);
     }
 }
