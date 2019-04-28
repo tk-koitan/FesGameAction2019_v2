@@ -39,5 +39,15 @@ public class StageChangeFrogUI : MonoBehaviour
             new Color(1f,1f,1f,1f),
             1.0f
             );
+        /*
+        rectTran.DOScale(
+            endScale * 0.2f,
+            1.5f
+            );
+        rectTran.DOLocalRotate(
+            new Vector3(0f, 0f, -180f),
+            2.5f
+            );
+            */
     }
 }
