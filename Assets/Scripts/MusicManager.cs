@@ -41,7 +41,7 @@ public class MusicManager : MonoBehaviour
             audioSource.time = startTime;
             audioSource.Play();
         }
-        Debug.Log(audioSource.time);
+        //Debug.Log(audioSource.time);
     }
 
     public static void Play(BGMSource bgm)
