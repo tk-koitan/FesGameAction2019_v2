@@ -35,6 +35,7 @@ public class GroundChecker : MonoBehaviour
             if (!tmpM.ridingPlayers.Contains(playerRB))
             {
                 tmpM.ridingPlayers.Add(playerRB);
+                rideOn = true;
             }
         }
     }
@@ -72,6 +73,7 @@ public class GroundChecker : MonoBehaviour
             if (tmpM.ridingPlayers.Contains(playerRB))
             {
                 tmpM.ridingPlayers.Remove(playerRB);
+                rideOn = false;
             }
         }
     }

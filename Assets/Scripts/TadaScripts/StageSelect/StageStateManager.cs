@@ -60,6 +60,8 @@ public class StageStateManager : MonoBehaviour
     private float dir;
     private float defaultScaleX;
 
+    MenuController menuCtrl;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +71,7 @@ public class StageStateManager : MonoBehaviour
             defaultScaleX, transform.localScale.y, transform.localScale.z);
 
         animator = GetComponent<Animator>();
+        menuCtrl = GetComponent<MenuController>();
 
         // すべてのstageStateから現在のステージ場所を全探索する テーブル作るより楽で簡潔になった
         foreach (Transform child in stageObjectList.transform) // 少し重そうなのが欠点
@@ -145,6 +148,23 @@ public class StageStateManager : MonoBehaviour
         
 
         if (IsStageSpriteEnabled()) return;
+
+        // まだ順番に難あり
+
+        if (menuCtrl != null)
+        {
+            if (menuCtrl.isDisplayed)
+            {
+                if (ActionInput.GetButtonDown(ButtonCode.Cancel))
+                {
+                    menuCtrl.EndMenu();
+                }
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.P))
+                menuCtrl.StartMenu();
+        }
 
         MoveDirection moveDir;
 
@@ -334,7 +354,7 @@ public class StageStateManager : MonoBehaviour
             flogChild.gameObject.SetActive(true);
         }
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.2f);
 
         SceneManager.LoadScene(nowStageState.stageSceneName);
     }
