@@ -8,12 +8,15 @@ public class ScoreManager : MonoBehaviour
     public float time = 0;
     private bool isRunning;
     public TextMeshProUGUI tmproText;
+    public TextMeshProUGUI tmproRanking;
+    public TMP_InputField tmproInput;
     public Animator canvasAnimator;
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip startSE;
     [SerializeField]
     private AudioClip countdownSE;
+    private ScoreSaver saver;
     static ScoreManager instance;
     public static ScoreManager Instatnce
     {
@@ -31,6 +34,7 @@ public class ScoreManager : MonoBehaviour
     {
         canvasAnimator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        saver = GetComponent<ScoreSaver>();
         StartCoroutine(StageStart());
         //MusicManager.Play(MusicManager.Instance.bgm1);
     }
@@ -43,6 +47,14 @@ public class ScoreManager : MonoBehaviour
             time += Time.deltaTime;
         }
         tmproText.text = time.ToString("0.00");
+        var scores = saver.leaderBoard.scores;
+        string rankingstr = "- Ranking -\n";
+        for(int i=0;i<scores.Count;i++)
+        {
+            rankingstr += i + ":  " + scores[i].time.ToString("0.00") + "  " +scores[i].name +"\n";
+        }
+        rankingstr += saver.leaderBoard.UpdateDate;
+        tmproRanking.text = rankingstr;
     }
 
     public void TimerStart()
@@ -50,9 +62,13 @@ public class ScoreManager : MonoBehaviour
         isRunning = true;
     }
 
-    public void TimerStop()
+    public void TimerStop(bool isSave = false)
     {
         isRunning = false;
+        if(isSave)
+        {
+            saver.EntryScoreData(new Score(1, time, saver.teamName));
+        }
     }
 
     public void TimerReset()
@@ -76,5 +92,10 @@ public class ScoreManager : MonoBehaviour
         ActionInput.actionEnabled = true;
         TimerStart();
         MusicManager.Play(MusicManager.Instance.bgm1);
+    }
+
+    public void EntryTeamName()
+    {
+        saver.teamName = tmproInput.text;
     }
 }

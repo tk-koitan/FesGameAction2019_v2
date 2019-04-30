@@ -454,7 +454,7 @@ public class PlayerRB : MonoBehaviour
         animator.SetTrigger("Clear");
         // 動けなくする処理
         ActionInput.actionEnabled = false; // koitan
-        ScoreManager.Instatnce.TimerStop();
+        ScoreManager.Instatnce.TimerStop(true);
         ScoreManager.Instatnce.canvasAnimator.Play("GoalText");
 
         //BGM変更
