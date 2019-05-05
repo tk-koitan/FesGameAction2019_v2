@@ -142,23 +142,24 @@ public class StageStateManager : MonoBehaviour
 
         if (ActionInput.GetButtonDown(ButtonCode.Jump))
         {
-            DisplayStageSprite();
-            SwitchArrow(false);
+            if (!menuCtrl.isDisplayed)
+            {
+                DisplayStageSprite();
+                SwitchArrow(false);
+            }
         }
         
 
         if (IsStageSpriteEnabled()) return;
 
-        // まだ順番に難あり
-
         if (menuCtrl != null)
         {
             if (menuCtrl.isDisplayed)
-            {
+            {/*
                 if (ActionInput.GetButtonDown(ButtonCode.Cancel))
                 {
                     menuCtrl.EndMenu();
-                }
+                }*/
                 return;
             }
 
