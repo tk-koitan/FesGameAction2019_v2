@@ -42,16 +42,16 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isRunning)
+        if (isRunning)
         {
             time += Time.deltaTime;
         }
         tmproText.text = time.ToString("0.00");
         var scores = saver.leaderBoard.scores;
         string rankingstr = "- Ranking -\n";
-        for(int i=0;i<scores.Count;i++)
+        for (int i = 0; i < scores.Count; i++)
         {
-            rankingstr += i + ":  " + scores[i].time.ToString("0.00") + "  " +scores[i].name +"\n";
+            rankingstr += scores[i].rank + ":  " + scores[i].time.ToString("0.00") + "  " + scores[i].name + "\n";
         }
         rankingstr += saver.leaderBoard.UpdateDate;
         tmproRanking.text = rankingstr;
@@ -65,7 +65,7 @@ public class ScoreManager : MonoBehaviour
     public void TimerStop(bool isSave = false)
     {
         isRunning = false;
-        if(isSave)
+        if (isSave)
         {
             saver.EntryScoreData(new Score(1, time, saver.teamName));
         }

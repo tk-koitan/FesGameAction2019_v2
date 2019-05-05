@@ -59,6 +59,10 @@ public class PlayerRB : MonoBehaviour
     public AudioClip deathSE;
     private AudioSource audioSource;
 
+    //IK
+    public GameObject ik;
+    public Transform handPos;
+
     // Start is called before the first frame update
     void Start()
     {
