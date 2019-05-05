@@ -8,19 +8,19 @@ namespace StageSelect
     {
         public static StageTable instance;
 
-        public static bool[] stageClearedList = new bool[1];
+        public static bool[] stageClearedList = new bool[32];
 
         public static int challengeStageId = 0;
 
-        int stageNum;
+        //int stageNum;
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
-                stageNum = GameObject.Find("StageList").transform.childCount;
-                stageClearedList = new bool[stageNum];
+                //stageNum = GameObject.Find("StageList").transform.childCount;
+                //stageClearedList = new bool[stageNum];
                 DontDestroyOnLoad(this);
             }
             else Destroy(gameObject);
