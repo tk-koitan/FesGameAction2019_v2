@@ -63,6 +63,10 @@ public class ScoreSaver : MonoBehaviour
         {
             leaderBoard.scores.RemoveAt(5);
         }
+        for(int i=0;i<leaderBoard.scores.Count;i++)
+        {
+            leaderBoard.scores[i].rank = i + 1;
+        }
         leaderBoard.UpdateDate = DateTime.Now.ToString();
         SaveScoreData(leaderBoard);
         Debug.Log("save score data");
