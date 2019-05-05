@@ -1570,7 +1570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238687666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.333333, y: 1.9999995, z: -10}
+  m_LocalPosition: {x: 1.2100453, y: 1.9999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12453,7 +12453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438898180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8666668, y: -1.3200002, z: -10}
+  m_LocalPosition: {x: -2.157991, y: -1.3200002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 778066555}
@@ -14359,6 +14359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   tmproText: {fileID: 1199621328}
+  tmproRanking: {fileID: 0}
+  tmproInput: {fileID: 0}
   canvasAnimator: {fileID: 0}
   startSE: {fileID: 8300000, guid: 970596041e67a4e30819b46a317a7a4b, type: 3}
   countdownSE: {fileID: 8300000, guid: 0fce5e05392e24eaf89db8a714a53f94, type: 3}
@@ -21333,6 +21335,32 @@ PrefabInstance:
         type: 3}
       propertyPath: animTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87161265601093521, guid: 7747bb8ad33d7ff4498f905fe071d2b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 64058dd6e09c0a7449616d98514f339c,
+        type: 3}
+    - target: {fileID: 87161265601093522, guid: 7747bb8ad33d7ff4498f905fe071d2b9,
+        type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: 1.6453407
+      objectReference: {fileID: 0}
+    - target: {fileID: 87161265601093522, guid: 7747bb8ad33d7ff4498f905fe071d2b9,
+        type: 3}
+      propertyPath: m_Bounds.m_Center.y
+      value: 0.29046726
+      objectReference: {fileID: 0}
+    - target: {fileID: 87161265601093522, guid: 7747bb8ad33d7ff4498f905fe071d2b9,
+        type: 3}
+      propertyPath: m_Bounds.m_Extent.x
+      value: 4.6337485
+      objectReference: {fileID: 0}
+    - target: {fileID: 87161265601093522, guid: 7747bb8ad33d7ff4498f905fe071d2b9,
+        type: 3}
+      propertyPath: m_Bounds.m_Extent.y
+      value: 1.9511992
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7747bb8ad33d7ff4498f905fe071d2b9, type: 3}
