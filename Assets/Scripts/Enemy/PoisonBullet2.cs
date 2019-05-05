@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonBullet : Bullet
+public class PoisonBullet2 : Bullet
 {
     public Vector3 rotationSpeed;
     public GameObject DestroyEffect;
+    public float gravity;
     protected override void Start()
     {
 
@@ -13,18 +14,18 @@ public class PoisonBullet : Bullet
 
     protected override void Update()
     {
+        speed.y += gravity * Time.deltaTime;
         transform.position += speed * Time.deltaTime;
         transform.Rotate(rotationSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag!="DeadTrigger")
+        if (collision.tag != "DeadTrigger")
         {
             Destroy(gameObject);
         }
     }
-
     private void OnDestroy()
     {
         GameObject tmpObj = Instantiate(DestroyEffect, transform.position, Quaternion.identity);
