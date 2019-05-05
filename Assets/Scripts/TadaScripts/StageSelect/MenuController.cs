@@ -13,6 +13,12 @@ public class MenuController : MonoBehaviour
         AUDIO = 1,
         TITLE = 2,
     }
+    enum ItemAudio
+    {
+        BACK = 0,
+        BGM = 1,
+        SE = 2,
+    }
 
     [SerializeField]
     private Image frogUI;
@@ -25,17 +31,30 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI titleText;
 
+    [SerializeField]
+    private Image frogUIAudio;
+    [SerializeField]
+    private Image backUIAudio;
+    [SerializeField]
+    private TextMeshProUGUI backTextAudio;
+    [SerializeField]
+    private TextMeshProUGUI bgmText;
+    [SerializeField]
+    private TextMeshProUGUI seText;
+
     public GameObject tearObject;
     public Transform[] tearPosition;
 
-    public Vector3 startPosition = Vector3.zero;
-    public Vector3 endPosition = Vector3.zero;
+    public Vector3 startRotation = Vector3.zero;
+    public Vector3 endRotation = Vector3.zero;
     public float animTime = 1.0f;
 
     public bool isDisplayed { get; private set; }
 
     Tween frogTween;
     Tween backTween;
+    Tween frogTweenAudio;
+    Tween backTweenAudio;
 
     private int index = 0;
     private int itemNum = 3;
@@ -45,7 +64,6 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        frogUI.rectTransform.localPosition = startPosition; // 見えない位置に配置
         isDisplayed = false;
 
         menuState = new Menu(0, itemNum, this);
@@ -62,16 +80,16 @@ public class MenuController : MonoBehaviour
     {
         isDisplayed = true;
 
-        StartFrogUI();
-        StartBackUI();
+        StartFrogUI(frogUI, frogTween);
+        StartBackUI(backUI, backTween);
     }
 
     public void EndMenu()
     {
         //isDisplayed = false;
 
-        EndFrogUI();
-        EndBackUI();
+        EndFrogUI(frogUI, frogTween);
+        EndBackUI(backUI, backTween);
     }
 
     public void TextApeal(TextMeshProUGUI text)
@@ -84,51 +102,51 @@ public class MenuController : MonoBehaviour
         text.color = Color.white;
     }
 
-    private void StartFrogUI()
+    private void StartFrogUI(Image frogImage, Tween tween)
     {
-        frogTween.Kill();
+        tween.Kill();
 
         //frogUI.gameObject.SetActive(true);
-        frogTween = frogUI.rectTransform.DOLocalMove(
-            endPosition,
+        tween = frogImage.rectTransform.DOLocalRotate(
+            endRotation,
             animTime
             )
             .SetEase(Ease.OutBack);
     }
 
-    private void StartBackUI()
+    private void StartBackUI(Image backImage, Tween tween)
     {
-        backTween.Kill();
+        tween.Kill();
 
         //frogUI.gameObject.SetActive(true);
-        backTween = DOTween.To(
-            () => backUI.GetComponent<Image>().color,
-            num => backUI.GetComponent<Image>().color = num,
-            new Color(backUI.GetComponent<Image>().color.r, backUI.GetComponent<Image>().color.g,
-            backUI.GetComponent<Image>().color.b, 1f),
+        tween = DOTween.To(
+            () => backImage.GetComponent<Image>().color,
+            num => backImage.GetComponent<Image>().color = num,
+            new Color(backImage.GetComponent<Image>().color.r, backImage.GetComponent<Image>().color.g,
+            backImage.GetComponent<Image>().color.b, 1f),
             animTime
             );
     }
 
-    private void EndFrogUI()
+    private void EndFrogUI(Image frogImage, Tween tween, bool changeDisplay = false)
     {
-        frogTween.Kill();
+        tween.Kill();
 
-        frogTween = frogUI.rectTransform.DOLocalMove(
-            startPosition,
+        tween = frogImage.rectTransform.DOLocalRotate(
+            startRotation,
             animTime
-            ).SetEase(Ease.OutQuint).OnComplete(() => isDisplayed = false);
+            ).SetEase(Ease.OutQuint).OnComplete(() => isDisplayed = changeDisplay);
     }
 
-    private void EndBackUI()
+    private void EndBackUI(Image backImage, Tween tween)
     {
-        backTween.Kill();
+        tween.Kill();
 
-        backTween = DOTween.To(
-            () => backUI.GetComponent<Image>().color,
-            num => backUI.GetComponent<Image>().color = num,
-            new Color(backUI.GetComponent<Image>().color.r, backUI.GetComponent<Image>().color.g,
-            backUI.GetComponent<Image>().color.b, 0f),
+        tween = DOTween.To(
+            () => backImage.GetComponent<Image>().color,
+            num => backImage.GetComponent<Image>().color = num,
+            new Color(backImage.GetComponent<Image>().color.r, backImage.GetComponent<Image>().color.g,
+            backImage.GetComponent<Image>().color.b, 0f),
             animTime
             );
     }
@@ -136,13 +154,15 @@ public class MenuController : MonoBehaviour
     private abstract class BaseMenu
     {
         protected MenuController menuCtrl;
+        public abstract void menuStart();
         public abstract void menuUpdate();
     }
 
     private class Menu : BaseMenu
     {
-        private int index;
-        private int itemNum;
+        private int index = 0;
+        private bool isChanged = true;
+        private int itemNum = 3;
 
         // コンストラクタはインターバル
         TadaLib.Timer timer = new TadaLib.Timer(1f);
@@ -154,12 +174,22 @@ public class MenuController : MonoBehaviour
             menuCtrl = _menuCtrl;
         }
 
+        public override void menuStart()
+        {
+        }
+
         public override void menuUpdate()
         {
             if (ActionInput.GetButtonDown(ButtonCode.DownArrow))
+            {
                 index = (++index) % itemNum;
+                isChanged = true;
+            }
             else if (ActionInput.GetButtonDown(ButtonCode.UpArrow))
+            {
                 index = (--index + itemNum) % itemNum;
+                isChanged = true;
+            }
             else if (ActionInput.GetButtonDown(ButtonCode.Jump))
             {
                 switch (index)
@@ -168,7 +198,8 @@ public class MenuController : MonoBehaviour
                         menuCtrl.EndMenu();
                         break;
                     case (int)Item.AUDIO:
-                        menuCtrl.menuState = new Audio();
+                        menuCtrl.menuState = new Audio(menuCtrl);
+                        menuCtrl.menuState.menuStart();
                         break;
                     case (int)Item.TITLE:
                         menuCtrl.menuState = new Title();
@@ -179,19 +210,31 @@ public class MenuController : MonoBehaviour
             switch (index)
             {
                 case (int)Item.BACK:
-                    menuCtrl.TextApeal(menuCtrl.backText);
-                    menuCtrl.EndTextApeal(menuCtrl.audioText);
-                    menuCtrl.EndTextApeal(menuCtrl.titleText);
+                    if (isChanged)
+                    {
+                        menuCtrl.TextApeal(menuCtrl.backText);
+                        menuCtrl.EndTextApeal(menuCtrl.audioText);
+                        menuCtrl.EndTextApeal(menuCtrl.titleText);
+                        isChanged = false;
+                    }
                     break;
                 case (int)Item.AUDIO:
-                    menuCtrl.TextApeal(menuCtrl.audioText);
-                    menuCtrl.EndTextApeal(menuCtrl.backText);
-                    menuCtrl.EndTextApeal(menuCtrl.titleText);
+                    if (isChanged)
+                    {
+                        menuCtrl.TextApeal(menuCtrl.audioText);
+                        menuCtrl.EndTextApeal(menuCtrl.backText);
+                        menuCtrl.EndTextApeal(menuCtrl.titleText);
+                        isChanged = false;
+                    }
                     break;
                 case (int)Item.TITLE:
-                    menuCtrl.TextApeal(menuCtrl.titleText);
-                    menuCtrl.EndTextApeal(menuCtrl.backText);
-                    menuCtrl.EndTextApeal(menuCtrl.audioText);
+                    if (isChanged)
+                    {
+                        menuCtrl.TextApeal(menuCtrl.titleText);
+                        menuCtrl.EndTextApeal(menuCtrl.backText);
+                        menuCtrl.EndTextApeal(menuCtrl.audioText);
+                        isChanged = false;
+                    }
                     timer.TimeUpdate(Time.deltaTime);
                     if (timer.IsTimeout())
                     {
@@ -211,14 +254,91 @@ public class MenuController : MonoBehaviour
 
     private class Audio : BaseMenu
     {
+        private int index = 0;
+        private bool isChanged = true;
+        private int itemNum = 3;
+
+        public Audio(MenuController _menuCtrl)
+        {
+            menuCtrl = _menuCtrl;
+        }
+
+        public override void menuStart()
+        {
+            menuCtrl.StartFrogUI(menuCtrl.frogUIAudio, menuCtrl.frogTweenAudio);
+            menuCtrl.StartBackUI(menuCtrl.backUIAudio, menuCtrl.backTweenAudio);
+        }
+
         public override void menuUpdate()
         {
+            if (ActionInput.GetButtonDown(ButtonCode.DownArrow))
+            {
+                index = (++index) % itemNum;
+                isChanged = true;
+            }
+            else if (ActionInput.GetButtonDown(ButtonCode.UpArrow))
+            {
+                index = (--index + itemNum) % itemNum;
+                isChanged = true;
+            }
+            else if (ActionInput.GetButtonDown(ButtonCode.Jump))
+            {
+                switch (index)
+                {
+                    case (int)ItemAudio.BACK:
+                        menuCtrl.EndFrogUI(menuCtrl.frogUIAudio, menuCtrl.frogTweenAudio, true);
+                        menuCtrl.EndBackUI(menuCtrl.backUIAudio, menuCtrl.backTweenAudio);
+                        menuCtrl.menuState = new Menu(1, 3, menuCtrl);
+                        break;
+                    case (int)ItemAudio.BGM:
+                        //menuCtrl.menuState = new Audio(menuCtrl);
+                        //menuCtrl.menuState.menuStart();
+                        break;
+                    case (int)ItemAudio.SE:
+                        //menuCtrl.menuState = new Title();
+                        break;
+                }
+            }
 
+            switch (index)
+            {
+                case (int)ItemAudio.BACK:
+                    if (isChanged)
+                    {
+                        menuCtrl.TextApeal(menuCtrl.backTextAudio);
+                        menuCtrl.EndTextApeal(menuCtrl.bgmText);
+                        menuCtrl.EndTextApeal(menuCtrl.seText);
+                        isChanged = false;
+                    }
+                    break;
+                case (int)ItemAudio.BGM:
+                    if (isChanged)
+                    {
+                        menuCtrl.TextApeal(menuCtrl.bgmText);
+                        menuCtrl.EndTextApeal(menuCtrl.backTextAudio);
+                        menuCtrl.EndTextApeal(menuCtrl.seText);
+                        isChanged = false;
+                    }
+                    break;
+                case (int)ItemAudio.SE:
+                    if (isChanged)
+                    {
+                        menuCtrl.TextApeal(menuCtrl.seText);
+                        menuCtrl.EndTextApeal(menuCtrl.backTextAudio);
+                        menuCtrl.EndTextApeal(menuCtrl.bgmText);
+                        isChanged = false;
+                    }
+                    break;
+            }
         }
     }
 
     private class Title : BaseMenu
     {
+        public override void menuStart()
+        {
+        }
+
         public override void menuUpdate()
         {
 

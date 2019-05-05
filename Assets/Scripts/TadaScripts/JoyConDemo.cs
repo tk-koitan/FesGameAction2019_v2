@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class JoyConDemo : MonoBehaviour
 {
-    Camera cam;
+    //Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
+        //cam = Camera.main;
     }
 
     private void LateUpdate()
     {
         // ジョイコンの親オブジェクトを画面左上に固定
-        transform.position = new Vector3(cam.transform.position.x - cam.orthographicSize * cam.aspect * 0.6f,
-            cam.transform.position.y + cam.orthographicSize * 0.6f, 0.0f);
+       // transform.position = new Vector3(cam.transform.position.x - cam.orthographicSize * cam.aspect * 0.6f,
+         //   cam.transform.position.y + cam.orthographicSize * 0.6f, 0.0f);
     }
 
     // Update is called once per frame
