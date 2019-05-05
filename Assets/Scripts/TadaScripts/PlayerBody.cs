@@ -12,6 +12,11 @@ public class PlayerBody : MonoBehaviour
                 collision.GetComponent<StageTrigger_Camera>().param); // カメラの情報をセット
         }
 
+        if(collision.tag == "CineCameraTrigger")
+        {
+            collision.GetComponent<CameraTrigger>().vcamera.gameObject.SetActive(collision.GetComponent<CameraTrigger>().isNewCamera);
+        }
+
         if(collision.tag == "DropTrigger")
         {
             GetComponent<PlayerRB>().Retry();
