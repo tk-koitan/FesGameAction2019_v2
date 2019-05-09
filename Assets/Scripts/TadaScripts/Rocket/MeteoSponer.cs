@@ -16,6 +16,8 @@ public class MeteoSponer : MonoBehaviour
 
     private float time = 0.0f;
 
+    public float delayTime = 3.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,12 @@ public class MeteoSponer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(delayTime > 0)
+        {
+            delayTime -= Time.deltaTime;
+            return;
+        }
+
         time += Time.deltaTime;
         timer.TimeUpdate(Time.deltaTime + time * intervalAccel);
 
