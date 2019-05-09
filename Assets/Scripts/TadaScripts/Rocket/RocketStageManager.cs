@@ -18,6 +18,8 @@ public class RocketStageManager : MonoBehaviour
     private Image backImage;
     [SerializeField]
     private TextMeshProUGUI explainText;
+    [SerializeField]
+    private TextMeshProUGUI leftDistanceText;
 
     private 
 
@@ -33,6 +35,8 @@ public class RocketStageManager : MonoBehaviour
     {
         if(textCtrl.isConversationing)
             textCtrl.ScenarioUpdate();
+        if (rocketCtrl.actionEnabled)
+            leftDistanceText.text = rocketCtrl.leftDistance.ToString();
     }
 
     private IEnumerator GameFlow()
@@ -59,7 +63,7 @@ public class RocketStageManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        explainText.text = "このままだと隕石に衝突しちゃう！";
+        explainText.text = "このままだといん石にぶつかる！";
         feedInObj(explainText, 0.5f);
 
         yield return new WaitForSeconds(0.5f + 1.0f);
@@ -68,21 +72,31 @@ public class RocketStageManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        explainText.text = "ジョイコンでロケットを操縦しよう！";
+        explainText.text = "ジョイコンでロケットをそうじゅうしよう！";
         feedInObj(explainText, 0.5f);
 
         yield return new WaitForSeconds(0.5f + 1.0f);
 
         feedOutObj(explainText, 0.3f);
+
+        leftDistanceText.text = rocketCtrl.leftDistance.ToString();
 
         yield return new WaitForSeconds(0.3f);
 
         feedOutObj(backImage, 1.0f);
+        /*
+        feedInObj(leftDistanceText, 1.0f);
+        foreach(Transform child in transform)
+        {
+            feedInObj(child.GetComponent<TextMeshProUGUI>(), 1.0f);
+        }*/
 
         yield return new WaitForSeconds(1.0f);
 
         // ゲーム開始
         meteoSponer.gameObject.SetActive(true);
+        rocketCtrl.actionEnabled = true;
+        leftDistanceText.gameObject.SetActive(true);
     }
 
 

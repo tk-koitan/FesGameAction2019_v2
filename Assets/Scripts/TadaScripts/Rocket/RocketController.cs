@@ -6,6 +6,11 @@ using DG.Tweening;
 
 public class RocketController : MonoBehaviour
 {
+    [SerializeField]
+    private ParticleSystem explosionEffect;
+    [SerializeField]
+    private ParticleSystem smokeEffect;
+
     public float speed = 2.0f;
     public float speedVx { private set; get; }
     public float speedVy { private set; get; }
@@ -18,8 +23,10 @@ public class RocketController : MonoBehaviour
 
     public Vector2 border = new Vector2(4.0f, 2.0f);
 
-    public bool actionEnabled { private set; get; } 
+    public bool actionEnabled; 
     public float startAnimationTime = 3.0f;
+
+    public int leftDistance = 50000;
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +41,21 @@ public class RocketController : MonoBehaviour
         SetRotation();
         SetVelocity();
 
+        if (!actionEnabled) return;
+
+        SetLeftDistance();
+
         posY = Mathf.Min(posY + speedVy * Time.deltaTime, upBorder);
 
         //Debug.Log(speedVx + " " + speedVy);
         float posX = Mathf.Clamp(transform.position.x + speedVx * Time.deltaTime, -border.x, border.x);
 
-        if (actionEnabled)
-            transform.position = new Vector2(posX, posY);
+        //if (actionEnabled)
+        transform.position = new Vector2(posX, posY);
         IsBorderInner();
 
         if (isDead)
-            GoNextScene();
+            StartCoroutine(GoNextScene());
     }
 
     private void SetRotation()
@@ -71,8 +82,28 @@ public class RocketController : MonoBehaviour
             isDead = true;
     }
 
-    private void GoNextScene()
+    private void SetLeftDistance()
     {
+        float moveDistance = speedVy;
+
+        if (moveDistance < 0) moveDistance *= 0.1f;
+
+        leftDistance -= (int)speedVy;
+    }
+
+    private IEnumerator GoNextScene()
+    {
+        actionEnabled = false;
+        explosionEffect.transform.position = transform.position;
+        explosionEffect.gameObject.SetActive(true);
+        smokeEffect.gameObject.SetActive(true);
+
+        transform.DOMove(
+            new Vector3(3.0f, -13f, 0f),
+            2.0f);
+
+        yield return new WaitForSeconds(2.0f);
+
         SceneManager.LoadScene("KawazStageSelect");
     }
 
@@ -106,7 +137,7 @@ public class RocketController : MonoBehaviour
 
         yield return new WaitForSeconds(startAnimationTime / 2f);
 
-        actionEnabled = true;
+        //actionEnabled = true;
         posY = -3.0f;
     }
 }

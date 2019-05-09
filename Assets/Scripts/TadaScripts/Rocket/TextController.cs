@@ -136,7 +136,7 @@ public class TextController : MonoBehaviour
         if (isEventing) return;
 
         if (scenarios[currentLine - 1].charaIndex == 0)
-            uiText.color = new Color(0.2f, 0.8f, 0.0f, 1.0f);
+            uiText.color = new Color(0.2f, 0.6f, 0.0f, 1.0f);
         else
             uiText.color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
 
