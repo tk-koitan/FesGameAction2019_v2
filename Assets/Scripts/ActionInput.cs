@@ -19,7 +19,7 @@ public class ActionInput : MonoBehaviour
     public static Button GetButtonDown, GetButton, GetButtonUp;
     public static Axis GetAxis;
     public static JoyconSensor GetJoyconVector, GetJoyconGyro, GetJoyconAccel;
-    private static float joyconAngle = 0;
+    private static float joyconAngle = 180; // キー操作の時にデフォルトで上を向くように変えました tada
     private Joycon stickJoycon;
     private Joycon gyroJoycon;
     private static float beforeHorizontalValue;
