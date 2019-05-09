@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
         isRunning = false;
         if (isSave)
         {
-            saver.EntryScoreData(new Score(1, time, saver.teamName));
+            //saver.EntryScoreData(new Score(1, time, saver.teamName));
         }
     }
 
