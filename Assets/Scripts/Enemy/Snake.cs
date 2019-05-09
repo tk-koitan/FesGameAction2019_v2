@@ -51,15 +51,22 @@ public class Snake : MonoBehaviour
         GizmosExtensions2D.DrawWireCircle2D(transform.position, radius);
         if ((target.transform.position - transform.position).magnitude < radius)
         {
-            switch(attackType)
-            {
-                case AttackType.Target:
-                    GizmosExtensions2D.DrawArrow2D(transform.position, target.transform.position);
-                    break;
-                case AttackType.Direction:
-                    GizmosExtensions2D.DrawArrow2D(transform.position, transform.position + new Vector3(Mathf.Cos(angle*Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad))*bulletSpeed);
-                    break;
-            }
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.white;
+        }
+        switch (attackType)
+        {
+            case AttackType.Target:
+                float distance = (transform.position - target.transform.position).magnitude;
+                distance = Mathf.Min(distance, radius);
+                GizmosExtensions2D.DrawArrow2D(transform.position, transform.position + (target.transform.position - transform.position).normalized * distance);
+                break;
+            case AttackType.Direction:
+                GizmosExtensions2D.DrawArrow2D(transform.position, transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * bulletSpeed);
+                break;
         }
     }
 }
