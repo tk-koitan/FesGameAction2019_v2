@@ -13,6 +13,9 @@ public class PlayerRB : MonoBehaviour
     public float gravity = -0.2f;
     public float maxVy = 10;
     public bool isGround;
+    private bool oldIsGround;
+    public bool isMoving;
+    private bool oldIsMoving;
     public bool isSquat;
     public int direction = 1;//右1,左-1
     private float defaultScaleX;
@@ -62,6 +65,9 @@ public class PlayerRB : MonoBehaviour
     //IK
     public GameObject ik;
     public Transform handPos;
+
+    //エフェクト
+    public ParticleSystem asikemuri;
 
     // Start is called before the first frame update
     void Start()
@@ -250,6 +256,23 @@ public class PlayerRB : MonoBehaviour
             v = power;
             v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
         }
+
+        isMoving = Mathf.Abs(power.x) > 0;
+
+        //エフェクト
+        if((isGround && !oldIsGround) || (isGround && !asikemuri.isPlaying && isMoving))
+        {
+            asikemuri.Play();
+        }
+
+        if((!isGround && oldIsGround) || (isGround && asikemuri.isPlaying && !isMoving) )
+        {
+            asikemuri.Stop();
+        }
+
+        //地面に付いてるか保存
+        oldIsGround = isGround;
+        oldIsMoving = isMoving;
 
         //rb.velocity = v + rv;
         rb.MovePosition(transform.position + (Vector3)v * Time.deltaTime * 60);
