@@ -190,6 +190,7 @@ MonoBehaviour:
   currentPos: {x: 0, y: 0}
   target: {fileID: 0}
   tuka: {fileID: 1564162672003467193}
+  body: {fileID: 1564162672737665455}
 --- !u!50 &1564162673091450328
 Rigidbody2D:
   serializedVersion: 4

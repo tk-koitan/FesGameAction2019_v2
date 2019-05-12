@@ -6,6 +6,7 @@ using UnityEngine.Experimental.U2D.IK;
 public class ItemUmbrella : MonoBehaviour
 {
     public GameObject umbrella;
+    public GameObject effect;
     public Vector3 offset = new Vector3(0, -0.27f, 0);
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,12 @@ public class ItemUmbrella : MonoBehaviour
             Transform tuka = tmpObj.GetComponent<JoyconUmbrella>().tuka;
             solverTarget.position = tuka.position;
             solverTarget.SetParent(tuka);
+
+            Transform body = tmpObj.GetComponent<JoyconUmbrella>().body;
+            GameObject effectObj = Instantiate(effect, body.position, Quaternion.Euler(0, 0, 180));
+            effectObj.transform.SetParent(body);
+            //effectObj.transform.SetParent()
+            Destroy(effectObj, effectObj.GetComponentInChildren<ParticleSystem>().duration);
 
             Destroy(gameObject);
         }
