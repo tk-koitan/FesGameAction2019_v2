@@ -80,6 +80,11 @@ namespace RocketStage
         {
             if (isPrepareTime) return;
 
+            if (ActionInput.GetButtonDown(ButtonCode.Cancel))
+            {
+                ScenerioEnd();
+            }
+
             if (isEventing)
             {
                 // Warningのアニメーションを表示
