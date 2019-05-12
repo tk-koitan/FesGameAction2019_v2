@@ -9,6 +9,7 @@ public class JoyconUmbrella : Mover
     public Transform target;
     private Vector3 offset;
     public Transform tuka;
+    public Transform body;
 
     protected override void Start()
     {

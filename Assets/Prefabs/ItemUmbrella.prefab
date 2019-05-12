@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2940521254464065487}
   - component: {fileID: 2940521254464065488}
   m_Layer: 2
-  m_Name: _kasa-01 (1)
+  m_Name: ItemUmbrella
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,4 +121,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   umbrella: {fileID: 1564162673091450333, guid: 6b6648061e6194ed6bf419b2ae0b8ce9,
     type: 3}
+  effect: {fileID: 1239282588315052, guid: 353c3c94dfb244bd59fa2e50740da2c8, type: 3}
   offset: {x: 0, y: -0.27, z: 0}
