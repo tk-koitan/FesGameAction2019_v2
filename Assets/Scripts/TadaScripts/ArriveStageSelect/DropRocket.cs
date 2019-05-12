@@ -24,6 +24,12 @@ namespace DropRocketScene
         }*/
 
         public SpriteRenderer[] rocketFlagment;
+        public SpriteRenderer[] otamatan;
+
+        public PlayerDrop player;
+
+        [SerializeField]
+        private SpriteRenderer rocketArea;
 
         //public RocketFlagment[] rocketFlagment;
 
@@ -42,6 +48,12 @@ namespace DropRocketScene
             {
                 flagment.gameObject.SetActive(true);
             }
+            foreach (SpriteRenderer child in otamatan)
+            {
+                child.gameObject.SetActive(true);
+            }
+            player.gameObject.SetActive(true);
+            rocketArea.gameObject.SetActive(true);
             Destroy(gameObject);
         }
     }

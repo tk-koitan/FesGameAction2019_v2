@@ -31,6 +31,7 @@ namespace RocketStage
 
         public int leftDistance = 50000;
 
+
         // Start is called before the first frame update
         void Start()
         {
@@ -73,6 +74,12 @@ namespace RocketStage
 
         private void SetVelocity()
         {
+            if (isDead)
+            {
+                speedVx = 0f;
+                speedVy = 0f;
+                return;
+            }
             speedVx = Mathf.Cos((transform.localEulerAngles.z + 90f) / 180f * Mathf.PI) * speed;
             speedVy = Mathf.Sin((transform.localEulerAngles.z + 90f) / 180f * Mathf.PI) * speed;
             speedVy += headWind;
@@ -107,7 +114,7 @@ namespace RocketStage
 
             yield return new WaitForSeconds(2.0f);
 
-            SceneManager.LoadScene("KawazStageSelect");
+            SceneManager.LoadScene("ArriveStageSelect");
         }
 
         public void DoBeginAnitmation1()

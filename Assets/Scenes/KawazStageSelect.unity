@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53573013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.448276, y: -12, z: -10}
+  m_LocalPosition: {x: -4.438291, y: -12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1436228210}
@@ -9240,7 +9240,7 @@ GameObject:
   - component: {fileID: 1581951006}
   - component: {fileID: 1581951005}
   m_Layer: 0
-  m_Name: AlphaCircle
+  m_Name: RocketCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9302,8 +9302,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581951004}
   m_LocalRotation: {x: -0.34930807, y: 0, z: 0, w: 0.93700796}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
