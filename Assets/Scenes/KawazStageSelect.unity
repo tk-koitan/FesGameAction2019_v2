@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53573013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.4444447, y: -12, z: -10}
+  m_LocalPosition: {x: -4.448276, y: -12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1436228210}
@@ -508,6 +508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 66908867}
+  - component: {fileID: 66908868}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -532,9 +533,50 @@ Transform:
   - {fileID: 793274861}
   - {fileID: 437061001}
   - {fileID: 810736579}
+  - {fileID: 2102425584}
+  - {fileID: 225066597}
+  - {fileID: 1207294792}
+  - {fileID: 1652711429}
+  - {fileID: 1352613805}
+  - {fileID: 1900912476}
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &66908868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66908866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481a6c0127fc3eb4f82db6e6992103b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocketFlagment:
+  - rocketSprite: {fileID: 584561477}
+    pathPosition:
+    - {x: -1, y: 2, z: 0}
+    - {x: -2, y: 7, z: 0}
+    - {x: -3, y: 11, z: 0}
+    - {x: -5, y: 10, z: 0}
+    - {x: -8, y: 7, z: 0}
+  - rocketSprite: {fileID: 1258694048}
+    pathPosition:
+    - {x: 3, y: 5, z: 0}
+    - {x: 6, y: 9, z: 0}
+    - {x: 9, y: 7, z: 0}
+  - rocketSprite: {fileID: 1072255959}
+    pathPosition:
+    - {x: -10, y: 0, z: 0}
+    - {x: -9, y: -5, z: 0}
+  - rocketSprite: {fileID: 793274862}
+    pathPosition: []
+  - rocketSprite: {fileID: 437061002}
+    pathPosition: []
+  - rocketSprite: {fileID: 810736580}
+    pathPosition: []
 --- !u!1 &67462582
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,6 +1016,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222185708}
   m_CullTransparentMesh: 0
+--- !u!1 &225066596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 225066597}
+  m_Layer: 0
+  m_Name: RocketFlagments_1Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &225066597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225066596}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.59, y: -2.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66908867}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &250951446
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,7 +6076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 3
-  stageSceneName: StageSelect
+  stageSceneName: Kaitoteststage3
   stageName: RightEye
   stageSprite: {fileID: 21300000, guid: fd80d2b052ee9474ab9f6bee02bca04f, type: 3}
   nextStage:
@@ -6379,6 +6451,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193085819}
   m_CullTransparentMesh: 0
+--- !u!1 &1207294791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1207294792}
+  m_Layer: 0
+  m_Name: RocketFlagments_3Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1207294792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207294791}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66908867}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1223826950
 GameObject:
   m_ObjectHideFlags: 0
@@ -7493,6 +7595,36 @@ RectTransform:
   m_AnchoredPosition: {x: -485, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1352613804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352613805}
+  m_Layer: 0
+  m_Name: RocketFlagments_5Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1352613805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352613804}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.08, y: -4.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66908867}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1368415268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7968,7 +8100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 4
-  stageSceneName: Stage1345
+  stageSceneName: SnakeTestStage
   stageName: LeftEye
   stageSprite: {fileID: 21300000, guid: 4639b2da5921f5741ba7c986fe7ed32f, type: 3}
   nextStage:
@@ -9329,9 +9461,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 2
-  stageSceneName: CamTestStage
+  stageSceneName: RocketStage
   stageName: LEFTHOOOO
-  stageSprite: {fileID: 21300000, guid: 0e5b6a6a23a2f4746b13fdb3ddc487e1, type: 3}
+  stageSprite: {fileID: 21300000, guid: 68e9df94a45cd5a4baddc2ff3ccbb296, type: 3}
   nextStage:
     <upStage>k__BackingField: {fileID: 1476056242}
     <rightStage>k__BackingField: {fileID: 934686837}
@@ -9663,6 +9795,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645042076}
   m_CullTransparentMesh: 0
+--- !u!1 &1652711428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652711429}
+  m_Layer: 0
+  m_Name: RocketFlagments_4Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1652711429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652711428}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.77, y: -4.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66908867}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662235105
 GameObject:
   m_ObjectHideFlags: 0
@@ -11403,6 +11565,36 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1900912475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900912476}
+  m_Layer: 0
+  m_Name: RocketFlagments_6Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1900912476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900912475}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8, y: -5.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66908867}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1915942955
 GameObject:
   m_ObjectHideFlags: 0
@@ -12432,6 +12624,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085487746}
   m_CullTransparentMesh: 0
+--- !u!1 &2102425583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2102425584}
+  m_Layer: 0
+  m_Name: RocketFlagments_0Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2102425584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102425583}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.41, y: -3.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66908867}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2123489303
 GameObject:
   m_ObjectHideFlags: 0

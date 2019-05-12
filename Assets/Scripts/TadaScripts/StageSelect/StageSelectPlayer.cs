@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StageSelect;
 
-public class StageSelectPlayer : MonoBehaviour
+namespace StageSelect
 {
+    public class StageSelectPlayer : MonoBehaviour
+    {
 
-    // 面倒だからあとで
+        // 面倒だからあとで
 
         /*
     public float speed = 15.0f;
@@ -42,4 +45,5 @@ public class StageSelectPlayer : MonoBehaviour
 
         prevPos = transform.position;
     }*/
+    }
 }

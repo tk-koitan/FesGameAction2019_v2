@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/JoyconLib/Scenes/Scene1.unity
     guid: 9b1befe983bd3db4a986f979bc44853d
   - enabled: 1
+    path: Assets/Scenes/SnakeTestStage.unity
+    guid: 5fd59358ed4d04bf2a6ef83cb311832e
+  - enabled: 1
     path: Assets/JoyconLib/Scenes/Scene2.unity
     guid: 32ca70a5b8e1c44d496f7fca50fe6f47
   - enabled: 1
@@ -29,4 +32,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/naichilab/unity-simple-ranking/Scenes/Ranking.unity
     guid: 152244f5855414ac4a3874f14efa583c
+  - enabled: 1
+    path: Assets/Scenes/RocketStage.unity
+    guid: 4fe060bed17655d4087dfd3902ea911b
+  - enabled: 1
+    path: Assets/Scenes/Kaitoteststage3.unity
+    guid: fc29a5e981bed144e8defa1348ed38e9
+  - enabled: 1
+    path: Assets/Scenes/Kaitoteststage2.unity
+    guid: b407ff11214415746a95542f44e8a3ed
+  - enabled: 1
+    path: Assets/Scenes/Kaitoteststage.unity
+    guid: 09478f50a5785bc40ad5cfe0fe43b852
   m_configObjects: {}

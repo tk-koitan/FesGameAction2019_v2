@@ -1,21 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RocketStage;
 
-public class RocketBody : MonoBehaviour
+namespace RocketStage
 {
-    RocketController rocketCtrl;
-
-    private void Start()
+    public class RocketBody : MonoBehaviour
     {
-        rocketCtrl = GetComponent<RocketController>();
-    }
+        RocketController rocketCtrl;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "DeadTrigger")
+        private void Start()
         {
-            rocketCtrl.isDead = true;
+            rocketCtrl = GetComponent<RocketController>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "DeadTrigger")
+            {
+                rocketCtrl.isDead = true;
+            }
         }
     }
 }

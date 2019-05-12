@@ -1,29 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RocketStage;
 
-public class RollText : MonoBehaviour
+namespace RocketStage
 {
-    public float speed = 10.0f;
-    public float bottomY = -452f;
-    public float topY = 453f;
-
-    private float posY;
-    private float posX;
-
-    private void Start()
+    public class RollText : MonoBehaviour
     {
-        posY = transform.localPosition.y;
-        posX = transform.localPosition.x;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        posY -= speed;
-        if(posY < bottomY)
+        public float speed = 10.0f;
+        public float bottomY = -452f;
+        public float topY = 453f;
+
+        private float posY;
+        private float posX;
+
+        private void Start()
         {
-            posY = topY - (bottomY - posY);
+            posY = transform.localPosition.y;
+            posX = transform.localPosition.x;
         }
-        transform.localPosition = new Vector3(posX, posY);
+        // Update is called once per frame
+        void Update()
+        {
+            posY -= speed;
+            if (posY < bottomY)
+            {
+                posY = topY - (bottomY - posY);
+            }
+            transform.localPosition = new Vector3(posX, posY);
+        }
     }
 }

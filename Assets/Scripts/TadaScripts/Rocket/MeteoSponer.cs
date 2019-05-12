@@ -2,50 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TadaLib;
+using RocketStage;
 
-public class MeteoSponer : MonoBehaviour
+namespace RocketStage
 {
-    Timer timer;
-
-    [SerializeField]
-    private GameObject meteoObject;
-
-    public float interval = 2.0f;
-    public float intervalAccel = 0.02f;
-    public float posXMax = 11.0f;
-
-    private float time = 0.0f;
-
-    public float delayTime = 3.0f;
-
-    // Start is called before the first frame update
-    void Start()
+    public class MeteoSponer : MonoBehaviour
     {
-        timer = new Timer(interval);
-    }
+        Timer timer;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(delayTime > 0)
+        [SerializeField]
+        private GameObject meteoObject;
+
+        public float interval = 2.0f;
+        public float intervalAccel = 0.02f;
+        public float posXMax = 11.0f;
+
+        private float time = 0.0f;
+
+        public float delayTime = 3.0f;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            delayTime -= Time.deltaTime;
-            return;
+            timer = new Timer(interval);
         }
 
-        time += Time.deltaTime;
-        timer.TimeUpdate(Time.deltaTime + time * intervalAccel);
-
-        if (timer.IsTimeout())
+        // Update is called once per frame
+        void Update()
         {
-            MeteoCreate();
-            timer.TimeReset();
-        }
-    }
+            if (delayTime > 0)
+            {
+                delayTime -= Time.deltaTime;
+                return;
+            }
 
-    void MeteoCreate()
-    {
-        float posX = Random.Range(-posXMax, posXMax);
-        Instantiate(meteoObject, new Vector3(posX, transform.position.y, transform.position.z), Quaternion.identity);
+            time += Time.deltaTime;
+            timer.TimeUpdate(Time.deltaTime + time * intervalAccel);
+
+            if (timer.IsTimeout())
+            {
+                MeteoCreate();
+                timer.TimeReset();
+            }
+        }
+
+        void MeteoCreate()
+        {
+            float posX = Random.Range(-posXMax, posXMax);
+            Instantiate(meteoObject, new Vector3(posX, transform.position.y, transform.position.z), Quaternion.identity);
+        }
     }
 }
