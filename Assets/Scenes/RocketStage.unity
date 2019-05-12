@@ -6852,6 +6852,8 @@ MonoBehaviour:
   gravityMin: -2
   gravityMax: -6
   lifeTime: 2.2
+  borderX: 12
+  borderY: 11
 --- !u!58 &1006649681
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13458,6 +13460,8 @@ MonoBehaviour:
   gravityMin: -2
   gravityMax: -6
   lifeTime: 2.2
+  borderX: 10
+  borderY: 5
 --- !u!58 &1878641489
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13692,6 +13696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039254824}
   - component: {fileID: 2039254823}
+  - component: {fileID: 2039254825}
   m_Layer: 0
   m_Name: MeteoSponer
   m_TagString: Untagged
@@ -13730,6 +13735,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2039254825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039254822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc0407d3621d2d44baaeb2e72f70532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1006649679}
+  maxCount: 30
+  prepareCount: 15
+  interval: 1
 --- !u!1 &2091823905
 GameObject:
   m_ObjectHideFlags: 0

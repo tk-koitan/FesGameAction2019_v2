@@ -19,8 +19,11 @@ namespace RocketStage
 
         public float lifeTime = 3.0f;
 
+        public float borderX = 12.0f;
+        public float borderY = 11.0f;
+
         // Start is called before the first frame update
-        void Start()
+        void OnEnable()
         {
             float vx = Random.Range(-vxMax, vxMax);
             float vy = Random.Range(vyMin, vyMax);
@@ -32,7 +35,7 @@ namespace RocketStage
 
             transform.localEulerAngles = new Vector3(0f, 0f, -rad + 180f);
 
-            Destroy(gameObject, lifeTime);
+            //Destroy(gameObject, lifeTime);
         }
 
         // Update is called once per frame
@@ -40,6 +43,15 @@ namespace RocketStage
         {
             v.y += gravity * Time.deltaTime;
             transform.position += v * Time.deltaTime;
+
+            if (IsOutSide()) gameObject.SetActive(false);
+        }
+
+        private bool IsOutSide()
+        {
+            if (transform.position.x < -borderX || transform.position.y > borderX || transform.position.y < -borderY)
+                return true;
+            return false;
         }
     }
 }
