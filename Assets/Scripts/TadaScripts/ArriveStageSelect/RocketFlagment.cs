@@ -20,6 +20,8 @@ namespace DropRocketScene
 
         public float gravity = -9.8f;
 
+        public bool isFlagment = true;
+
         private float rotate;
 
         private Vector3 initVelocity;
@@ -37,6 +39,9 @@ namespace DropRocketScene
             initVelocity = (destination.position - transform.position) / arriveTime;
             float time = arriveTime / 2f;
             addVelocity.y = -gravity * time; // upHeight / time - (gravity / 2f) * time;
+
+            if (!isFlagment)
+                GetComponent<Animator>().SetTrigger("Death");
         }
 
         // Update is called once per frame
@@ -49,7 +54,10 @@ namespace DropRocketScene
             if (timer.IsTimeout())
             {
                 FeedOut();
-                StageMarkReded();
+                if (isFlagment)
+                {
+                    StageMarkReded();
+                }
                 actionEnabled = false;
                 return;
             }
@@ -82,7 +90,7 @@ namespace DropRocketScene
                 new Color(1f, 0f, 0f, 1f),
                 5.0f);
 
-            destination.gameObject.GetComponent<SpriteGlowEffect>().OutlineWidth = 2;
+            destination.gameObject.GetComponent<SpriteGlowEffect>().OutlineWidth = 3;
 
             DOTween.To(
                 () => destination.gameObject.GetComponent<SpriteGlowEffect>().GlowBrightness,
