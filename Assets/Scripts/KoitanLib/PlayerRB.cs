@@ -66,8 +66,13 @@ public class PlayerRB : MonoBehaviour
     public GameObject ik;
     public Transform handPos;
 
+    //場所
+    public Transform ashimoto;
+
     //エフェクト
     public ParticleSystem asikemuri;
+    public GameObject jumpEff;
+    public GameObject laundingEff;
 
     // Start is called before the first frame update
     void Start()
@@ -194,6 +199,8 @@ public class PlayerRB : MonoBehaviour
             animator.SetBool("Jump", true); // tada
             //音
             audioSource.PlayOneShot(jumpSE);
+            //エフェクト
+            JumpEffFire();
         }
 
         if (isGround)
@@ -260,14 +267,19 @@ public class PlayerRB : MonoBehaviour
         isMoving = Mathf.Abs(power.x) > 0;
 
         //エフェクト
-        if((isGround && !oldIsGround) || (isGround && !asikemuri.isPlaying && isMoving))
+        if ((isGround && !oldIsGround) || (isGround && !asikemuri.isPlaying && isMoving))
         {
             asikemuri.Play();
         }
 
-        if((!isGround && oldIsGround) || (isGround && asikemuri.isPlaying && !isMoving) )
+        if ((!isGround && oldIsGround) || (isGround && asikemuri.isPlaying && !isMoving))
         {
             asikemuri.Stop();
+        }
+
+        if (isGround && !oldIsGround)
+        {
+            LaundEffFire();
         }
 
         //地面に付いてるか保存
@@ -497,5 +509,21 @@ public class PlayerRB : MonoBehaviour
         ActionInput.actionEnabled = true;
         SceneManager.LoadScene("KawazStageSelect");
         MusicManager.Play(MusicManager.Instance.bgm2);
+    }
+
+    //ジャンプのエフェクト
+    private void JumpEffFire()
+    {
+        GameObject tmpObj = Instantiate(jumpEff);
+        tmpObj.transform.position = ashimoto.position;
+        Destroy(tmpObj, tmpObj.GetComponent<ParticleSystem>().duration);
+    }
+
+    //着地のエフェクト
+    private void LaundEffFire()
+    {
+        GameObject tmpObj = Instantiate(laundingEff);
+        tmpObj.transform.position = ashimoto.position;
+        Destroy(tmpObj, tmpObj.GetComponentInChildren<ParticleSystem>().duration);
     }
 }
