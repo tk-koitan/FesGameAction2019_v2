@@ -5587,6 +5587,8 @@ MonoBehaviour:
   ashimoto: {fileID: 1955264668}
   asikemuri: {fileID: 1773111603}
   jumpEff: {fileID: 1740784179610347872, guid: ddca86f2ef5c240e5ba98f3e7a37b94d, type: 3}
+  laundingEff: {fileID: 3142631415993351919, guid: d4b706459c2cf4e0892f1063bb734686,
+    type: 3}
 --- !u!50 &6041591133535156035
 Rigidbody2D:
   serializedVersion: 4

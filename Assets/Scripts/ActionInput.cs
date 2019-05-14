@@ -224,8 +224,8 @@ public class ActionInput : MonoBehaviour
     {
         GetJoyconVector = () =>
         {
-            if (Input.GetKey(KeyCode.D)) joyconAngle--;
-            if (Input.GetKey(KeyCode.A)) joyconAngle++;
+            if (Input.GetKey(KeyCode.D)) joyconAngle -= Time.deltaTime * 60;
+            if (Input.GetKey(KeyCode.A)) joyconAngle += Time.deltaTime * 60;
             return new Vector3(0, joyconAngle, 0);
         };
 
@@ -238,7 +238,7 @@ public class ActionInput : MonoBehaviour
 
         GetJoyconAccel = () =>
         {
-            return new Vector3(Input.GetAxis("Horizontal") * 10, 1, 0);
+            return new Vector3(Input.GetAxis("Vertical") * 10, 1, 0);
         };
     }
 

@@ -24477,11 +24477,5 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6041591133535156034, guid: 01ae1285c5a53bf44a6e36190bda6d6f,
-        type: 3}
-      propertyPath: laundingEff
-      value: 
-      objectReference: {fileID: 3142631415993351919, guid: d4b706459c2cf4e0892f1063bb734686,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae1285c5a53bf44a6e36190bda6d6f, type: 3}
