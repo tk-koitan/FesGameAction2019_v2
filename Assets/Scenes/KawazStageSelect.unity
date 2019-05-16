@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53573013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.438291, y: -12, z: -10}
+  m_LocalPosition: {x: -4.4408946, y: -12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1436228210}
@@ -2414,6 +2414,7 @@ GameObject:
   - component: {fileID: 479435542}
   - component: {fileID: 479435541}
   - component: {fileID: 479435544}
+  - component: {fileID: 479435545}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2467,7 +2468,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -2483,6 +2484,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1350085615}
+  - {fileID: 1007151914}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2523,6 +2525,66 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &479435545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479435540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 479435543}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 1
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &508839504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,6 +2687,7 @@ GameObject:
   - component: {fileID: 514162318}
   - component: {fileID: 514162319}
   - component: {fileID: 514162320}
+  - component: {fileID: 514162321}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -2663,7 +2726,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2684,7 +2747,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2710,6 +2773,7 @@ MonoBehaviour:
   stageSceneName: CamTestStage
   stageName: Start
   stageSprite: {fileID: 21300000, guid: c52da50c488009f4caec4c237518aa16, type: 3}
+  clearedColor: {r: 0.71733713, g: 0.9811321, b: 0.86615324, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
     <rightStage>k__BackingField: {fileID: 934686837}
@@ -2729,6 +2793,24 @@ MonoBehaviour:
     right: 1
     down: 0
     left: 1
+--- !u!114 &514162321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514162317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 8
+  outlineWidth: 3
+  alphaThreshold: 0.01
+  drawOutside: 0
+  enableInstancing: 0
 --- !u!1 &525896341
 GameObject:
   m_ObjectHideFlags: 0
@@ -5003,6 +5085,7 @@ GameObject:
   - component: {fileID: 934686835}
   - component: {fileID: 934686836}
   - component: {fileID: 934686837}
+  - component: {fileID: 934686838}
   m_Layer: 0
   m_Name: RightHo
   m_TagString: Untagged
@@ -5041,7 +5124,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5062,7 +5145,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5088,6 +5171,7 @@ MonoBehaviour:
   stageSceneName: Stage1345
   stageName: Hooooo
   stageSprite: {fileID: 21300000, guid: f7c09c3d618a2cf408971d34ac28075d, type: 3}
+  clearedColor: {r: 1, g: 0.5581, b: 0.5581, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 1077367569}
     <rightStage>k__BackingField: {fileID: 0}
@@ -5110,6 +5194,24 @@ MonoBehaviour:
     right: 0
     down: 1
     left: 1
+--- !u!114 &934686838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934686834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 8
+  outlineWidth: 3
+  alphaThreshold: 0.01
+  drawOutside: 0
+  enableInstancing: 0
 --- !u!1 &948038243
 GameObject:
   m_ObjectHideFlags: 0
@@ -5547,6 +5649,54 @@ RectTransform:
   m_AnchoredPosition: {x: 485, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1007151913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007151914}
+  - component: {fileID: 1007151915}
+  m_Layer: 11
+  m_Name: PostProcessingVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007151914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007151913}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.725475, y: 11.482862, z: 27.256504}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 479435543}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007151915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007151913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: fde87473cd5ac1841baa2fdb40e63de5, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &1041233619
 GameObject:
   m_ObjectHideFlags: 0
@@ -5994,6 +6144,7 @@ GameObject:
   - component: {fileID: 1077367567}
   - component: {fileID: 1077367568}
   - component: {fileID: 1077367569}
+  - component: {fileID: 1077367570}
   m_Layer: 0
   m_Name: RightEye
   m_TagString: Untagged
@@ -6032,7 +6183,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6053,7 +6204,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6079,6 +6230,7 @@ MonoBehaviour:
   stageSceneName: Kaitoteststage3
   stageName: RightEye
   stageSprite: {fileID: 21300000, guid: fd80d2b052ee9474ab9f6bee02bca04f, type: 3}
+  clearedColor: {r: 0, g: 0, b: 0, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
     <rightStage>k__BackingField: {fileID: 0}
@@ -6099,6 +6251,24 @@ MonoBehaviour:
     right: 0
     down: 1
     left: 1
+--- !u!114 &1077367570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077367566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 8
+  outlineWidth: 3
+  alphaThreshold: 0.01
+  drawOutside: 0
+  enableInstancing: 0
 --- !u!1 &1144968991
 GameObject:
   m_ObjectHideFlags: 0
@@ -8018,6 +8188,7 @@ GameObject:
   - component: {fileID: 1476056240}
   - component: {fileID: 1476056241}
   - component: {fileID: 1476056242}
+  - component: {fileID: 1476056243}
   m_Layer: 0
   m_Name: LeftEye
   m_TagString: Untagged
@@ -8056,7 +8227,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8077,7 +8248,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8103,6 +8274,7 @@ MonoBehaviour:
   stageSceneName: SnakeTestStage
   stageName: LeftEye
   stageSprite: {fileID: 21300000, guid: 4639b2da5921f5741ba7c986fe7ed32f, type: 3}
+  clearedColor: {r: 0, g: 0, b: 0, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
     <rightStage>k__BackingField: {fileID: 1077367569}
@@ -8123,6 +8295,24 @@ MonoBehaviour:
     right: 1
     down: 1
     left: 0
+--- !u!114 &1476056243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476056239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 8
+  outlineWidth: 3
+  alphaThreshold: 0.01
+  drawOutside: 0
+  enableInstancing: 0
 --- !u!1 &1481085906
 GameObject:
   m_ObjectHideFlags: 0
@@ -9379,6 +9569,7 @@ GameObject:
   - component: {fileID: 1611688436}
   - component: {fileID: 1611688437}
   - component: {fileID: 1611688438}
+  - component: {fileID: 1611688439}
   m_Layer: 0
   m_Name: LeftHo
   m_TagString: Untagged
@@ -9417,7 +9608,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9438,7 +9629,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2591cf84c6d99124fbe73f6b50c74256, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9464,6 +9655,7 @@ MonoBehaviour:
   stageSceneName: RocketStage
   stageName: LEFTHOOOO
   stageSprite: {fileID: 21300000, guid: 68e9df94a45cd5a4baddc2ff3ccbb296, type: 3}
+  clearedColor: {r: 1, g: 0.5581, b: 0.5581, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 1476056242}
     <rightStage>k__BackingField: {fileID: 934686837}
@@ -9485,6 +9677,24 @@ MonoBehaviour:
     right: 1
     down: 1
     left: 0
+--- !u!114 &1611688439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611688435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 8
+  outlineWidth: 3
+  alphaThreshold: 0.01
+  drawOutside: 0
+  enableInstancing: 0
 --- !u!1 &1627508031
 GameObject:
   m_ObjectHideFlags: 0

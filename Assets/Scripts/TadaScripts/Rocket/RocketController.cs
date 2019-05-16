@@ -14,6 +14,9 @@ namespace RocketStage
         [SerializeField]
         private ParticleSystem smokeEffect;
 
+        [SerializeField]
+        private CameraShake cam;
+
         public float speed = 2.0f;
         public float speedVx { private set; get; }
         public float speedVy { private set; get; }
@@ -59,7 +62,7 @@ namespace RocketStage
             IsBorderInner();
 
             if (isDead)
-                StartCoroutine(GoNextScene());
+                GoNextScene();
         }
 
         private void SetRotation()
@@ -101,20 +104,19 @@ namespace RocketStage
             leftDistance -= (int)speedVy;
         }
 
-        private IEnumerator GoNextScene()
+        private void GoNextScene()
         {
             actionEnabled = false;
             explosionEffect.transform.position = transform.position;
             explosionEffect.gameObject.SetActive(true);
             smokeEffect.gameObject.SetActive(true);
 
+            // カメラを揺らす
+            cam.isShake = true;
+
             transform.DOMove(
                 new Vector3(3.0f, -13f, 0f),
                 2.0f);
-
-            yield return new WaitForSeconds(2.0f);
-
-            SceneManager.LoadScene("ArriveStageSelect");
         }
 
         public void DoBeginAnitmation1()

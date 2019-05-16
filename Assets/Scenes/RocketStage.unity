@@ -6760,6 +6760,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &769310216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 769310218}
+  - component: {fileID: 769310217}
+  m_Layer: 0
+  m_Name: TextController2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &769310217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769310216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d309c317b30dc254e971b274372a39bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenarios:
+  - scenario: "\u305D\u3093\u306A\u3042\u3042\u3042\u3042\u3042"
+    charaIndex: 0
+  - scenario: "\u52A9\u3051\u3066\u3048\u3048\u3048\u3048\u3048"
+    charaIndex: 1
+  uiText: {fileID: 1311946096}
+  intervalForCharacterDisplay: 0.05
+  conversationField: {fileID: 640873054}
+  warningText: {fileID: 429906823}
+  leftChara: {fileID: 95839778}
+  rightChara: {fileID: 622868229}
+--- !u!4 &769310218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769310216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4129045, y: -3.8207088, z: 1.4276571}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &787051815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6568648625253919297, guid: 8d557b779c23a4430b0073a457ac67ac,
@@ -6798,9 +6852,11 @@ MonoBehaviour:
   meteoSponer: {fileID: 2039254823}
   rocketCtrl: {fileID: 685116504}
   textCtrl: {fileID: 90496791}
+  textCtrl2: {fileID: 769310217}
   backImage: {fileID: 1532942900}
   explainText: {fileID: 81606781}
   leftDistanceText: {fileID: 699981358}
+  cam: {fileID: 1591407942}
 --- !u!4 &983863555
 Transform:
   m_ObjectHideFlags: 0
@@ -12632,6 +12688,7 @@ GameObject:
   - component: {fileID: 1591407939}
   - component: {fileID: 1591407938}
   - component: {fileID: 1591407941}
+  - component: {fileID: 1591407942}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12740,6 +12797,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1591407942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591407937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f687e2fae103ab04fa68af5e2449991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShake: 0
+  shakePower: {x: 0.5, y: 0.5}
 --- !u!1 &1614876786
 GameObject:
   m_ObjectHideFlags: 0
