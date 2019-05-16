@@ -12,6 +12,9 @@ namespace StageSelect
         public string stageName = "";
         public Sprite stageSprite;
 
+        [SerializeField]
+        protected Color clearedColor;
+
         [System.Serializable]
         public class NextStage
         {

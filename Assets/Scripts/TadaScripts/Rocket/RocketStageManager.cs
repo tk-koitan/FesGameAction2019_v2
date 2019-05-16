@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
 using RocketStage;
+using UnityEngine.SceneManagement;
 
 namespace RocketStage
 {
@@ -16,6 +17,8 @@ namespace RocketStage
         private RocketController rocketCtrl;
         [SerializeField]
         private TextController textCtrl;
+        [SerializeField]
+        private TextController textCtrl2;
 
         [SerializeField]
         private Image backImage;
@@ -38,6 +41,8 @@ namespace RocketStage
         {
             if (textCtrl.isConversationing)
                 textCtrl.ScenarioUpdate();
+            if (textCtrl2.isConversationing)
+                textCtrl2.ScenarioUpdate();
             if (rocketCtrl.actionEnabled)
                 leftDistanceText.text = rocketCtrl.leftDistance.ToString();
         }
@@ -100,6 +105,23 @@ namespace RocketStage
             meteoSponer.gameObject.SetActive(true);
             rocketCtrl.actionEnabled = true;
             leftDistanceText.gameObject.SetActive(true);
+
+            while (rocketCtrl.isDead == false)
+            {
+                yield return new WaitForSeconds(1.0f);
+            }
+
+
+            textCtrl2.ScenarioStart();
+
+            while (textCtrl2.isConversationing)
+            {
+                yield return new WaitForSeconds(1.0f);
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            SceneManager.LoadScene("ArriveStageSelect");
         }
 
         private void feedObj(Image target, float time, float endValue)

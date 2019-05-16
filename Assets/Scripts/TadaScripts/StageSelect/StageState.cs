@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using KoitanLib;
 using StageSelect;
+using SpriteGlow;
 
 namespace StageSelect
 {
     public class StageState : BaseStageState
     {
-        // stageStateが持つべき状態
-        // ステージの画像(名前)、座標、上下左右押したときの遷移先ステート
-        // 道のりも必要？
-
         private void Start()
         {
             if (StageSelect.StageTable.stageClearedList[stageId])
             {
-                GetComponent<SpriteRenderer>().color =
-                    new Color(0.2f, 0f, 0f, 1f);
+                ChangeColor();
                 SetStageExist();
             }
         }
@@ -28,6 +24,13 @@ namespace StageSelect
             if (nextStage.rightStage != null) canMove.right = true;
             if (nextStage.downStage != null) canMove.down = true;
             if (nextStage.leftStage != null) canMove.left = true;
+        }
+
+        private void ChangeColor()
+        {
+            GetComponent<SpriteRenderer>().color =
+                clearedColor;
+            GetComponent<SpriteGlowEffect>().GlowBrightness = 0;
         }
         /*
         public bool[] GetStageExist()

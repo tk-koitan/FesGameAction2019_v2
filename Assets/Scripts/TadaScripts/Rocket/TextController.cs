@@ -74,6 +74,9 @@ namespace RocketStage
             isConversationing = false;
             conversationField.rectTransform.DOScaleX(
                 0f, 1.0f).SetEase(Ease.InCubic);
+            uiText.text = "";
+            leftChara.gameObject.SetActive(false);
+            rightChara.gameObject.SetActive(false);
         }
 
         public void ScenarioUpdate()

@@ -4,11 +4,15 @@ using UnityEngine;
 using DropRocketScene;
 using TadaLib;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 namespace DropRocketScene
 {
     public class PlayerDrop : MonoBehaviour
     {
+        [SerializeField]
+        private CameraShake cam;
+
         public Transform destination;
 
         public float arriveTime = 3.0f;
@@ -37,6 +41,9 @@ namespace DropRocketScene
             float time = arriveTime / 2f;
             addVelocity.y = -gravity * time; // upHeight / time - (gravity / 2f) * time;
             GetComponent<Animator>().SetTrigger("Death");
+
+            // カメラを揺らす
+            SetCameraShake(true);
         }
 
         // Update is called once per frame
@@ -51,6 +58,8 @@ namespace DropRocketScene
 
             if (timer.IsTimeout())
             {
+                SetCamera();
+                SetCameraShake(false);
                 actionEnabled = false;
                 return;
             }
@@ -66,6 +75,26 @@ namespace DropRocketScene
         private void VyUpdate()
         {
             addVelocity.y += gravity * Time.deltaTime;
+        }
+
+        private void SetCameraShake(bool isShake)
+        {
+            cam.isShake = isShake;
+        }
+
+        private void SetCamera()
+        {
+            DOTween.To(
+                () => Camera.main.orthographicSize,
+                num => Camera.main.orthographicSize = num,
+                8.0f,
+                2.0f);
+
+            DOTween.To(
+                () => Camera.main.transform.position,
+                num => Camera.main.transform.position = num,
+                new Vector3(transform.position.x, transform.position.y, -10f),
+                2.0f);
         }
     }
 }
