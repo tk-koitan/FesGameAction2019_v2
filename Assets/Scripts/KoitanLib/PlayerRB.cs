@@ -60,6 +60,8 @@ public class PlayerRB : MonoBehaviour
     //音
     public AudioClip jumpSE;
     public AudioClip deathSE;
+    public AudioClip ashiSE;
+    public AudioClip laundingSE;
     private AudioSource audioSource;
 
     //IK
@@ -282,6 +284,17 @@ public class PlayerRB : MonoBehaviour
             LaundEffFire();
         }
 
+        if (isGround && v.magnitude > 0)
+        {
+            //audioSource.clip = ashiSE;
+            //audioSource.Play();
+        }
+        else
+        {
+            //audioSource.clip = null;
+            //audioSource.Stop();
+        }
+
         //地面に付いてるか保存
         oldIsGround = isGround;
         oldIsMoving = isMoving;
@@ -495,6 +508,7 @@ public class PlayerRB : MonoBehaviour
         ActionInput.actionEnabled = false; // koitan
         ScoreManager.Instatnce.TimerStop(true);
         ScoreManager.Instatnce.canvasAnimator.Play("GoalText");
+        ScoreManager.Instatnce.StageGoal();
 
         //BGM変更
         MusicManager.Play(MusicManager.Instance.bgm3);
@@ -525,5 +539,6 @@ public class PlayerRB : MonoBehaviour
         GameObject tmpObj = Instantiate(laundingEff);
         tmpObj.transform.position = ashimoto.position;
         Destroy(tmpObj, tmpObj.GetComponentInChildren<ParticleSystem>().duration);
+        audioSource.PlayOneShot(laundingSE);
     }
 }
