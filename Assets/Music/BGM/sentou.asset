@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9f3fd86be1242219df42566360cba3, type: 3}
   m_Name: sentou
   m_EditorClassIdentifier: 
-  BGM: {fileID: 8300000, guid: 11613d4110dd14c458276026748e71bb, type: 3}
-  startTime: 2.5
-  endTime: 44.821
+  BGM: {fileID: 8300000, guid: 2bb441d6816b022498bad3c378cdcba4, type: 3}
+  startTime: 0
+  endTime: 57
