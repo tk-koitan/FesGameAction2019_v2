@@ -95,6 +95,8 @@ namespace StageSelect
             //Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 
             prevPos = transform.position;
+
+            MusicManager.Play(MusicManager.Instance.bgm2);
         }
 
         // Update is called once per frame
