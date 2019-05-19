@@ -115,6 +115,7 @@ namespace StageSelect
         {
             effect.transform.parent = transform;
             effect.transform.localPosition = Vector3.zero;
+            effect.gameObject.SetActive(true);
         }
 
         /*

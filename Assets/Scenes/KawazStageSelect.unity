@@ -3365,6 +3365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eff_Star
       objectReference: {fileID: 0}
+    - target: {fileID: 3210964552037818468, guid: 4640ea53a64794cb7b81c787391d2cfe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 689731497560180063, guid: 4640ea53a64794cb7b81c787391d2cfe,
         type: 3}
       propertyPath: m_LocalPosition.x
