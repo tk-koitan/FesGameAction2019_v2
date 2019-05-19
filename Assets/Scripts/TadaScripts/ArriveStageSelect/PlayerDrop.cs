@@ -43,7 +43,7 @@ namespace DropRocketScene
             GetComponent<Animator>().SetTrigger("Death");
 
             // カメラを揺らす
-            SetCameraShake(true);
+            cam.DOShake(1.5f);
         }
 
         // Update is called once per frame
@@ -52,14 +52,16 @@ namespace DropRocketScene
             sceneTimer.TimeUpdate(Time.deltaTime);
 
             if (sceneTimer.IsTimeout())
-                SceneManager.LoadScene("KawazStageSelect");
-
+            {
+                FadeManager.Instance.LoadScene("KawazStageSelect", 1.0f);
+                //SceneManager.LoadScene("KawazStageSelect");
+                sceneTimer.TimeReset();
+            }
             if (!actionEnabled) return;
 
             if (timer.IsTimeout())
             {
                 SetCamera();
-                SetCameraShake(false);
                 actionEnabled = false;
                 return;
             }
@@ -75,11 +77,6 @@ namespace DropRocketScene
         private void VyUpdate()
         {
             addVelocity.y += gravity * Time.deltaTime;
-        }
-
-        private void SetCameraShake(bool isShake)
-        {
-            cam.isShake = isShake;
         }
 
         private void SetCamera()

@@ -129,6 +129,9 @@ namespace StageSelect
 
             if (isMoving) return;
 
+            // あまりよくない
+            SwitchArrow(ActionInput.actionEnabled);
+
             if (IsStageSpriteEnabled())
             {
                 if (ActionInput.GetButtonDown(ButtonCode.Jump))
@@ -325,7 +328,8 @@ namespace StageSelect
         // 移動中は矢印を消す
         private void SwitchArrow(bool isActive)
         {
-            arrow.SetActive(isActive);
+            if(arrow.activeSelf != isActive)
+                arrow.SetActive(isActive);
         }
 
         // ステージ名を表示する

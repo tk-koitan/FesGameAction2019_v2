@@ -112,7 +112,7 @@ namespace RocketStage
             smokeEffect.gameObject.SetActive(true);
 
             // カメラを揺らす
-            cam.isShake = true;
+            cam.DOShake();
 
             transform.DOMove(
                 new Vector3(3.0f, -13f, 0f),

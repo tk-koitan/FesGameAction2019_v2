@@ -5964,6 +5964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 1466739941}
   smokeEffect: {fileID: 1016027029}
+  cam: {fileID: 0}
   speed: 10
   upBorder: -1
   headWind: -7
@@ -6471,6 +6472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 1466739941}
   smokeEffect: {fileID: 264104625}
+  cam: {fileID: 1591407942}
   speed: 10
   upBorder: -1
   headWind: -7
@@ -6856,7 +6858,6 @@ MonoBehaviour:
   backImage: {fileID: 1532942900}
   explainText: {fileID: 81606781}
   leftDistanceText: {fileID: 699981358}
-  cam: {fileID: 1591407942}
 --- !u!4 &983863555
 Transform:
   m_ObjectHideFlags: 0
@@ -6907,6 +6908,8 @@ MonoBehaviour:
   vyMax: -10
   gravityMin: -2
   gravityMax: -6
+  v: {x: 0, y: 0, z: 0}
+  gravity: 0
   lifeTime: 2.2
   borderX: 12
   borderY: 11
@@ -12068,6 +12071,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fb08c7daa1be419289eabda317d72b1, type: 3}
+--- !u!1001 &1286085787
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 130190, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_Name
+      value: FadeManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474238, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460108, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: DebugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460108, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: fadeColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460108, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: fadeColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460108, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
+      propertyPath: fadeColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd9d58dbfb8f846f58b62a48334a0058, type: 3}
 --- !u!1 &1311429913
 GameObject:
   m_ObjectHideFlags: 0
@@ -12809,7 +12885,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f687e2fae103ab04fa68af5e2449991f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShake: 0
   shakePower: {x: 0.5, y: 0.5}
 --- !u!1 &1614876786
 GameObject:
@@ -13530,6 +13605,8 @@ MonoBehaviour:
   vyMax: -10
   gravityMin: -2
   gravityMax: -6
+  v: {x: 0, y: 0, z: 0}
+  gravity: 0
   lifeTime: 2.2
   borderX: 10
   borderY: 5
@@ -13792,6 +13869,8 @@ MonoBehaviour:
   intervalAccel: 0.01
   posXMax: 11
   delayTime: 0
+  isDeathComb: 1
+  endTime: 30
 --- !u!4 &2039254824
 Transform:
   m_ObjectHideFlags: 0
@@ -13820,7 +13899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1006649679}
   maxCount: 30
-  prepareCount: 15
+  prepareCount: 30
   interval: 1
 --- !u!1 &2091823905
 GameObject:

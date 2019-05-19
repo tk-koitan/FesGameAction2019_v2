@@ -30,7 +30,8 @@ namespace StageSelect
         {
             GetComponent<SpriteRenderer>().color =
                 clearedColor;
-            GetComponent<SpriteGlowEffect>().GlowBrightness = 0;
+            GetComponent<SpriteGlowEffect>().GlowColor = clearedColor;
+            GetComponent<SpriteGlowEffect>().GlowBrightness = 3;
         }
         /*
         public bool[] GetStageExist()

@@ -14,8 +14,8 @@ namespace RocketStage
         public float gravityMin = -0.1f;
         public float gravityMax = -1.0f;
 
-        private Vector3 v;
-        private float gravity;
+        public Vector3 v;
+        public float gravity;
 
         public float lifeTime = 3.0f;
 

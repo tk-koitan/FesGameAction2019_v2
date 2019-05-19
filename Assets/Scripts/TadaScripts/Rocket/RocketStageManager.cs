@@ -119,9 +119,10 @@ namespace RocketStage
                 yield return new WaitForSeconds(1.0f);
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
 
-            SceneManager.LoadScene("ArriveStageSelect");
+            //SceneManager.LoadScene("ArriveStageSelect");
+            FadeManager.Instance.LoadScene("ArriveStageSelect", 1.0f);
         }
 
         private void feedObj(Image target, float time, float endValue)
