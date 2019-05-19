@@ -21,7 +21,7 @@ public class MoveBlockGyro : Mover
 
     protected override void Update()
     {
-        float gyroZ = ActionInput.GetJoyconGyro().z * moveSpeed;
+        float gyroZ = ActionInput.GetJoyconGyro().z * moveSpeed * Time.deltaTime * 60f;
 
         foreach (Transform child in transform)
         {
