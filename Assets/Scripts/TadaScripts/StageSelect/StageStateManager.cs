@@ -132,7 +132,8 @@ namespace StageSelect
             if (isMoving) return;
 
             // あまりよくない
-            SwitchArrow(ActionInput.actionEnabled);
+            if(!ActionInput.actionEnabled)
+                SwitchArrow(ActionInput.actionEnabled);
 
             if (IsStageSpriteEnabled())
             {

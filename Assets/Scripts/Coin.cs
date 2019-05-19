@@ -5,6 +5,10 @@ using DG.Tweening;
 
 public class Coin : MonoBehaviour
 {
+    [SerializeField]
+    private int value = 1;
+    [SerializeField]
+    private GameObject star;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +20,17 @@ public class Coin : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            GameObject tmpObj = Instantiate(star, transform.position, Quaternion.identity);
+            Destroy(tmpObj, star.GetComponent<ParticleSystem>().duration);
+            transform.DOMoveY(0.5f, 0.5f).SetRelative();
+            Destroy(gameObject,0.5f);
+
+        }
     }
 }

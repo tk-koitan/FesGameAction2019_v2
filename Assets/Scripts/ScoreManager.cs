@@ -17,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private AudioClip countdownSE;
     private ScoreSaver saver;
+    public GameObject ClearEffect;
     static ScoreManager instance;
     public static ScoreManager Instatnce
     {
@@ -97,5 +98,48 @@ public class ScoreManager : MonoBehaviour
     public void EntryTeamName()
     {
         saver.teamName = tmproInput.text;
+    }
+
+    public void StageGoal()
+    {
+        StartCoroutine(EffectFire());
+    }
+
+    private IEnumerator EffectFire()
+    {
+        Vector3 camPos = Camera.main.transform.position;
+        float camSize = Camera.main.orthographicSize;
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+        Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity); Instantiate(ClearEffect, camPos + new Vector3(camSize * Random.Range(-1f, 1f), camSize * Random.Range(-1f, 1f), 10), Quaternion.identity);
+
     }
 }
