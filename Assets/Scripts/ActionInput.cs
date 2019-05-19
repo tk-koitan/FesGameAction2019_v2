@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ActionInput : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class ActionInput : MonoBehaviour
     private Joycon gyroJoycon;
     private static float beforeHorizontalValue;
     private static float beforeVerticalValue;
+    private Dictionary<ButtonCode, bool> oldButton = new Dictionary<ButtonCode, bool>();
+    private bool oldIsJump, oldIsUpArrow, oldIsDownArrow, oldIsLeftArrow, oldIsRightArrow, oldIsCancel;
 
 
     static ActionInput instance;
@@ -37,11 +40,17 @@ public class ActionInput : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
 
+        //1f前のボタンを入れる
+        foreach(ButtonCode button in Enum.GetValues(typeof(ButtonCode)))
+        {
+            oldButton.Add(button, false);
+        }
+
         Debug.Log("コントローラーにキーボードが設定されました");
         SetControllerKeyboard();
         SetSensorKeyboard();
 
-        Debug.Log("ActionInoput.Awake()");
+        //Debug.Log("ActionInoput.Awake()");
         var joycons = JoyconManager.Instance.j;
         stickJoycon = joycons.Find(c => c.isLeft);
         if (stickJoycon == null)
@@ -134,6 +143,13 @@ public class ActionInput : MonoBehaviour
 
     protected virtual void LateUpdate()
     {
+        //1f前のボタンを入れる
+        foreach (ButtonCode button in Enum.GetValues(typeof(ButtonCode)))
+        {
+            oldButton[button] = GetButton(button);
+            Debug.Log(button + GetButton(button).ToString());
+        }
+
         if (stickJoycon != null)
         {
             beforeHorizontalValue = stickJoycon.GetStick()[1];
