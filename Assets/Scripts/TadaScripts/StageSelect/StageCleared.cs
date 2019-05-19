@@ -31,6 +31,8 @@ namespace StageSelect
         private ParticleSystem getEffect;
         [SerializeField]
         private ParticleSystem setEffect;
+        [SerializeField]
+        private ParticleSystem starEffect;
 
         // Start is called before the first frame update
         void Start()
@@ -77,6 +79,7 @@ namespace StageSelect
             yield return new WaitForSeconds(0.5f);
 
             PlayEffect(getEffect);
+            SetEffect(starEffect);
 
             // 移動する
             transform.DOLocalPath(
@@ -106,6 +109,12 @@ namespace StageSelect
         {
             effect.transform.position = transform.position;
             effect.Play();
+        }
+
+        private void SetEffect(ParticleSystem effect)
+        {
+            effect.transform.parent = transform;
+            effect.transform.localPosition = Vector3.zero;
         }
 
         /*
