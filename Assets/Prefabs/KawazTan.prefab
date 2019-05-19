@@ -5582,6 +5582,8 @@ MonoBehaviour:
   sceneWaitTime: 5
   jumpSE: {fileID: 8300000, guid: 87334d6813d9947da9adf1cd6735d6ad, type: 3}
   deathSE: {fileID: 8300000, guid: a11b4824d401c40b990563e26fc3cf42, type: 3}
+  ashiSE: {fileID: 8300000, guid: 60d867aeb04274826aecb2bd8d8e3847, type: 3}
+  laundingSE: {fileID: 8300000, guid: 1d5a55f1ed9dc41ac93640e6e81b4320, type: 3}
   ik: {fileID: 1448748624}
   handPos: {fileID: 1709649516}
   ashimoto: {fileID: 1955264668}
@@ -5650,11 +5652,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 60d867aeb04274826aecb2bd8d8e3847, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
