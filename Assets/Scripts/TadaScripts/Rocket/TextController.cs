@@ -60,6 +60,9 @@ namespace RocketStage
                 1.0f,
                 1.0f).SetEase(Ease.OutCubic)
                 .OnComplete(() => StartText());
+            uiText.text = "";
+            leftChara.gameObject.SetActive(false);
+            rightChara.gameObject.SetActive(false);
         }
 
         private void StartText()

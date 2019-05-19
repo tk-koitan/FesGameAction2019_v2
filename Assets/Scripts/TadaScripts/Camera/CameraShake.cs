@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    public bool isShake = false;
+    private bool isShake = false;
 
     public Vector2 shakePower = new Vector2(1f, 1f);
 
@@ -18,14 +18,43 @@ public class CameraShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isShake) DOShake();
+        if (isShake) Shake();
     }
 
-    private void DOShake()
+    private void Shake()
     {
         float x = defaultPos.x + Random.Range(-shakePower.x, shakePower.x);
         float y = defaultPos.y + Random.Range(-shakePower.y, shakePower.y);
 
         transform.localPosition = new Vector3(x, y, defaultPos.z);
+    }
+
+    private void BeginShake()
+    {
+        isShake = true;
+        defaultPos = transform.position;
+    }
+
+    private void EndShake()
+    {
+        isShake = false;
+        transform.position = defaultPos;
+    }
+
+    public void DOShake()
+    {
+        BeginShake();
+    }
+
+    public void DOShake(float duration)
+    {
+        StartCoroutine(CameraShakeCoroutine(duration));
+    }
+
+    private IEnumerator CameraShakeCoroutine(float time)
+    {
+        BeginShake();
+        yield return new WaitForSeconds(time);
+        EndShake();
     }
 }
