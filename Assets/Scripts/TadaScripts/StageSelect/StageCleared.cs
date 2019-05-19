@@ -27,6 +27,13 @@ namespace StageSelect
         [SerializeField]
         private float moveTime = 5.0f;
 
+        [SerializeField]
+        private ParticleSystem getEffect;
+        [SerializeField]
+        private ParticleSystem setEffect;
+        [SerializeField]
+        private ParticleSystem starEffect;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -71,11 +78,21 @@ namespace StageSelect
                 */
             yield return new WaitForSeconds(0.5f);
 
+            PlayEffect(getEffect);
+            SetEffect(starEffect);
+
             // 移動する
             transform.DOLocalPath(
                 path,
                 moveTime,
                 PathType.CatmullRom).SetEase(Ease.InOutQuart).OnComplete(() => EndAnimation());
+        }
+
+        private void EndAnimation()
+        {
+            PlayEffect(setEffect);
+            ActionInput.actionEnabled = true;
+            vcamera.gameObject.SetActive(false);
         }
 
         private void feedObj(SpriteRenderer target, float time, float firstValue, float endValue)
@@ -87,6 +104,20 @@ namespace StageSelect
                 time
                 ).SetEase(Ease.InOutCubic);
         }
+
+        private void PlayEffect(ParticleSystem effect)
+        {
+            effect.transform.position = transform.position;
+            effect.Play();
+        }
+
+        private void SetEffect(ParticleSystem effect)
+        {
+            effect.transform.parent = transform;
+            effect.transform.localPosition = Vector3.zero;
+            effect.gameObject.SetActive(true);
+        }
+
         /*
         private void GetFlagmentAnimation()
         {
@@ -109,12 +140,6 @@ namespace StageSelect
                 moveTime,
                 PathType.CatmullRom).SetEase(Ease.InQuint).OnComplete(() => EndAnimation());
         }*/
-
-        private void EndAnimation()
-        {
-            ActionInput.actionEnabled = true;
-            vcamera.gameObject.SetActive(false);
-        }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
