@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGM: {fileID: 8300000, guid: 2bb441d6816b022498bad3c378cdcba4, type: 3}
   startTime: 0
-  endTime: 57
+  endTime: 60
