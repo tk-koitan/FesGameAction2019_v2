@@ -101,6 +101,7 @@ public class JoyconManager : MonoBehaviour
         {
             j[i].Update();
         }
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1) && SceneManager.GetActiveScene().name != "Scene1")
         {
             SceneManager.LoadScene("Scene1");
@@ -109,6 +110,7 @@ public class JoyconManager : MonoBehaviour
         {
             SceneManager.LoadScene("Scene2");
         }
+        */
     }
 
     void OnApplicationQuit()
