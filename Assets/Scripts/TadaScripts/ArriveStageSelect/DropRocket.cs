@@ -31,6 +31,7 @@ namespace DropRocketScene
         [SerializeField]
         private SpriteRenderer rocketArea;
 
+
         //public RocketFlagment[] rocketFlagment;
 
         // Start is called before the first frame update

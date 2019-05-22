@@ -111,7 +111,7 @@ namespace RocketStage
                 yield return new WaitForSeconds(1.0f);
             }
 
-
+            meteoSponer.gameObject.SetActive(false);
             textCtrl2.ScenarioStart();
 
             while (textCtrl2.isConversationing)

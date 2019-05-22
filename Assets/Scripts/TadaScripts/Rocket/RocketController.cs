@@ -34,10 +34,15 @@ namespace RocketStage
 
         public int leftDistance = 50000;
 
+        [SerializeField]
+        private AudioClip destroySE;
+        private AudioSource audioSource;
+
 
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             actionEnabled = false;
             //posY = transform.position.y;
         }
@@ -106,6 +111,7 @@ namespace RocketStage
 
         private void GoNextScene()
         {
+            audioSource.PlayOneShot(destroySE);
             actionEnabled = false;
             explosionEffect.transform.position = transform.position;
             explosionEffect.gameObject.SetActive(true);

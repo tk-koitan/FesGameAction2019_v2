@@ -27,9 +27,14 @@ namespace RocketStage
 
         private bool endCombing = false;
 
+        [SerializeField]
+        private AudioClip meteoSE;
+        private AudioSource audioSource;
+
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             timer = new Timer(interval);
             endTimer = new Timer(endTime);
         }
@@ -71,6 +76,7 @@ namespace RocketStage
 
             if (obj != null)
             {
+                audioSource.PlayOneShot(meteoSE);
                 obj.transform.position = new Vector3(posX,
                     transform.position.y, transform.position.z);
             }
@@ -92,6 +98,7 @@ namespace RocketStage
 
                         if (obj != null)
                         {
+                            audioSource.PlayOneShot(meteoSE);
                             obj.transform.position = new Vector3(posX * dir,
                                 transform.position.y, transform.position.z);
                             obj.GetComponent<MeteoDrop>().v = new Vector3(0f, -Mathf.Max((9 - posX / 1.4f), 3.0f), 0f);
