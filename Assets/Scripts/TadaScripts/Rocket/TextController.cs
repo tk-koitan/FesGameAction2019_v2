@@ -56,6 +56,8 @@ namespace RocketStage
         private AudioSource audioSource;
         [SerializeField]
         private AudioClip messageSE;
+        [SerializeField]
+        private AudioClip warningSE;
 
         private void Awake()
         {
@@ -185,6 +187,8 @@ namespace RocketStage
 
         void WarningAnimation()
         {
+            audioSource.pitch = 1.0f;
+            audioSource.PlayOneShot(warningSE);
             //warningText.rectTransform.DOPunchScale(
             //    transform.localScale * 1.5f, 4.0f).OnComplete(() => EndWarningEvent());
             warningText.rectTransform.DOShakeScale(

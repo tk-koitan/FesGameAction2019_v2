@@ -412,6 +412,7 @@ MonoBehaviour:
   leftChara: {fileID: 95839778}
   rightChara: {fileID: 622868229}
   messageSE: {fileID: 8300000, guid: 011c29b07db534e3db1348fa530e30b0, type: 3}
+  warningSE: {fileID: 8300000, guid: d49abffb0420e4659bfece9445dea503, type: 3}
 --- !u!4 &90496792
 Transform:
   m_ObjectHideFlags: 0
@@ -7001,6 +7002,7 @@ MonoBehaviour:
   leftChara: {fileID: 95839778}
   rightChara: {fileID: 622868229}
   messageSE: {fileID: 8300000, guid: 011c29b07db534e3db1348fa530e30b0, type: 3}
+  warningSE: {fileID: 0}
 --- !u!4 &769310218
 Transform:
   m_ObjectHideFlags: 0
