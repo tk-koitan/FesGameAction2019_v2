@@ -83,7 +83,7 @@ namespace RocketStage
             // 左右から中央へ降らせる
             while (true)
             {
-                for(float posX = 10f; posX >= 0f; posX -= 1.55f)
+                for(float posX = 9.75f; posX >= 0f; posX -= 1.5f)
                 {
                     for (int dir = -1; dir <= 1; dir += 2)
                     {
@@ -94,7 +94,7 @@ namespace RocketStage
                         {
                             obj.transform.position = new Vector3(posX * dir,
                                 transform.position.y, transform.position.z);
-                            obj.GetComponent<MeteoDrop>().v = new Vector3(0f, -(9 - posX / 1.2f), 0f);
+                            obj.GetComponent<MeteoDrop>().v = new Vector3(0f, -Mathf.Max((9 - posX / 1.4f), 3.0f), 0f);
                             obj.GetComponent<MeteoDrop>().gravity = -0.5f;
                         }
                     }
@@ -122,7 +122,7 @@ namespace RocketStage
 
                     yield return new WaitForSeconds(interval / 10f);
                 }*/
-                yield return new WaitForSeconds(interval / 5f);
+                yield return new WaitForSeconds(interval / 3f);
             }
         }
     }

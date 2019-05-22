@@ -35,10 +35,6 @@ namespace RocketStage
         [SerializeField]
         private Image rightChara;
 
-        [SerializeField]
-        private AudioClip textSE;
-        private AudioSource audioSource;
-
         private int currentLine = 0; // 現在の行番号
         private string currentText = string.Empty;
         private float timeUntilDisplay = 0;
@@ -77,7 +73,6 @@ namespace RocketStage
             uiText.text = "";
             leftChara.gameObject.SetActive(false);
             rightChara.gameObject.SetActive(false);
-            audioSource = GetComponent<AudioSource>();
         }
 
         private void StartText()
@@ -139,7 +134,6 @@ namespace RocketStage
 
             if (displayCharacterCount != lastUpdateCharacter)
             {
-                audioSource.PlayOneShot(textSE);
                 uiText.text = currentText.Substring(0, displayCharacterCount);
                 lastUpdateCharacter = displayCharacterCount;
 
