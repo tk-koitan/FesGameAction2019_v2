@@ -10,12 +10,16 @@ public class MoveBlockGyro : Mover
     public float moveDistanceMax = 5.0f; // 中心からどれだけ進めるか
     public float moveSpeed = 0.05f;
     private float moveDistance = 0.0f;
+    private AudioSource audioSource;
+    private Renderer targetRenderer;
 
     private ActionInput actionInput;
 
     protected override void Start()
     {
         actionInput = ActionInput.Instatnce;
+        audioSource = GetComponent<AudioSource>();
+        targetRenderer = GetComponent<Renderer>();
         base.Start();
     }
 
@@ -37,6 +41,22 @@ public class MoveBlockGyro : Mover
 
         base.Update();
         // 画面外にいるときは処理を行わないようにしたい 出来れば基底クラスで
+
+        //画面内にいる時に音出す
+        if(targetRenderer.isVisible && ActionInput.GetJoyconGyro().z != 0)
+        {
+            if (!audioSource.isPlaying) audioSource.Play();
+            //フェードイン
+            audioSource.volume += (1 - audioSource.volume) * 0.2f;
+            //Debug.Log("歯車音:" + gyroZ);
+        }
+        else
+        {
+            //audioSource.Stop();
+            //フェードアウト
+            audioSource.volume *=0.9f;
+            if (audioSource.volume < 0.01f) audioSource.Stop();
+        }
     }
 
     // Update is called once per frame
