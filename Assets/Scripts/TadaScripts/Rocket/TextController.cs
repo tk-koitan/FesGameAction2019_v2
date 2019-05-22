@@ -52,6 +52,16 @@ namespace RocketStage
             get { return Time.time > timeElapsed + timeUntilDisplay; }
         }
 
+        //by koitan
+        private AudioSource audioSource;
+        [SerializeField]
+        private AudioClip messageSE;
+
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         public void ScenarioStart()
         {
             isPrepareTime = true;
@@ -126,6 +136,9 @@ namespace RocketStage
             {
                 uiText.text = currentText.Substring(0, displayCharacterCount);
                 lastUpdateCharacter = displayCharacterCount;
+
+                //by koitan
+                audioSource.PlayOneShot(messageSE);
             }
         }
 
@@ -158,11 +171,15 @@ namespace RocketStage
             {
                 leftChara.gameObject.SetActive(true);
                 rightChara.gameObject.SetActive(false);
+                //by koitan
+                audioSource.pitch = 1.5f;
             }
             else
             {
                 leftChara.gameObject.SetActive(false);
                 rightChara.gameObject.SetActive(true);
+                //by koitan
+                audioSource.pitch = 3f;
             }
         }
 

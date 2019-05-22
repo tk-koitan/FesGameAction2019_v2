@@ -336,6 +336,7 @@ public class PlayerRB : MonoBehaviour
         float slopeMinY = Mathf.Sin((90 - slopeMaxDeg) * Mathf.Deg2Rad);
         for (int i = 1; i < collision.contacts.Length; i++)
         {
+            if (collision.contacts[i].normal.y <= 0) continue;
             float tmpDir = (v + center - collision.contacts[i].point).magnitude;
             if (tmpDir < dir)
             {

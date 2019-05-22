@@ -7,7 +7,8 @@ public class AspectChanger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //強制的にアスペクト比を16:9にする
+        Screen.SetResolution(Screen.width, Screen.width * 9 / 16, Screen.fullScreen);
     }
 
     // Update is called once per frame
@@ -38,11 +39,14 @@ public class AspectChanger : MonoBehaviour
 
     private void OnGUI()
     {
-        GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("解像度: " + Screen.width + "×" + Screen.height);
-        GUILayout.EndHorizontal();
-        GUILayout.EndArea();
+        if (Debug.isDebugBuild)
+        {
+            GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("解像度: " + Screen.width + "×" + Screen.height);
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
+        }
     }
 }
