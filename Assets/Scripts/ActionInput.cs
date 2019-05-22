@@ -25,8 +25,8 @@ public class ActionInput : MonoBehaviour
     private Joycon gyroJoycon;
     private static float beforeHorizontalValue;
     private static float beforeVerticalValue;
+    private Dictionary<ButtonCode, bool> nowButton = new Dictionary<ButtonCode, bool>();
     private Dictionary<ButtonCode, bool> oldButton = new Dictionary<ButtonCode, bool>();
-    private bool oldIsJump, oldIsUpArrow, oldIsDownArrow, oldIsLeftArrow, oldIsRightArrow, oldIsCancel;
 
 
     static ActionInput instance;
@@ -40,13 +40,13 @@ public class ActionInput : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
 
-        //1f前のボタンを入れる
         foreach(ButtonCode button in Enum.GetValues(typeof(ButtonCode)))
         {
+            nowButton.Add(button, false);
             oldButton.Add(button, false);
         }
 
-        Debug.Log("コントローラーにキーボードが設定されました");
+        //Debug.Log("コントローラーにキーボードが設定されました");
         SetControllerKeyboard();
         SetSensorKeyboard();
 
@@ -124,6 +124,10 @@ public class ActionInput : MonoBehaviour
             }
         }
 
+        //キーボード用
+        if (Input.GetKey(KeyCode.D)) joyconAngle -= Time.deltaTime * 180;
+        if (Input.GetKey(KeyCode.A)) joyconAngle += Time.deltaTime * 180;
+
         //テスト
         /*
         if(ActionInput.GetButtonDown(ButtonCode.UpArrow))
@@ -147,7 +151,7 @@ public class ActionInput : MonoBehaviour
         foreach (ButtonCode button in Enum.GetValues(typeof(ButtonCode)))
         {
             oldButton[button] = GetButton(button);
-            Debug.Log(button + GetButton(button).ToString());
+            //Debug.Log(button + GetButton(button).ToString());
         }
 
         if (stickJoycon != null)
@@ -238,10 +242,12 @@ public class ActionInput : MonoBehaviour
 
     public static void SetSensorKeyboard()
     {
+        if(GetJoyconVector!=null)
+        {
+            joyconAngle = GetJoyconVector().y;
+        }
         GetJoyconVector = () =>
         {
-            if (Input.GetKey(KeyCode.D)) joyconAngle -= Time.deltaTime * 60;
-            if (Input.GetKey(KeyCode.A)) joyconAngle += Time.deltaTime * 60;
             return new Vector3(0, joyconAngle, 0);
         };
 
