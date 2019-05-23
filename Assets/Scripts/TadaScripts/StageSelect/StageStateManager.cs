@@ -65,9 +65,19 @@ namespace StageSelect
 
         MenuController menuCtrl;
 
+        [SerializeField]
+        private AudioClip decideSE;
+        [SerializeField]
+        private AudioClip calcelSE;
+        [SerializeField]
+        private AudioClip walkingSE;
+        private AudioSource audioSource;
+
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+
             dir = (transform.localScale.x > 0.0f) ? 1 : -1; // tada
             defaultScaleX = transform.localScale.x * dir;
             transform.localScale = new Vector3(
@@ -129,8 +139,11 @@ namespace StageSelect
             else
                 arrow.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
 
-            if (isMoving) return;
-
+            if (isMoving)
+            {
+                //audioSource.PlayOneShot(walkingSE);
+                return;
+            }
             // あまりよくない
             if(!ActionInput.actionEnabled)
                 SwitchArrow(ActionInput.actionEnabled);
@@ -295,6 +308,7 @@ namespace StageSelect
         // ステージの画像を表示する
         private void DisplayStageSprite()
         {
+            audioSource.PlayOneShot(decideSE);
             vcamera.gameObject.SetActive(false);
             stageImageFlame.gameObject.SetActive(true);
             stageImageFlame.rectTransform.localPosition = new Vector3(-1600f, -100f, 0f); // 見えない位置に配置
@@ -308,6 +322,7 @@ namespace StageSelect
         // ステージの画像を消す
         private void BlindStageSprite()
         {
+            audioSource.PlayOneShot(calcelSE);
             vcamera.gameObject.SetActive(true);
             stageImageFlame.rectTransform.DOKill();
             stageImageFlame.gameObject.SetActive(false);
