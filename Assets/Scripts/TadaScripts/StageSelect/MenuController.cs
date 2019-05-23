@@ -48,6 +48,12 @@ namespace StageSelect
         public GameObject tearObject;
         public Transform[] tearPosition;
 
+        [SerializeField]
+        private AudioClip calcelSE;
+        [SerializeField]
+        private AudioClip decideSE;
+        private AudioSource audioSource;
+
         public Vector3 startRotation = Vector3.zero;
         public Vector3 endRotation = Vector3.zero;
         public float animTime = 1.0f;
@@ -67,24 +73,29 @@ namespace StageSelect
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             isDisplayed = false;
 
-            menuState = new Menu(0, itemNum, this);
+            //menuState = new Menu(0, itemNum, this);
         }
 
         private void Update()
         {
             if (!isDisplayed) return;
 
-            menuState.menuUpdate();
+            if(menuState != null)
+                menuState.menuUpdate();
         }
 
         public void StartMenu()
         {
             isDisplayed = true;
 
+            menuState = new Menu(0, itemNum, this);
+
             StartFrogUI(frogUI, frogTween);
             StartBackUI(backUI, backTween);
+            audioSource.PlayOneShot(decideSE);
         }
 
         public void EndMenu()
@@ -93,6 +104,7 @@ namespace StageSelect
 
             EndFrogUI(frogUI, frogTween);
             EndBackUI(backUI, backTween);
+            audioSource.PlayOneShot(calcelSE);
         }
 
         public void TextApeal(TextMeshProUGUI text)
@@ -199,6 +211,7 @@ namespace StageSelect
                     {
                         case (int)Item.BACK:
                             menuCtrl.EndMenu();
+                            menuCtrl.menuState = null;
                             break;
                         case (int)Item.AUDIO:
                             menuCtrl.menuState = new Audio(menuCtrl);

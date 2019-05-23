@@ -109,7 +109,7 @@ namespace RocketStage
                 if (!warningText.gameObject.activeSelf)
                 {
                     warningText.gameObject.SetActive(true);
-                    WarningAnimation();
+                    StartCoroutine(WarningAnimation());
                 }
                 return;
             }
@@ -185,17 +185,36 @@ namespace RocketStage
             }
         }
 
-        void WarningAnimation()
+        private IEnumerator WarningAnimation()
         {
             audioSource.pitch = 1.0f;
             audioSource.PlayOneShot(warningSE);
+
+            Vector3 defaultScale = warningText.rectTransform.localScale;
+            Vector3 popScale = defaultScale * 2.0f;
+
+            for(int i = 0; i < 4; i++)
+            {
+                warningText.rectTransform.DOScale(
+                    popScale,
+                    0.5f);
+
+                yield return new WaitForSeconds(0.5f);
+
+                warningText.rectTransform.DOScale(
+                    defaultScale,
+                    0.5f);
+
+                yield return new WaitForSeconds(0.5f);
+            }
             //warningText.rectTransform.DOPunchScale(
             //    transform.localScale * 1.5f, 4.0f).OnComplete(() => EndWarningEvent());
-            warningText.rectTransform.DOShakeScale(
-                4.0f).OnComplete(() => EndWarningEvent());
+            //warningText.rectTransform.DOShakeScale(
+            //4.0f).OnComplete(() => EndWarningEvent());
+            EndWarningEvent();
         }
 
-        void EndWarningEvent()
+        private void EndWarningEvent()
         {
             isEventing = false;
             warningText.gameObject.SetActive(false);
