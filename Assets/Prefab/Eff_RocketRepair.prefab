@@ -74,7 +74,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 35
@@ -177,8 +177,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.7
+      scalar: 0.6
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -310,8 +310,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 8
+      scalar: 12
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -855,7 +855,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 6
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -973,20 +973,29 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: -1
-          tangentMode: 69
+          inSlope: -0.54638004
+          outSlope: -0.54638004
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.1694152
+        - serializedVersion: 3
+          time: 0.8798993
+          value: 0.5998931
+          inSlope: -0.45471895
+          outSlope: -4.56566
+          tangentMode: 5
+          weightedMode: 0
+          inWeight: 0.1670419
+          outWeight: 0.3018281
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1
-          outSlope: 0
-          tangentMode: 69
+          inSlope: -5.878293
+          outSlope: -5.878293
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.37221608
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
