@@ -2,21 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RocketStage;
+using TadaLib;
 
 namespace RocketStage {
     public class ShootingRocketController : BaseRocketController
     {
         [SerializeField]
-        private GameObject laser;
+        private GameObject normalLaser;
+        [SerializeField]
+        private GameObject chargeLaser;
+        [SerializeField]
+        private GameObject chargeEffect;
+        [SerializeField]
+        private Transform laserMuzzle;
+        [SerializeField]
+        private ParticleSystem normalLaserFlash;
+        [SerializeField]
+        private ParticleSystem chargeLaserFlash;
 
         public float chargeSpeed = 1.0f;
-        public float chargeMax = 10.0f;
+        public float chargeMax = 4.0f;
         private float charge = 0.0f;
+        public float laserInterval = 0.5f;
+
+        public float chargeLaserBorder = 2.0f;
+
+        Timer laserTimer;
 
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
+            laserTimer = new Timer(laserInterval);
         }
 
         // Update is called once per frame
@@ -26,20 +43,42 @@ namespace RocketStage {
 
             if (!actionEnabled) return;
 
-            charge = Mathf.Min(charge + chargeSpeed * Time.deltaTime, chargeMax);
-            if (ActionInput.GetButtonDown(ButtonCode.Jump))
+            laserTimer.TimeUpdate(Time.deltaTime);
+
+            if (!laserTimer.IsTimeout()) return;
+
+            if (ActionInput.GetButton(ButtonCode.Jump))
             {
-                CreateLaser();
+                if (!chargeEffect.activeSelf)
+                    chargeEffect.SetActive(true);
+                charge = Mathf.Min(charge + chargeSpeed * Time.deltaTime, chargeMax);
+            }
+            else if (ActionInput.GetButtonUp(ButtonCode.Jump))
+            {
+                if (charge >= chargeLaserBorder)
+                    CreateChargeLaser();
+                else
+                    CreateNormalLaser();
                 charge = 0f;
+                chargeEffect.SetActive(false);
+                laserTimer.TimeReset();
             }
         }
 
-        private void CreateLaser()
+        private void CreateNormalLaser()
         {
-            GameObject laserObj = Instantiate(laser, transform.position, Quaternion.identity);
+            GameObject laserObj = Instantiate(normalLaser, laserMuzzle.position, Quaternion.identity);
+            laserObj.GetComponent<LaserController>().dir = transform.eulerAngles.z;
+            normalLaserFlash.Play();
+        }
+
+        private void CreateChargeLaser()
+        {
+            GameObject laserObj = Instantiate(chargeLaser, laserMuzzle.position, Quaternion.identity);
             laserObj.GetComponent<LaserController>().dir = transform.eulerAngles.z;
             laserObj.GetComponent<LaserController>().speed = charge;
-            laserObj.GetComponent<LaserController>().defaultScale = charge / chargeMax;
+            laserObj.GetComponent<LaserController>().defaultScale = 2 * charge / chargeMax;
+            chargeLaserFlash.Play();
         }
     }
 }
