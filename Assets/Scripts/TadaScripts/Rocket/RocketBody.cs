@@ -7,11 +7,11 @@ namespace RocketStage
 {
     public class RocketBody : MonoBehaviour
     {
-        RocketController rocketCtrl;
+        BaseRocketController rocketCtrl;
 
         private void Start()
         {
-            rocketCtrl = GetComponent<RocketController>();
+            rocketCtrl = GetComponent<BaseRocketController>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

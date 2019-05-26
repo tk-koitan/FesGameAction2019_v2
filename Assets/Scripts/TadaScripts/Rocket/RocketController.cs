@@ -7,106 +7,23 @@ using RocketStage;
 
 namespace RocketStage
 {
-    public class RocketController : MonoBehaviour
+    public class RocketController : BaseRocketController
     {
-        [SerializeField]
-        private ParticleSystem explosionEffect;
-        [SerializeField]
-        private ParticleSystem smokeEffect;
-
-        [SerializeField]
-        private CameraShake cam;
-
-        public float speed = 2.0f;
-        public float speedVx { private set; get; }
-        public float speedVy { private set; get; }
-
-        private float posY;
-        public float upBorder = 3.0f;
-        public float headWind = -0.5f;
-
-        public bool isDead = false;
-
-        public Vector2 border = new Vector2(4.0f, 2.0f);
-
-        public bool actionEnabled;
-        public float startAnimationTime = 3.0f;
-
-        public int leftDistance = 50000;
-
-        [SerializeField]
-        private AudioClip destroySE;
-        private AudioSource audioSource;
-
-
-        // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
-            audioSource = GetComponent<AudioSource>();
-            actionEnabled = false;
-            //posY = transform.position.y;
+            base.Start();
         }
 
-        // Update is called once per frame
-        void Update()
+        protected override void Update()
         {
-            SetRotation();
-            SetVelocity();
+            base.Update();
 
             if (!actionEnabled) return;
 
             SetLeftDistance();
 
-            posY = Mathf.Min(posY + speedVy * Time.deltaTime, upBorder);
-
-            //Debug.Log(speedVx + " " + speedVy);
-            float posX = Mathf.Clamp(transform.position.x + speedVx * Time.deltaTime, -border.x, border.x);
-
-            //if (actionEnabled)
-            transform.position = new Vector2(posX, posY);
-            IsBorderInner();
-
             if (isDead)
                 GoNextScene();
-        }
-
-        private void SetRotation()
-        {
-            Vector3 orientation = ActionInput.GetJoyconVector();
-            Vector3 angles = transform.localEulerAngles;
-
-            angles.z = orientation.y + 180;
-
-            transform.localEulerAngles = angles;
-        }
-
-        private void SetVelocity()
-        {
-            if (isDead)
-            {
-                speedVx = 0f;
-                speedVy = 0f;
-                return;
-            }
-            speedVx = Mathf.Cos((transform.localEulerAngles.z + 90f) / 180f * Mathf.PI) * speed;
-            speedVy = Mathf.Sin((transform.localEulerAngles.z + 90f) / 180f * Mathf.PI) * speed;
-            speedVy += headWind;
-        }
-
-        private void IsBorderInner()
-        {
-            //if (transform.position.x < -border.x || transform.position.x > border.x || transform.position.y < -border.y)
-            if (transform.position.y < -border.y)
-                isDead = true;
-        }
-
-        private void SetLeftDistance()
-        {
-            float moveDistance = speedVy;
-
-            if (moveDistance < 0) moveDistance *= 0.1f;
-
-            leftDistance -= (int)speedVy;
         }
 
         private void GoNextScene()
@@ -125,38 +42,13 @@ namespace RocketStage
                 2.0f);
         }
 
-        public void DoBeginAnitmation1()
+        private void SetLeftDistance()
         {
-            StartCoroutine(BeginAnimation1());
-        }
+            float moveDistance = speedVy;
 
-        public void DoBeginAnimation2()
-        {
-            StartCoroutine(BeginAnimation2());
-        }
+            if (moveDistance < 0) moveDistance *= 0.1f;
 
-        private IEnumerator BeginAnimation1()
-        {
-            actionEnabled = false;
-
-            transform.DOMoveY(
-                1.0f,
-                startAnimationTime);
-
-            yield return new WaitForSeconds(startAnimationTime);
-            //actionEnabled = true;
-        }
-
-        private IEnumerator BeginAnimation2()
-        {
-            transform.DOMoveY(
-                -3.0f,
-                startAnimationTime / 2f);
-
-            yield return new WaitForSeconds(startAnimationTime / 2f);
-
-            //actionEnabled = true;
-            posY = -3.0f;
+            leftDistance -= (int)speedVy;
         }
     }
 }

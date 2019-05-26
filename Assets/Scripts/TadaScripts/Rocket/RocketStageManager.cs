@@ -14,7 +14,7 @@ namespace RocketStage
         [SerializeField]
         private MeteoSponer meteoSponer;
         [SerializeField]
-        private RocketController rocketCtrl;
+        private BaseRocketController rocketCtrl;
         [SerializeField]
         private TextController textCtrl;
         [SerializeField]

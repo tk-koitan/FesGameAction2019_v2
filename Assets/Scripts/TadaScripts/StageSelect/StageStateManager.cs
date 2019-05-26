@@ -34,6 +34,8 @@ namespace StageSelect
         private CinemachineVirtualCamera vcamera;
         [SerializeField]
         private GameObject flogUI;
+        [SerializeField]
+        private TextMeshProUGUI rocketText;
 
         [System.Serializable]
         public class ArrowList
@@ -166,8 +168,11 @@ namespace StageSelect
             {
                 if (!menuCtrl.isDisplayed)
                 {
-                    DisplayStageSprite();
                     SwitchArrow(false);
+                    if(nowStageState.stageName == "FinalRocket") // かなりよくない
+                        RocketExplanation();
+                    else
+                        DisplayStageSprite();
                 }
             }
 
@@ -383,6 +388,38 @@ namespace StageSelect
             yield return new WaitForSeconds(2.2f);
 
             SceneManager.LoadScene(nowStageState.stageSceneName);
+        }
+
+        // ロケットが完成しているかの説明
+        private void RocketExplanation()
+        {
+            if (rocketText.gameObject.activeSelf) return;
+
+            // もしロケットがすべて完成していたら特殊処理
+            bool cleared = true;
+            for (int i = 0; i < 6; i++)
+            {
+                if (!StageTable.stageClearedList[i])
+                {
+                    cleared = false;
+                    break;
+                }
+            }
+            if (cleared)
+            {
+                // クリア処理
+                Debug.Log("クリアしました");
+            }
+            else
+            {
+                ShowRocketExplanation();
+            }
+        }
+
+        // ロケットの破片が足りません的なことを言う
+        private void ShowRocketExplanation()
+        {
+            rocketText.gameObject.SetActive(true);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace RocketStage
     public class RocketBackGround : MonoBehaviour
     {
         [SerializeField]
-        private RocketController rocket;
+        private BaseRocketController rocket;
 
         public float speed = 20.0f;
         private float posY;

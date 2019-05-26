@@ -11,6 +11,8 @@ namespace StageSelect
     {
         [SerializeField]
         RectTransform rectTran;
+        [SerializeField]
+        private Color endColor;
 
         public Vector3 beforePos = new Vector3(100f, -100f, 0f);
         public float stampTime = 1.0f;
@@ -39,7 +41,7 @@ namespace StageSelect
             DOTween.To(
                 () => GetComponent<Image>().color,
                 num => GetComponent<Image>().color = num,
-                new Color(1f, 1f, 1f, 1f),
+                endColor,
                 1.0f
                 );
             /*
