@@ -68,6 +68,9 @@ namespace StageSelect
         MenuController menuCtrl;
 
         [SerializeField]
+        private RocketMergeController rocketMergeObject;
+
+        [SerializeField]
         private AudioClip decideSE;
         [SerializeField]
         private AudioClip calcelSE;
@@ -169,8 +172,11 @@ namespace StageSelect
                 if (!menuCtrl.isDisplayed)
                 {
                     SwitchArrow(false);
-                    if(nowStageState.stageName == "FinalRocket") // かなりよくない
+                    if (nowStageState.stageName == "FinalRocket")
+                    { // よくない
                         RocketExplanation();
+                        return;
+                    }
                     else
                         DisplayStageSprite();
                 }
@@ -408,7 +414,9 @@ namespace StageSelect
             if (cleared)
             {
                 // クリア処理
-                Debug.Log("クリアしました");
+                //Debug.Log("クリアしました");
+                ActionInput.actionEnabled = false;
+                rocketMergeObject.gameObject.SetActive(true);
             }
             else
             {

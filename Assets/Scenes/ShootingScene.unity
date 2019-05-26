@@ -2352,6 +2352,11 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3445629813885578681, guid: bc0757785f6d04483a19c515e3c63afd,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0757785f6d04483a19c515e3c63afd, type: 3}
 --- !u!1 &903721977 stripped
