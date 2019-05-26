@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ArriveStageSelect.unity
     guid: b9400f52f949b99478ec8cf673f76d19
+  - enabled: 1
+    path: Assets/Scenes/ShootingScene.unity
+    guid: f37352d200a9b7748bcd49186c11fffa
+  - enabled: 1
+    path: Assets/Scenes/Kaitoteststage5.unity
+    guid: a2af3a4063c4206499b2d30a14f07cd7
   m_configObjects: {}

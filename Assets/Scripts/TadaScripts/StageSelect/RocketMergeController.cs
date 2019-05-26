@@ -4,6 +4,7 @@ using UnityEngine;
 using StageSelect;
 using Cinemachine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace StageSelect
 {
@@ -52,6 +53,9 @@ namespace StageSelect
             ActionInput.actionEnabled = true;
 
             vcam.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(1.0f);
+            SceneManager.LoadScene("ShootingScene");
         }
     }
 }

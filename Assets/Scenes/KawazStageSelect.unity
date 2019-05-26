@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 56847837}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 62113265}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 171314934}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 189994119}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -944,7 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 222185709}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 275661080}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 298914446}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -1472,7 +1472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8ec21094bac1d478575080d7dc7bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 1
 --- !u!4 &321830522
 Transform:
   m_ObjectHideFlags: 0
@@ -1991,7 +1990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 414486393}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -2083,7 +2082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 421948320}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -2309,7 +2308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 465702815}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -2653,7 +2652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 508839505}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -2953,7 +2952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 525896342}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -3045,7 +3044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 534356531}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -3137,7 +3136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 549527892}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -3642,7 +3641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 633720025}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -3842,7 +3841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 658033369}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -4392,7 +4391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 696565466}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -4794,7 +4793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 775504741}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -5026,7 +5025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 803250272}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -5252,7 +5251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 840174310}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -6074,7 +6073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 953398177}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -7071,7 +7070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1171298961}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -7278,7 +7277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1193085820}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -7544,7 +7543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1235618548}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -7781,7 +7780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1280434241}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -7979,7 +7978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1298004550}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -8104,7 +8103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1308049784}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -8196,7 +8195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1324221809}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -8288,7 +8287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1328172386}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -8802,7 +8801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1417644191}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -9291,7 +9290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1481085907}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -9383,7 +9382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1488903225}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -9852,6 +9851,8 @@ MonoBehaviour:
   repairedEffect: {fileID: 1994552882}
   allRocketTrfm: {fileID: 66908867}
   mergingDuration: 3
+  raiseRocketY: 2
+  vcam: {fileID: 0}
 --- !u!212 &1559632251
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9967,7 +9968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1562874015}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -10433,7 +10434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1576870107}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -10882,9 +10883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 3
-  stageSceneName: RocketStage
+  stageSceneName: KaitoTestStage5
   stageName: LEFTHOOOO
-  stageSprite: {fileID: 21300000, guid: 68e9df94a45cd5a4baddc2ff3ccbb296, type: 3}
+  stageSprite: {fileID: 21300000, guid: 4bdb3975058c7488eb20950c58c35d01, type: 3}
   clearedColor: {r: 1, g: 0.5581, b: 0.5581, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 1476056242}
@@ -11011,7 +11012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1634001427}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -11103,7 +11104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1643180669}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -11195,7 +11196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1645042077}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -11317,7 +11318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1662235106}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -11523,7 +11524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1669394484}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -11615,7 +11616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1676093719}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12157,7 +12158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1742884562}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12249,7 +12250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1751672536}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12341,7 +12342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1758150064}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12433,7 +12434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1759359005}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12555,7 +12556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1779948176}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12647,7 +12648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1793644069}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12831,7 +12832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1840871617}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -12923,7 +12924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1843660985}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -13566,7 +13567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1958752422}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -13930,7 +13931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 1999554252}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -14053,7 +14054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 2052689633}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 250, y: -250, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -14219,7 +14220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 2066820811}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}
@@ -14531,7 +14532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTran: {fileID: 2123489304}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.28608364, g: 0.9716981, b: 0, a: 1}
   beforePos: {x: 200, y: -200, z: 0}
   stampTime: 0.6
   endScale: {x: 3.5, y: 3.5, z: 1}

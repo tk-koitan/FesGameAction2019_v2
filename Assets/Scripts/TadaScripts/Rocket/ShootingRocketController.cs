@@ -14,6 +14,8 @@ namespace RocketStage {
         [SerializeField]
         private GameObject chargeEffect;
         [SerializeField]
+        private GameObject chargeMaxEffect;
+        [SerializeField]
         private Transform laserMuzzle;
         [SerializeField]
         private ParticleSystem normalLaserFlash;
@@ -52,11 +54,16 @@ namespace RocketStage {
                 if (!chargeEffect.activeSelf)
                     chargeEffect.SetActive(true);
                 charge = Mathf.Min(charge + chargeSpeed * Time.deltaTime, chargeMax);
+                if (charge >= chargeLaserBorder && !chargeMaxEffect.activeSelf)
+                    chargeMaxEffect.SetActive(true);
             }
             else if (ActionInput.GetButtonUp(ButtonCode.Jump))
             {
                 if (charge >= chargeLaserBorder)
+                {
                     CreateChargeLaser();
+                    chargeMaxEffect.SetActive(false);
+                }
                 else
                     CreateNormalLaser();
                 charge = 0f;
