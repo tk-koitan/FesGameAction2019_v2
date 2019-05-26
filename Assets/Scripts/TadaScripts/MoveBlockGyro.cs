@@ -43,7 +43,7 @@ public class MoveBlockGyro : Mover
         // 画面外にいるときは処理を行わないようにしたい 出来れば基底クラスで
 
         //画面内にいる時に音出す
-        if(targetRenderer.isVisible && ActionInput.GetJoyconGyro().z != 0)
+        if(targetRenderer.isVisible && Mathf.Abs(ActionInput.GetJoyconGyro().z) >0.1f)
         {
             if (!audioSource.isPlaying) audioSource.Play();
             //フェードイン
