@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KoitanLib;
 
 public abstract class Mover : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public abstract class Mover : MonoBehaviour
         for (int i = 0; i < ridingPlayers.Count; i++)
         {
             ridingPlayers[i].PositionSet(v);
-            Vector2 fromPos = ridingPlayers[i].groundPoint - (Vector2)transform.position;
+            Vector2 fromPos = ridingPlayers[i].groundPoint - ((Vector2)transform.position);
             Vector2 toPos = Quaternion.Euler(0, 0, angleSpeed) * fromPos;
             Vector2 tmpV = toPos - fromPos;
             //Debug.Log(gameObject.name + ":" + tmpV.magnitude);
