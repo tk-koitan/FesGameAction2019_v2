@@ -91,11 +91,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6121159292638602259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e510105327814820b6085b530b288ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 25b6753164cc9344797bb01342d3596d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
-  star: {fileID: 2289392195053435, guid: cc5193ae3f2f34f9e8c94d75c320f1cf, type: 3}
+  star: {fileID: 6121159292638602259}
 --- !u!58 &6121159292638602258
 CircleCollider2D:
   m_ObjectHideFlags: 0
