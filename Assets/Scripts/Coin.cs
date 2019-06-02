@@ -10,6 +10,7 @@ public class Coin : MonoBehaviour
     [SerializeField]
     private GameObject star;
     private AudioSource audio;
+    private bool isGet;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +27,9 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(!isGet && collision.tag == "Player")
         {
+            isGet = true;
             audio.PlayOneShot(audio.clip);
             GameObject tmpObj = Instantiate(star, transform.position, Quaternion.identity);
             Destroy(tmpObj, star.GetComponent<ParticleSystem>().duration);

@@ -2664,7 +2664,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -100
-  m_Sprite: {fileID: 21300000, guid: c5b1297c2746350469b0bad0ac109df9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5177b04c6f351634599d7797feadaf47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2684,7 +2684,7 @@ Transform:
   m_GameObject: {fileID: 508230654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.2, y: 3.2, z: 0}
-  m_LocalScale: {x: 6.64, y: 3, z: 5.325611}
+  m_LocalScale: {x: 6, y: 3, z: 5.325611}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 83
@@ -3503,8 +3503,8 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 625221782}
     m_ColliderPaths:
-    - - X: 720167744
-        Y: 100000000
+    - - X: -129501728
+        Y: 301754816
       - X: -130000000
         Y: 100000000
       - X: -130000000
@@ -3519,19 +3519,16 @@ CompositeCollider2D:
         Y: 130000000
       - X: 1300000000
         Y: 165000000
-      - X: 1015000000
-        Y: 165000000
-      - X: 845840256
-        Y: 130000000
+      - X: 792042304
+        Y: 299670464
   m_CompositePaths:
     m_Paths:
     - - {x: 171, y: 10}
       - {x: 156.24567, y: 10}
       - {x: 143, y: 13}
       - {x: 130, y: 16.5}
-      - {x: 101.5, y: 16.5}
-      - {x: 84.58403, y: 13}
-      - {x: 72.01678, y: 10}
+      - {x: 79.20423, y: 29.967047}
+      - {x: -12.950173, y: 30.175482}
       - {x: -13, y: 10}
       - {x: -13, y: -6}
       - {x: 171, y: -6}
@@ -3596,7 +3593,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 72.01678, y: 10}
+    - - {x: -12.950172, y: 30.175482}
       - {x: -13, y: 10}
       - {x: -13, y: -6}
       - {x: 171, y: -6}
@@ -3604,8 +3601,7 @@ PolygonCollider2D:
       - {x: 156.24567, y: 10}
       - {x: 143, y: 13}
       - {x: 130, y: 16.5}
-      - {x: 101.5, y: 16.5}
-      - {x: 84.58402, y: 13}
+      - {x: 79.20423, y: 29.967047}
 --- !u!1001 &690623763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3891,7 +3887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!199 &700507973
 ParticleSystemRenderer:
   serializedVersion: 6

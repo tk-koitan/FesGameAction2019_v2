@@ -6,8 +6,8 @@ using KoitanLib;
 public class BackgroundMover : MonoBehaviour
 {
     public float minX;
-    public float minY;
     public float maxX;
+    public float minY;
     public float maxY;
     private float width;
     private float height;
