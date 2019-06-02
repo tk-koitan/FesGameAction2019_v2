@@ -8,6 +8,8 @@ TagManager:
   - DeadTrigger
   - DropTrigger
   - CineCameraTrigger
+  - PlayerAttack
+  - LastBoss
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - 
   - Joycon
   - 
-  - 
+  - RocketRepair
   - 
   - 
   - 

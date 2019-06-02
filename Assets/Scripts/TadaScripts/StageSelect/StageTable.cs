@@ -27,10 +27,10 @@ namespace StageSelect
             }
             else Destroy(gameObject);
             
-            /*for(int i = 0; i < 6; i++)
-            {
-                stageClearedList[i] = true;
-            }*/
+            //for(int i = 0; i < 6; i++)
+            //{
+                //stageClearedList[i] = true;
+            //}
             //Debug.Log("<color=red>" + stageClearedList[challengeStageId] + "</color>");
         }
     }

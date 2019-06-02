@@ -23,6 +23,8 @@ namespace StageSelect
         public static int nowStageId = 0;
         private StageState nowStageState;
         [SerializeField]
+        private Image stageNameFlame;
+        [SerializeField]
         private TextMeshProUGUI stageNameText;
         [SerializeField]
         private Image stageImage;
@@ -48,6 +50,10 @@ namespace StageSelect
         public ArrowList arrowList;
         [SerializeField]
         private GameObject arrow;
+        [SerializeField]
+        private int lastStageId;
+        [SerializeField]
+        private string lastStageName;
 
         public Vector2 moveHoming = new Vector2(0.2f, 0.2f);
         public float stageAnimSpeed = 1.0f;
@@ -172,8 +178,8 @@ namespace StageSelect
                 if (!menuCtrl.isDisplayed)
                 {
                     SwitchArrow(false);
-                    if (nowStageState.stageName == "FinalRocket")
-                    { // よくない
+                    if (nowStageState.stageId == lastStageId)
+                    {
                         RocketExplanation();
                         return;
                     }
@@ -310,7 +316,8 @@ namespace StageSelect
             nowStageId = nowStageState.stageId;
 
             stageImage.sprite = nowStageState.stageSprite;
-            stageNameText.text = "";
+            stageNameFlame.gameObject.SetActive(false);
+            //stageNameText.text = "";
             //stageNameText.text = nowStageState.stageName;
 
             SetArrow();
@@ -365,13 +372,14 @@ namespace StageSelect
         private void ShowStageName()
         {
             stageNameText.text = nowStageState.stageName;
+            stageNameFlame.gameObject.SetActive(true);
         }
 
         // 目的のステージへ遷移する
         private void GoNextStage()
         {
             // 挑戦するステージのidを保存しておく
-            StageSelect.StageTable.challengeStageId = nowStageId;
+            StageTable.challengeStageId = nowStageId;
             SceneManager.LoadScene(nowStageState.stageSceneName);
         }
 
@@ -414,9 +422,19 @@ namespace StageSelect
             if (cleared)
             {
                 // クリア処理
-                //Debug.Log("クリアしました");
-                ActionInput.actionEnabled = false;
-                rocketMergeObject.gameObject.SetActive(true);
+                // 始めはロケットが回復する
+                if (!rocketMergeObject.gameObject.activeSelf)
+                {
+                    ActionInput.actionEnabled = false;
+                    rocketMergeObject.gameObject.SetActive(true);
+                    stageNameText.text = lastStageName;
+                }
+                else // 2回目にラストステージに行くか決める
+                {
+                    actionEnabled = false;
+                    // 進むかの選択肢
+                    SceneManager.LoadScene("ShootingScene");
+                }
             }
             else
             {

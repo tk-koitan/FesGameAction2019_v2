@@ -53,5 +53,13 @@ namespace RocketStage
                 return true;
             return false;
         }
+
+        /*private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.tag == "PlayerAttack")
+            {
+                Destroy(gameObject);
+            }
+        }*/
     }
 }
