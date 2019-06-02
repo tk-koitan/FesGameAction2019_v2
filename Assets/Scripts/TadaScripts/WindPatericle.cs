@@ -30,7 +30,7 @@ public class WindPatericle : MonoBehaviour
         Vector3 orientation = ActionInput.GetJoyconVector();
         Vector3 angles = transform.localEulerAngles;
         angles.z = orientation.y;
-        transform.localEulerAngles = -angles + new Vector3(0f, 0f, 90f);
+        transform.localEulerAngles = angles + new Vector3(0f, 0f, 90f);
 
         wingAngle = transform.localRotation.eulerAngles.z;
         transform.position = new Vector3(playerTrfm.position.x + distanceFromPlayer * Mathf.Cos(wingAngle / 180f * Mathf.PI),

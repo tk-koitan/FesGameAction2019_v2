@@ -167,8 +167,8 @@ public class PlayerRB : MonoBehaviour
         //風
         if (wind != null)
         {
-            power.x += Mathf.Cos(ActionInput.GetJoyconVector().y * Mathf.Deg2Rad) * 0.1f;
-            gravity = defaultGravity + Mathf.Sin(ActionInput.GetJoyconVector().y * Mathf.Deg2Rad) * 0.01f;
+            //power.x += -Mathf.Cos((ActionInput.GetJoyconVector().y + 90) * Mathf.Deg2Rad) * 00.5f;
+            gravity = defaultGravity - Mathf.Sin((ActionInput.GetJoyconVector().y + 90) * Mathf.Deg2Rad) * 0.02f;
         }
 
 
@@ -232,6 +232,11 @@ public class PlayerRB : MonoBehaviour
                 v = Vector2.zero;
             }
             v = Vector3.ProjectOnPlane(power, groundNormal);
+            //風
+            if (wind != null)
+            {
+                v.x += -Mathf.Cos((ActionInput.GetJoyconVector().y + 90) * Mathf.Deg2Rad) * 0.1f;
+            }
             v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
             Debug.DrawRay(groundPoint, groundNormal, Color.red);
             //Debug.DrawRay(groundPoint, v, Color.red);
@@ -276,6 +281,11 @@ public class PlayerRB : MonoBehaviour
             }
             power.y = Mathf.Clamp(power.y, -maxVy, maxVy * 2);
             v = power;
+            //風
+            if (wind != null)
+            {
+                v.x += -Mathf.Cos((ActionInput.GetJoyconVector().y + 90) * Mathf.Deg2Rad) * 0.1f;
+            }
             v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
         }
 
