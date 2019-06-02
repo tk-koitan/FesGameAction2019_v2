@@ -12,23 +12,21 @@ public class BackgroundMover : MonoBehaviour
     private float width;
     private float height;
     private SpriteRenderer renderer;
-    private Transform camTr;
+    private Camera cam;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
-        camTr = Camera.main.transform;
-        width = maxX - minX;
-        height = maxY - minY;
+        cam = Camera.main;
+        width = renderer.bounds.size.x;
+        height = renderer.bounds.size.y;
         Debug.Log("大きさ:" + renderer.size);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        width = maxX - minX;
-        height = maxY - minY;
-        transform.position = new Vector3(camTr.position.x + camTr.position.x/width, camTr.position.y);
+        transform.position = new Vector3(cam.transform.position.x - cam.orthographicSize*16/9 + width/2, cam.transform.position.y);
         Debug.Log("大きさ:" + renderer.bounds.size);
     }
 

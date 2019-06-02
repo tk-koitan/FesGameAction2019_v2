@@ -11,6 +11,7 @@ public class PlayerRB : MonoBehaviour
     public float maxVx = 5;
     public float accelVx = 1;
     public float gravity = -0.2f;
+    private float defaultGravity;
     public float maxVy = 10;
     public bool isGround;
     private bool oldIsGround;
@@ -76,6 +77,9 @@ public class PlayerRB : MonoBehaviour
     public GameObject jumpEff;
     public GameObject laundingEff;
 
+    //風
+    public WindPatericle wind;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +94,8 @@ public class PlayerRB : MonoBehaviour
         animator = GetComponent<Animator>(); // tada
         actionInput = ActionInput.Instatnce;
         audioSource = GetComponent<AudioSource>();
+        wind = GameObject.Find("Wind").GetComponent<WindPatericle>();
+        defaultGravity = gravity;
     }
 
     // Update is called once per frame
@@ -156,6 +162,13 @@ public class PlayerRB : MonoBehaviour
                 power.x += accelVx * Time.deltaTime * 60;
                 power.x = Mathf.Min(power.x, -maxVx);
             }
+        }
+
+        //風
+        if (wind != null)
+        {
+            power.x += Mathf.Cos(ActionInput.GetJoyconVector().y * Mathf.Deg2Rad) * 0.1f;
+            gravity = defaultGravity + Mathf.Sin(ActionInput.GetJoyconVector().y * Mathf.Deg2Rad) * 0.01f;
         }
 
 
