@@ -7,6 +7,8 @@ namespace RocketStage
 {
     public class NormalLaserController : LaserController
     {
+        [SerializeField]
+        private ParticleSystem breakEffect;
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -17,6 +19,21 @@ namespace RocketStage
         protected override void Update()
         {
             base.Update();
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "DeadTrigger")
+            {
+                Destroy(collision.gameObject);
+                Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            else if(collision.tag == "LastBoss")
+            {
+                collision.GetComponent<Animator>().SetTrigger("Damage");
+                Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
     }
 }

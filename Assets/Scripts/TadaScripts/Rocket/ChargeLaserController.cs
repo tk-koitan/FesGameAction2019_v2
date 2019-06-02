@@ -6,6 +6,8 @@ using RocketStage;
 namespace RocketStage {
     public class ChargeLaserController : LaserController
     {
+        [SerializeField]
+        private ParticleSystem breakEffect;
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -16,6 +18,20 @@ namespace RocketStage {
         protected override void Update()
         {
             base.Update();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.tag == "DeadTrigger")
+            {
+                Destroy(collision.gameObject);
+                Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
+            }
+            else if (collision.tag == "LastBoss")
+            {
+                collision.GetComponent<Animator>().SetTrigger("Damage");
+                Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
+            }
         }
     }
 }
