@@ -1535,8 +1535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minX: -16.79
-  minY: -6.81
   maxX: 173.35
+  minY: -6.81
   maxY: 16.3
 --- !u!212 &190081537
 SpriteRenderer:
@@ -1575,7 +1575,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 5177b04c6f351634599d7797feadaf47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f5112be055a09741a843cf2267f367a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
