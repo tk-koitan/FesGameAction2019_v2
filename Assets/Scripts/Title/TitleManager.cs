@@ -27,14 +27,19 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private AudioClip cancelSe;
     [SerializeField]
+    private AudioClip drumSe;
+    [SerializeField]
     private AudioMixer audioMixer;
 
     private float bgmVol;
     private float seVol;
     private float masterVol;
+
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         cursorDefaultPos = cursor.transform.localPosition;
         StartPlacement();
         nowIndex = 0;
@@ -47,12 +52,14 @@ public class TitleManager : MonoBehaviour
         {
             nowIndex--;
             nowIndex = (nowIndex + maxIndex) % maxIndex;
+            audioSource.PlayOneShot(drumSe);
         }
 
         if (ActionInput.GetButtonDown(ButtonCode.DownArrow))
         {
             nowIndex++;
             nowIndex %= maxIndex;
+            audioSource.PlayOneShot(drumSe);
         }
 
         if (onSelecteds[nowIndex] != null)
@@ -64,10 +71,11 @@ public class TitleManager : MonoBehaviour
         if (onCancel != null && ActionInput.GetButtonDown(ButtonCode.Cancel))
         {
             onCancel();
+            audioSource.PlayOneShot(cancelSe);
         }
 
 
-        cursor.transform.localPosition = cursorDefaultPos + Vector3.down * width * (nowIndex+addIndex);
+        cursor.transform.localPosition = cursorDefaultPos + Vector3.down * width * (nowIndex + addIndex);
     }
 
     OnSelected SetButtonPush(Action onPush)
@@ -77,6 +85,7 @@ public class TitleManager : MonoBehaviour
             if (ActionInput.GetButtonDown(ButtonCode.Jump))
             {
                 onPush();
+                audioSource.PlayOneShot(decisionSe);
             }
         };
     }
@@ -97,7 +106,7 @@ public class TitleManager : MonoBehaviour
 
     void StartRocketScene()
     {
-        if(!FadeManager.Instance.isFading)
+        if (!FadeManager.Instance.isFading)
         {
             FadeManager.Instance.LoadScene("RocketStage", 1f);
         }
@@ -107,7 +116,7 @@ public class TitleManager : MonoBehaviour
     {
         maxIndex = 1;
         nowIndex = 0;
-        titleUi.text = "そうさほうほう\nかわずたん\u3000\u3000\u3000\u3000\u3000\u3000\u3000ジョイコン\n<sprite=7>\u3000…いどう\u3000\u3000\u3000\u3000\u3000\u3000 かたむける・ふる\n<sprite=4>\u3000…ジャンプ、決定\u3000\u3000 ZLでほせい\n<sprite=3>\u3000…キャンセル";
+        titleUi.text = "そうさほうほう\nかわずたん\u3000\u3000\u3000\u3000\u3000\u3000\u3000ジョイコン\n<sprite=7>\u3000…いどう\u3000\u3000\u3000\u3000\u3000\u3000 かたむける・ふる\n<sprite=4>\u3000…ジャンプ、決定\u3000\u3000 ZRでほせい\n<sprite=3>\u3000…キャンセル";
         onSelecteds[0] = SetButtonPush(StartPlacement);
         onSelecteds[0] += SetButtonPush(() => nowIndex = 1);
         onCancel = StartPlacement;
@@ -192,6 +201,41 @@ public class TitleManager : MonoBehaviour
             titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
         };
     }
+
+    /*
+    OnSelected SetVol(string n)
+    {
+        return () =>
+        {
+            out float vol = 0;
+            switch (n)
+            {
+                case "MasterVol":
+                    vol = masterVol;
+                    break;
+                case "BGMVol":
+                    vol = bgmVol;
+                    break;
+                case "SEVol":
+                    vol = seVol;
+                    break;
+            }
+            if (ActionInput.GetButton(ButtonCode.RightArrow))
+            {
+                vol++;
+                vol = Mathf.Min(vol, 20);
+                audioMixer.SetFloat(n, vol);
+            }
+            if (ActionInput.GetButton(ButtonCode.LeftArrow))
+            {
+                vol--;
+                vol = Math.Max(vol, -80);
+                audioMixer.SetFloat(n, vol);
+            }
+            titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
+        };
+    }
+    */
 
     OnSelected SetDefault()
     {
