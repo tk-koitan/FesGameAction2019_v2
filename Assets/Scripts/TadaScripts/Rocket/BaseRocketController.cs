@@ -29,7 +29,7 @@ namespace RocketStage
 
         public Vector2 border = new Vector2(4.0f, 2.0f);
 
-        public bool actionEnabled;
+        public bool actionEnabled = false;
         public float startAnimationTime = 3.0f;
 
         public int leftDistance = 50000;
@@ -43,7 +43,7 @@ namespace RocketStage
         protected virtual void Start()
         {
             audioSource = GetComponent<AudioSource>();
-            actionEnabled = false;
+            //actionEnabled = false;
             //posY = transform.position.y;
         }
 

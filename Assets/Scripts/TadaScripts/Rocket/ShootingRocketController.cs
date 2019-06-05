@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RocketStage;
 using TadaLib;
+using UnityEngine.UI;
 
 namespace RocketStage {
     public class ShootingRocketController : BaseRocketController
@@ -22,6 +23,12 @@ namespace RocketStage {
         [SerializeField]
         private ParticleSystem chargeLaserFlash;
 
+        public int hp = 10;
+        public int hpMax = 10;
+
+        [SerializeField]
+        private Image[] hpImages;
+
         public float chargeSpeed = 1.0f;
         public float chargeMax = 4.0f;
         private float charge = 0.0f;
@@ -35,12 +42,19 @@ namespace RocketStage {
         protected override void Start()
         {
             base.Start();
+            // hpをコインの数にする
+            // hpMax = coinNum;
+            hp = hpMax;
+            // hp外の画像を消す
+            DeleteHpImage(30);
+
             laserTimer = new Timer(laserInterval);
         }
 
         // Update is called once per frame
         protected override void Update()
         {
+            Debug.Log("hp : " + hp + " enabled : " + actionEnabled);
             base.Update();
 
             if (!actionEnabled) return;
@@ -86,6 +100,55 @@ namespace RocketStage {
             laserObj.GetComponent<LaserController>().speed = charge;
             laserObj.GetComponent<LaserController>().defaultScale = 2 * charge / chargeMax;
             chargeLaserFlash.Play();
+        }
+
+        // ダメージを受ける
+        public void ActionDamage(int damage)
+        {
+            if (hp <= 0)
+            {
+                return;
+            }
+
+            if (SetHp(hp - damage, hpMax))
+            {
+                Dead(false);
+            }
+            DeleteHpImage(hp + damage);
+        }
+
+        public void Dead(bool gameOver)
+        {
+            if (isDead)
+            {
+                return;
+            }
+            explosionEffect.Play();
+            isDead = true;
+            // animator.SetTrigger("Dead");
+        }
+
+        public bool SetHp(int _hp, int _hpMax)
+        {
+            hp = _hp;
+            hpMax = _hpMax;
+            return (hp <= 0);
+        }
+
+        private void DeleteHpImage(int hpBefore)
+        {
+            for(int i = Mathf.Max(hp, 0); i < hpBefore; i++)
+            {
+                hpImages[i].gameObject.SetActive(false);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.tag == "DeadTrigger")
+            {
+                ActionDamage(1);
+            }
         }
     }
 }

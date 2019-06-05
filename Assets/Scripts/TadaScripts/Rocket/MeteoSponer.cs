@@ -67,9 +67,6 @@ namespace RocketStage
         void MeteoCreate()
         {
             float posX = Random.Range(-posXMax, posXMax);
-            /*
-            Instantiate(meteoObject, new Vector3(posX, transform.position.y, transform.position.z), Quaternion.identity);
-            */
 
             var pool = Pool.GetObjectPool(meteoObject);
             GameObject obj = pool.GetInstance();
