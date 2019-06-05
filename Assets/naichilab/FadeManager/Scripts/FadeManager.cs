@@ -38,7 +38,7 @@ public class FadeManager : MonoBehaviour
 	/// <summary>フェード中の透明度</summary>
 	private float fadeAlpha = 0;
 	/// <summary>フェード中かどうか</summary>
-	private bool isFading = false;
+	public bool isFading = false;
 	/// <summary>フェード色</summary>
 	public Color fadeColor = Color.black;
 
