@@ -14,6 +14,7 @@ public class TitleManager : MonoBehaviour
     public float width;
     private int nowIndex = 0;
     private int maxIndex;
+    private int addIndex = 0;
     private Vector3 cursorDefaultPos;
 
     delegate void OnPush();
@@ -66,7 +67,7 @@ public class TitleManager : MonoBehaviour
         }
 
 
-        cursor.transform.localPosition = cursorDefaultPos + Vector3.down * width * nowIndex;
+        cursor.transform.localPosition = cursorDefaultPos + Vector3.down * width * (nowIndex+addIndex);
     }
 
     OnSelected SetButtonPush(Action onPush)
@@ -84,13 +85,22 @@ public class TitleManager : MonoBehaviour
     {
         cursor.gameObject.SetActive(true);
         maxIndex = 4;
+        addIndex = 0;
         titleUi.text = "スタート\nそうさほうほう\nオプション\nおわる";
         onSelecteds = new OnSelected[maxIndex];
-        onSelecteds[0] = SetButtonPush(() => SceneManager.LoadScene("RocketStage"));
+        onSelecteds[0] = SetButtonPush(StartRocketScene);
         onSelecteds[1] = SetButtonPush(Manual);
         onSelecteds[2] = SetButtonPush(Option);
         onSelecteds[3] = SetButtonPush(Quit);
         onCancel = null;
+    }
+
+    void StartRocketScene()
+    {
+        if(!FadeManager.Instance.isFading)
+        {
+            FadeManager.Instance.LoadScene("RocketStage", 1f);
+        }
     }
 
     void Manual()
@@ -109,14 +119,16 @@ public class TitleManager : MonoBehaviour
     {
         cursor.gameObject.SetActive(true);
         maxIndex = 4;
-        nowIndex = 1;
+        nowIndex = 0;
+        addIndex = 1;
         audioMixer.GetFloat("MasterVol", out masterVol);
         audioMixer.GetFloat("BGMVol", out bgmVol);
         audioMixer.GetFloat("SEVol", out seVol);
-        titleUi.text = "おんりょうせってい\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >";
-        onSelecteds[1] = SetMaster();
-        onSelecteds[2] = SetBGM();
-        onSelecteds[3] = SetSE();
+        titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
+        onSelecteds[0] = SetMaster();
+        onSelecteds[1] = SetBGM();
+        onSelecteds[2] = SetSE();
+        onSelecteds[3] = SetDefault();
         onCancel = StartPlacement;
         onCancel += () => nowIndex = 2;
     }
@@ -137,7 +149,7 @@ public class TitleManager : MonoBehaviour
                 masterVol = Math.Max(masterVol, -80);
                 audioMixer.SetFloat("MasterVol", masterVol);
             }
-            titleUi.text = "おんりょうせってい\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >";
+            titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
         };
     }
 
@@ -157,7 +169,7 @@ public class TitleManager : MonoBehaviour
                 bgmVol = Math.Max(bgmVol, -80);
                 audioMixer.SetFloat("BGMVol", bgmVol);
             }
-            titleUi.text = "おんりょうせってい\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >";
+            titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
         };
     }
 
@@ -177,8 +189,20 @@ public class TitleManager : MonoBehaviour
                 seVol = Math.Max(seVol, -80);
                 audioMixer.SetFloat("SEVol", seVol);
             }
-            titleUi.text = "おんりょうせってい\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >";
+            titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
         };
+    }
+
+    OnSelected SetDefault()
+    {
+        return SetButtonPush(() =>
+        {
+            masterVol = bgmVol = seVol = 0;
+            audioMixer.SetFloat("MasterVol", masterVol);
+            audioMixer.SetFloat("BGMVol", bgmVol);
+            audioMixer.SetFloat("SEVol", seVol);
+            titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
+        });
     }
 
     void Quit()
