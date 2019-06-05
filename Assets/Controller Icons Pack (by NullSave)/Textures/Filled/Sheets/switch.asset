@@ -1,0 +1,516 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
+  m_Name: switch
+  m_EditorClassIdentifier: 
+  hashCode: 151247730
+  material: {fileID: 21661523970233822}
+  materialHashCode: 0
+  spriteSheet: {fileID: 2800000, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  spriteInfoList:
+  - id: 0
+    x: 0
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad
+    hashCode: 2394737
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300000, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 1
+    x: 128
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad Left
+    hashCode: -1471630198
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300002, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 2
+    x: 256
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad Up
+    hashCode: 160350068
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300004, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 3
+    x: 384
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad Right
+    hashCode: -1354159695
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300006, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 4
+    x: 512
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad Down
+    hashCode: -1471903005
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300008, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 5
+    x: 640
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad Horizontal
+    hashCode: 537111535
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300010, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 6
+    x: 768
+    y: 512
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: DPad Vertical
+    hashCode: -1598662141
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300012, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 7
+    x: 0
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: JS Empty
+    hashCode: -1118499956
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300014, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 8
+    x: 128
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: JS Left
+    hashCode: -164354206
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300016, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 9
+    x: 256
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: JS Right
+    hashCode: -1136133159
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300018, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 10
+    x: 384
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: JS Empty Press
+    hashCode: -761632757
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300020, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 11
+    x: 512
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: JS Left Press
+    hashCode: 370943141
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300022, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 12
+    x: 640
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: JS Right Press
+    hashCode: -555550818
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300024, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 13
+    x: 768
+    y: 384
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: LR Empty
+    hashCode: -1653405301
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300026, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 14
+    x: 0
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: L
+    hashCode: 76
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300028, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 15
+    x: 128
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: R
+    hashCode: 82
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300030, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 16
+    x: 256
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: ZLR Empty
+    hashCode: 1845654993
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300032, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 17
+    x: 384
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: ZL
+    hashCode: 3030
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300034, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 18
+    x: 512
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: ZR
+    hashCode: 3016
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300036, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 19
+    x: 640
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Button Empty
+    hashCode: 936944579
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300038, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 20
+    x: 768
+    y: 256
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: A
+    hashCode: 65
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 21
+    x: 0
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: B
+    hashCode: 66
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300042, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 22
+    x: 128
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: X
+    hashCode: 88
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300044, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 23
+    x: 256
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Y
+    hashCode: 89
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300046, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 24
+    x: 384
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Minus
+    hashCode: 87655372
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300048, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 25
+    x: 512
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Plus
+    hashCode: 2853530
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300050, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 26
+    x: 640
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Capture
+    hashCode: 1975864100
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300052, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 27
+    x: 768
+    y: 128
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Home
+    hashCode: 2554831
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300054, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 28
+    x: 0
+    y: 0
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: SLR Empty
+    hashCode: -116562472
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300056, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 29
+    x: 128
+    y: 0
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: SL
+    hashCode: 2815
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300058, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 30
+    x: 256
+    y: 0
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: SR
+    hashCode: 2785
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300060, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 31
+    x: 384
+    y: 0
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Console
+    hashCode: -2114075945
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300062, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  - id: 32
+    x: 512
+    y: 0
+    width: 128
+    height: 128
+    xOffset: 0
+    yOffset: 128
+    xAdvance: 128
+    scale: 1
+    name: Controller
+    hashCode: -1479875716
+    unicode: 0
+    pivot: {x: -64, y: 64}
+    sprite: {fileID: 21300064, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  fallbackSpriteAssets: []
+--- !u!21 &21661523970233822
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TextMeshPro/Sprite
+  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
