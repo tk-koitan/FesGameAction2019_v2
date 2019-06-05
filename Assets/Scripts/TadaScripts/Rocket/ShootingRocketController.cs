@@ -36,6 +36,11 @@ namespace RocketStage {
 
         public float chargeLaserBorder = 2.0f;
 
+        [SerializeField]
+        private AudioClip normalLaserSE;
+        [SerializeField]
+        private AudioClip chargeLaserSE;
+
         Timer laserTimer;
 
         // Start is called before the first frame update
@@ -91,6 +96,7 @@ namespace RocketStage {
             GameObject laserObj = Instantiate(normalLaser, laserMuzzle.position, Quaternion.identity);
             laserObj.GetComponent<LaserController>().dir = transform.eulerAngles.z;
             normalLaserFlash.Play();
+            audioSource.PlayOneShot(normalLaserSE);
         }
 
         private void CreateChargeLaser()
@@ -100,6 +106,7 @@ namespace RocketStage {
             laserObj.GetComponent<LaserController>().speed = charge;
             laserObj.GetComponent<LaserController>().defaultScale = 2 * charge / chargeMax;
             chargeLaserFlash.Play();
+            audioSource.PlayOneShot(chargeLaserSE);
         }
 
         // ダメージを受ける

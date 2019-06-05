@@ -38,7 +38,7 @@ namespace RocketStage
                 Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 // 敵のHPを減らす
-                collision.GetComponent<LastBossController>().ActionDamage();
+                collision.GetComponent<LastBossController>().ActionDamage(1);
             }
         }
     }

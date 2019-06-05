@@ -37,7 +37,7 @@ namespace RocketStage {
                 collision.GetComponent<Animator>().SetTrigger("Damage");
                 Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
                 // 敵のHPを減らす
-                collision.GetComponent<LastBossController>().ActionDamage();
+                collision.GetComponent<LastBossController>().ActionDamage(5);
             }
         }
     }

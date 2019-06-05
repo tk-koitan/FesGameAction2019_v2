@@ -133,14 +133,13 @@ namespace RocketStage
         }
 
 
-        public void ActionDamage()
+        public void ActionDamage(int damage)
         {
-            int damage = 0;
             if (hp <= 0)
             {
                 return;
             }
-            damage = 1;
+
             if (SetHp(hp - damage, hpMax))
             {
                 Dead(false);
