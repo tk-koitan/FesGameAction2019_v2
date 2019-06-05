@@ -22,6 +22,7 @@ namespace RocketStage
         public float borderX = 12.0f;
         public float borderY = 11.0f;
 
+
         // Start is called before the first frame update
         void OnEnable()
         {
@@ -52,6 +53,20 @@ namespace RocketStage
             if (transform.position.x < -borderX || transform.position.y > borderX || transform.position.y < -borderY)
                 return true;
             return false;
+        }
+
+        // 他スクリプトから呼び出しホーミングにする関数
+        public void SetHoming(Vector2 target)
+        {
+            float vx = target.x - transform.position.x / 2f;
+            float vy = target.y - transform.position.y / 2f;
+
+            //float power = v.x * v.x + v.y * v.y;
+            //power = Mathf.Sqrt(power);
+            v.x = vx;// / power;
+            v.y = vy;// / power;
+
+            transform.localEulerAngles = new Vector3(0f, 0f, -Mathf.Atan2(vx, vy)*Mathf.Rad2Deg + 180f);
         }
 
         /*private void OnTriggerEnter2D(Collider2D collision)

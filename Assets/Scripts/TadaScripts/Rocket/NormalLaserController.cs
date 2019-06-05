@@ -9,6 +9,8 @@ namespace RocketStage
     {
         [SerializeField]
         private ParticleSystem breakEffect;
+        [SerializeField]
+        private ParticleSystem meteoBreakEffect;
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -24,8 +26,10 @@ namespace RocketStage
         {
             if (collision.tag == "DeadTrigger")
             {
-                Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
                 Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
+                Instantiate(meteoBreakEffect.gameObject, collision.transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
             else if(collision.tag == "LastBoss")
@@ -33,6 +37,8 @@ namespace RocketStage
                 collision.GetComponent<Animator>().SetTrigger("Damage");
                 Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
                 Destroy(gameObject);
+                // 敵のHPを減らす
+                collision.GetComponent<LastBossController>().ActionDamage(1);
             }
         }
     }
