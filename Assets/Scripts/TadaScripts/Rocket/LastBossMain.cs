@@ -11,8 +11,7 @@ namespace RocketStage
         public int aiIfNORMALACTION = 50;
         public int aiIfATTACK1 = 30;
         public int aiIfATTACK2 = 20;
-
-        public int damageAttack_A = 1;
+        public int aiIfATTACK3 = 20;
 
         // === 内部パラメータ =================================
         private bool isAttacking = false;
@@ -21,7 +20,7 @@ namespace RocketStage
         public override void FixedUpdateAI()
         {
             // AIステート
-            Debug.Log(string.Format(">>> aists{0}", aiState));
+            //Debug.Log(string.Format(">>> aists{0}", aiState));
             switch (aiState)
             {
                 case ENEMYAISTS.ACTIONSELECT: // 思考の起点
@@ -29,7 +28,7 @@ namespace RocketStage
                     int n = SelectRandomAIState();
                     if (n < aiIfNORMALACTION)
                     {
-                        SetAIState(ENEMYAISTS.NORMALACTION, 5.0f);
+                        SetAIState(ENEMYAISTS.NORMALACTION, 6.0f);
                     }
                     else if (n < aiIfNORMALACTION + aiIfATTACK1)
                     {
@@ -38,6 +37,10 @@ namespace RocketStage
                     else if (n < aiIfNORMALACTION + aiIfATTACK1 + aiIfATTACK2)
                     {
                         SetAIState(ENEMYAISTS.ATTACK_B, 5.0f);
+                    }
+                    else if(n < aiIfNORMALACTION + aiIfATTACK1 + aiIfATTACK2 + aiIfATTACK3)
+                    {
+                        SetAIState(ENEMYAISTS.ATTACK_C, 8.0f);
                     }
                     else
                     {
@@ -51,13 +54,15 @@ namespace RocketStage
                     break;
 
                 case ENEMYAISTS.ATTACK_A: // プレイヤーの真上にいって急降下
-                    if(!isAttacking)
-                        Attack_A();
+                    Attack_A();
                     break;
 
                 case ENEMYAISTS.ATTACK_B: // プレイヤーに隕石を向けて大量発射
-                    if (!isAttacking)
-                        Attack_B();
+                    Attack_B();
+                    break;
+
+                case ENEMYAISTS.ATTACK_C: // 隕石を一列に降らせる
+                    Attack_C();
                     break;
 
                 case ENEMYAISTS.NORMALACTION: // 楕円状に回転して隕石を降らせる
@@ -71,12 +76,20 @@ namespace RocketStage
         // プレイヤーの真上に行って急降下
         private void Attack_A()
         {
-            StartCoroutine(Attack_ACoroutine());
+            if (!isAttacking)
+                StartCoroutine(Attack_ACoroutine());
         }
         // プレイヤーに隕石を狙い撃ち
         private void Attack_B()
         {
-            StartCoroutine(Attack_BCoroutine());
+            if (!isAttacking)
+                StartCoroutine(Attack_BCoroutine());
+        }
+        // 隕石を一列に降らせる
+        private void Attack_C()
+        {
+            if (!isAttacking)
+                StartCoroutine(Attack_CCoroutine());
         }
         // 楕円状に移動して隕石を相手に降らせる
         private void NormalAction()
@@ -84,7 +97,8 @@ namespace RocketStage
             // 隕石を振らせる
             lastBossCtrl.NormalMeteoAttack();
             // 楕円状に移動する
-            lastBossCtrl.EclipseMove();
+            if (!isAttacking)
+                StartCoroutine(EclipseMove());
         }
 
         private IEnumerator Attack_ACoroutine()
@@ -130,7 +144,7 @@ namespace RocketStage
 
             // 真ん中にいく
             float targetX = 0f;
-            float duration = GetDistancePlayerX() / (lastBossCtrl.speed * 2f);
+            float duration = Mathf.Abs(transform.position.x) / (lastBossCtrl.speed * 2f);
 
             lastBossCtrl.MoveToDestination(new Vector2(targetX, transform.position.y), duration);
 
@@ -153,5 +167,47 @@ namespace RocketStage
             SetAIState(ENEMYAISTS.WAIT, 1.0f);
         }
 
+        private IEnumerator Attack_CCoroutine()
+        {
+            isAttacking = true;
+
+            // 真ん中にいく
+            float targetX = 0f;
+            float duration = Mathf.Abs(transform.position.x) / (lastBossCtrl.speed * 2f);
+
+            lastBossCtrl.MoveToDestination(new Vector2(targetX, transform.position.y), duration);
+
+            yield return new WaitForSeconds(duration);
+
+            // 止まる
+            lastBossCtrl.ActionMove(0f, 0f);
+
+            // 左右から中央へ降らせる
+            for (float posX = 9.75f; posX >= 0f; posX -= 1.5f)
+            {
+                for (int dir = -1; dir <= 1; dir += 2)
+                {
+                    lastBossCtrl.DropOneMeteo(posX, dir);
+                }
+
+                yield return new WaitForSeconds(0.4f);
+            }
+
+            yield return new WaitForSeconds(2.0f);
+
+            isAttacking = false;
+            SetAIState(ENEMYAISTS.WAIT, 1.0f);
+        }
+
+        private IEnumerator EclipseMove()
+        {
+            isAttacking = true;
+            // 6秒間で2週する
+            lastBossCtrl.EclipseMove(3.0f);
+            yield return new WaitForSeconds(3.0f);
+            lastBossCtrl.EclipseMove(3.0f);
+            yield return new WaitForSeconds(3.0f);
+            isAttacking = false;
+        }
     }
 }

@@ -22,6 +22,9 @@ namespace RocketStage
         public float borderX = 12.0f;
         public float borderY = 11.0f;
 
+        [SerializeField]
+        private ParticleSystem breakEffect;
+
 
         // Start is called before the first frame update
         void OnEnable()
@@ -69,12 +72,10 @@ namespace RocketStage
             transform.localEulerAngles = new Vector3(0f, 0f, -Mathf.Atan2(vx, vy)*Mathf.Rad2Deg + 180f);
         }
 
-        /*private void OnTriggerEnter2D(Collider2D collision)
+        public void DestroyMeteo()
         {
-            if(collision.tag == "PlayerAttack")
-            {
-                Destroy(gameObject);
-            }
-        }*/
+            Instantiate(breakEffect.gameObject, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
     }
 }

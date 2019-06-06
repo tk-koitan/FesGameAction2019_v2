@@ -95,6 +95,22 @@ namespace RocketStage
                 isDead = true;
         }
 
+        public void GoNextScene()
+        {
+            audioSource.PlayOneShot(destroySE);
+            actionEnabled = false;
+            explosionEffect.transform.position = transform.position;
+            explosionEffect.gameObject.SetActive(true);
+            smokeEffect.gameObject.SetActive(true);
+
+            // カメラを揺らす
+            cam.DOShake();
+
+            transform.DOMove(
+                new Vector3(3.0f, -13f, 0f),
+                2.0f);
+        }
+
         public void DoBeginAnitmation1()
         {
             StartCoroutine(BeginAnimation1());
