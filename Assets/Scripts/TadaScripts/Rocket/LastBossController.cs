@@ -23,6 +23,8 @@ namespace RocketStage
 
         [SerializeField]
         private MeteoCreater meteoCreater;
+        [SerializeField]
+        private Transform[] eclipsePath;
 
         // === 内部パラメータ =============================================
         private float speedVx = 0.0f;
@@ -85,13 +87,33 @@ namespace RocketStage
             yield return new WaitForSeconds(time);
         }*/
 
-        public void EclipseMove()
+        public void EclipseMove(float time)
         {
-            if (transform.position.x >= posXMax) dir = -1f;
-            else if (transform.position.x <= -posXMax) dir = 1f;
+            speedVx = 0f;
+            speedVy = 0f;
+
+            // 禁断のDOTWeen使います
+            // 時計回りで楕円運動
+            // 始めに第何象限にいるのかを確かめる
+            int index = 0; // 左上から時計回りに0,1,2,3
+            if (transform.position.x > 0f) index++;
+            if (transform.position.y < 5f) index += 3 - index;
+
+            Vector3[] path = new Vector3[eclipsePath.Length];
+            for(int i = 0; i < eclipsePath.Length; i++)
+            {
+                path[i] = eclipsePath[(index + i) % eclipsePath.Length].transform.position;
+            }
+
+            transform.DOPath(path, time, PathType.CatmullRom).SetEase(Ease.OutQuad);
+
+            /*
+            if (transform.position.x >= posXMax * 0.9f) dir = -1f;
+            else if (transform.position.x <= -posXMax * 0.9f) dir = 1f;
 
             speedVy = 0f;
             speedVx = speed * dir;
+            */
         }
 
         public void NormalMeteoAttack()
@@ -114,6 +136,12 @@ namespace RocketStage
                 meteoCreater.MeteoSporne(posXMax, true);
                 homingMeteoTimer.TimeReset();
             }
+        }
+
+        // 一つの隕石を場所、角度を決めて落とす
+        public void DropOneMeteo(float posX, float dir)
+        {
+            meteoCreater.MeteoSporne(posX, dir);
         }
 
         public void ActionMove(float nx, float ny)

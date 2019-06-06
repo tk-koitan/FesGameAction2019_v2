@@ -64,6 +64,7 @@ namespace StageSelect
         private bool isMoving = false;
         private bool prevIsMoving = false;
         private bool actionEnabled = true;
+        private bool prevActionEnabled = true;
 
         Animator animator;
 
@@ -156,8 +157,10 @@ namespace StageSelect
                 return;
             }
             // あまりよくない
-            if(!ActionInput.actionEnabled)
+            if(ActionInput.actionEnabled != prevActionEnabled)
                 SwitchArrow(ActionInput.actionEnabled);
+
+            prevActionEnabled = ActionInput.actionEnabled;
 
             if (IsStageSpriteEnabled())
             {
@@ -433,6 +436,8 @@ namespace StageSelect
                 {
                     actionEnabled = false;
                     // 進むかの選択肢
+                    // 挑戦するステージのidを保存しておく
+                    StageTable.challengeStageId = nowStageId;
                     SceneManager.LoadScene("ShootingScene");
                 }
             }

@@ -12,6 +12,7 @@ namespace RocketStage
         NORMALACTION,  // 楕円状に移動して、ロケットを発射
         ATTACK_A,       // プレイヤーの真上に移動して急降下
         ATTACK_B,       // プレイヤーに隕石を集中砲火
+        ATTACK_C,       // 隕石を一列にして落とす
         TURN,         // その場で回転する
         FREEZ,        // 行動停止(ただし移動処理は継続する)
     }

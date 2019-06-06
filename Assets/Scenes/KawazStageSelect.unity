@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53573013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.4444447, y: -12, z: -10}
+  m_LocalPosition: {x: -4.4434934, y: -12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1436228210}
@@ -2869,7 +2869,7 @@ MonoBehaviour:
   stageId: 0
   stageSceneName: CamTestStage
   stageName: Start
-  stageSprite: {fileID: 21300000, guid: c52da50c488009f4caec4c237518aa16, type: 3}
+  stageSprite: {fileID: 21300000, guid: c5b1297c2746350469b0bad0ac109df9, type: 3}
   clearedColor: {r: 0.7632116, g: 0.9716981, b: 0.73794055, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
@@ -5652,9 +5652,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 1
-  stageSceneName: CamTestStage
+  stageSceneName: KaitoTestStage3
   stageName: Start
-  stageSprite: {fileID: 21300000, guid: c52da50c488009f4caec4c237518aa16, type: 3}
+  stageSprite: {fileID: 21300000, guid: c5b1297c2746350469b0bad0ac109df9, type: 3}
   clearedColor: {r: 0.7632116, g: 0.9716981, b: 0.73794055, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
@@ -5926,7 +5926,7 @@ MonoBehaviour:
   stageId: 2
   stageSceneName: Stage1345
   stageName: Hooooo
-  stageSprite: {fileID: 21300000, guid: f7c09c3d618a2cf408971d34ac28075d, type: 3}
+  stageSprite: {fileID: 21300000, guid: c5b1297c2746350469b0bad0ac109df9, type: 3}
   clearedColor: {r: 1, g: 0.5581, b: 0.5581, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 1077367569}
@@ -7021,9 +7021,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 4
-  stageSceneName: Kaitoteststage3
+  stageSceneName: WindStage
   stageName: RightEye
-  stageSprite: {fileID: 21300000, guid: fd80d2b052ee9474ab9f6bee02bca04f, type: 3}
+  stageSprite: {fileID: 21300000, guid: 5177b04c6f351634599d7797feadaf47, type: 3}
   clearedColor: {r: 0, g: 0, b: 0, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
@@ -9389,7 +9389,7 @@ MonoBehaviour:
   stageId: 5
   stageSceneName: SnakeTestStage
   stageName: LeftEye
-  stageSprite: {fileID: 21300000, guid: 4639b2da5921f5741ba7c986fe7ed32f, type: 3}
+  stageSprite: {fileID: 21300000, guid: c5b1297c2746350469b0bad0ac109df9, type: 3}
   clearedColor: {r: 0, g: 0, b: 0, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 0}
@@ -11079,7 +11079,7 @@ MonoBehaviour:
   stageId: 3
   stageSceneName: KaitoTestStage5
   stageName: LEFTHOOOO
-  stageSprite: {fileID: 21300000, guid: 4bdb3975058c7488eb20950c58c35d01, type: 3}
+  stageSprite: {fileID: 21300000, guid: 1b8dcd06fdc6f0442b5eee668ad2e997, type: 3}
   clearedColor: {r: 1, g: 0.5581, b: 0.5581, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 1476056242}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using RocketStage;
 using TadaLib;
-using UnityEngine.UI;
 
 namespace RocketStage {
     public class ShootingRocketController : BaseRocketController
@@ -27,7 +26,7 @@ namespace RocketStage {
         public int hpMax = 10;
 
         [SerializeField]
-        private Image[] hpImages;
+        private PlayerHPController[] hpImages;
 
         public float chargeSpeed = 1.0f;
         public float chargeMax = 4.0f;
@@ -35,6 +34,8 @@ namespace RocketStage {
         public float laserInterval = 0.5f;
 
         public float chargeLaserBorder = 2.0f;
+
+        public float hpDisplayTime = 3.0f;
 
         [SerializeField]
         private AudioClip normalLaserSE;
@@ -50,8 +51,9 @@ namespace RocketStage {
             // hpをコインの数にする
             // hpMax = coinNum;
             hp = hpMax;
-            // hp外の画像を消す
-            DeleteHpImage(30);
+
+            // hp分コインを表示させる
+            StartCoroutine(ShowHpImage(hp, hpDisplayTime));
 
             laserTimer = new Timer(laserInterval);
         }
@@ -59,7 +61,7 @@ namespace RocketStage {
         // Update is called once per frame
         protected override void Update()
         {
-            Debug.Log("hp : " + hp + " enabled : " + actionEnabled);
+            //Debug.Log("hp : " + hp + " enabled : " + actionEnabled);
             base.Update();
 
             if (!actionEnabled) return;
@@ -130,9 +132,15 @@ namespace RocketStage {
             {
                 return;
             }
-            explosionEffect.Play();
+            GameOver();
             isDead = true;
             // animator.SetTrigger("Dead");
+        }
+
+        private void GameOver()
+        {
+            GoNextScene();
+            FadeManager.Instance.LoadScene("KawazStageSelect", 2.0f);
         }
 
         public bool SetHp(int _hp, int _hpMax)
@@ -146,7 +154,16 @@ namespace RocketStage {
         {
             for(int i = Mathf.Max(hp, 0); i < hpBefore; i++)
             {
-                hpImages[i].gameObject.SetActive(false);
+                hpImages[i].DestroyCoin();
+            }
+        }
+
+        private IEnumerator ShowHpImage(int num, float time)
+        {
+            for(int i = 0; i < num; i++)
+            {
+                hpImages[i].gameObject.SetActive(true);
+                yield return new WaitForSeconds(time / (float)num);
             }
         }
 
@@ -155,6 +172,11 @@ namespace RocketStage {
             if(collision.tag == "DeadTrigger")
             {
                 ActionDamage(1);
+                collision.GetComponent<MeteoDrop>().DestroyMeteo();
+            }
+            if(collision.tag == "LastBoss")
+            {
+                ActionDamage(2);
             }
         }
     }
