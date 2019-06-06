@@ -22,19 +22,20 @@ public class Coin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!isGet && collision.tag == "Player")
+        if (!isGet && collision.tag == "Player")
         {
             isGet = true;
             audio.PlayOneShot(audio.clip);
             GameObject tmpObj = Instantiate(star, transform.position, Quaternion.identity);
             Destroy(tmpObj, star.GetComponent<ParticleSystem>().duration);
             transform.DOMoveY(0.5f, 0.5f).SetRelative();
-            Destroy(gameObject,0.5f);
+            CoinManager.coinNum++;
+            Destroy(gameObject, 0.5f);
         }
     }
 }

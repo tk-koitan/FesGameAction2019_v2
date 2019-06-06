@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 53501d137857743c2bdbe16cfa9cd043
+  - enabled: 1
     path: Assets/Scenes/RocketStage.unity
     guid: 4fe060bed17655d4087dfd3902ea911b
   - enabled: 1
