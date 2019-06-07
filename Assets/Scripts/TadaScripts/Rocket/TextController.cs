@@ -102,10 +102,10 @@ namespace RocketStage
         {
             if (isPrepareTime) return;
 
-            if (ActionInput.GetButtonDown(ButtonCode.Cancel))
+            /*if (ActionInput.GetButtonDown(ButtonCode.Cancel))
             {
                 ScenerioEnd();
-            }
+            }*/
 
             if (isEventing)
             {
@@ -202,6 +202,8 @@ namespace RocketStage
 
         private IEnumerator WarningAnimation()
         {
+            MusicManager.Play(MusicManager.Instance.bgm5);
+
             audioSource.pitch = 1.0f;
             audioSource.PlayOneShot(warningSE);
 

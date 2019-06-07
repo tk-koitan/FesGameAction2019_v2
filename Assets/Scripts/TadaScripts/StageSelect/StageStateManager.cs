@@ -38,6 +38,10 @@ namespace StageSelect
         private GameObject flogUI;
         [SerializeField]
         private TextMeshProUGUI rocketText;
+        [SerializeField]
+        private TextMeshProUGUI firstText1;
+        [SerializeField]
+        private TextMeshProUGUI firstText2;
 
         [System.Serializable]
         public class ArrowList
@@ -106,6 +110,12 @@ namespace StageSelect
                     nowStageState = child.GetComponent<StageState>();
                     break;
                 }
+            }
+
+            if (!StageTable.alreadyExplanation)
+            {
+                StartCoroutine(FirstExplanation());
+                StageTable.alreadyExplanation = true;
             }
 
             ChangeStageInfo();
@@ -451,6 +461,24 @@ namespace StageSelect
         private void ShowRocketExplanation()
         {
             rocketText.gameObject.SetActive(true);
+        }
+
+        private IEnumerator FirstExplanation()
+        {
+            ActionInput.actionEnabled = false;
+
+            yield return new WaitForSeconds(2.0f);
+
+            firstText1.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(2.0f);
+
+            firstText2.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(3.0f);
+
+
+            ActionInput.actionEnabled = true;
         }
     }
 }

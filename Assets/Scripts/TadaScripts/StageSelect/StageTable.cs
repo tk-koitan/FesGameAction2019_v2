@@ -9,6 +9,8 @@ namespace StageSelect
     {
         public static StageTable instance;
 
+        public static bool alreadyExplanation = false;
+
         public static bool[] stageClearedList = new bool[32];
         public static bool[] prevStageClearedList = new bool[32];
 
