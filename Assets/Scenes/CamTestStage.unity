@@ -1732,7 +1732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238687666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8461175, y: 1.9999995, z: -10}
+  m_LocalPosition: {x: 2.8456874, y: 1.9999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10972,7 +10972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438898180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8461175, y: -0.32000017, z: -10}
+  m_LocalPosition: {x: 2.8456874, y: -0.32000017, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 778066555}
@@ -12599,7 +12599,7 @@ PrefabInstance:
     - target: {fileID: 4198175575610517214, guid: 6bc21c03ce9bb8c46b6cf666d3d641a5,
         type: 3}
       propertyPath: moveAngle
-      value: -0.5
+      value: 2.67
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc21c03ce9bb8c46b6cf666d3d641a5, type: 3}
@@ -19848,6 +19848,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 378639996059254827, guid: cc21086ff43e14579acf24d8d4302ef8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 378639996059254822, guid: cc21086ff43e14579acf24d8d4302ef8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19969,6 +19974,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1936906881, guid: cc21086ff43e14579acf24d8d4302ef8, type: 3}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616191347, guid: cc21086ff43e14579acf24d8d4302ef8, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

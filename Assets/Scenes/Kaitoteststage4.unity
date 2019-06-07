@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1804,7 +1804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238687666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8466876, y: 1.9999995, z: -10}
+  m_LocalPosition: {x: 2.8461175, y: 1.9999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13785,7 +13785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438898180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8466876, y: -0.32000017, z: -10}
+  m_LocalPosition: {x: 2.8461175, y: -0.32000017, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 778066555}
@@ -15692,7 +15692,8 @@ MonoBehaviour:
   canvasAnimator: {fileID: 0}
   startSE: {fileID: 8300000, guid: 970596041e67a4e30819b46a317a7a4b, type: 3}
   countdownSE: {fileID: 8300000, guid: 0fce5e05392e24eaf89db8a714a53f94, type: 3}
-  ClearEffect: {fileID: 0}
+  ClearEffect: {fileID: 3210964552037818468, guid: 4640ea53a64794cb7b81c787391d2cfe,
+    type: 3}
 --- !u!114 &1704111339
 MonoBehaviour:
   m_ObjectHideFlags: 0
