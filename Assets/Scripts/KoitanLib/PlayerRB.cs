@@ -94,7 +94,11 @@ public class PlayerRB : MonoBehaviour
         animator = GetComponent<Animator>(); // tada
         actionInput = ActionInput.Instatnce;
         audioSource = GetComponent<AudioSource>();
-        wind = GameObject.Find("Wind").GetComponent<WindPatericle>();
+        GameObject tmpObj = GameObject.Find("Wind");
+        if(tmpObj!=null)
+        {
+            wind = tmpObj.GetComponent<WindPatericle>();
+        }
         defaultGravity = gravity;
     }
 
@@ -284,7 +288,7 @@ public class PlayerRB : MonoBehaviour
             //風
             if (wind != null)
             {
-                v.x += -Mathf.Cos((ActionInput.GetJoyconVector().y + 90) * Mathf.Deg2Rad) * 0.1f;
+                v.x += -Mathf.Cos((ActionInput.GetJoyconVector().y + 90) * Mathf.Deg2Rad) * 0.25f;
             }
             v.x = Mathf.Clamp(v.x, -maxVx * 2, maxVx * 2);
         }
@@ -346,7 +350,7 @@ public class PlayerRB : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (v.y > 0 && !isGround) return;
+        //if (v.y > 0 && !isGround) return;
         isContactRight = false;
         isContactLeft = false;
 
@@ -354,6 +358,15 @@ public class PlayerRB : MonoBehaviour
         groundNormal = collision.contacts[0].normal;
         groundObj = collision.contacts[0].collider.gameObject;
         Vector2 center = transform.position;
+
+        if(groundNormal.y<-0.5f)
+        {
+            power.y = -0.05f;
+            v.y = -0.05f;
+            Debug.Log("天井にぶつかった:" + groundNormal.y);
+            return;
+        }
+
         float dir = (v + center - collision.contacts[0].point).magnitude;
 
         float slopeMinY = Mathf.Sin((90 - slopeMaxDeg) * Mathf.Deg2Rad);
