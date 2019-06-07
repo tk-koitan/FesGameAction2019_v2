@@ -60,8 +60,12 @@ namespace RocketStage
 
             // ここで第三者のコメント
 
+            MusicManager.Play(MusicManager.Instance.bgm5);
+
+
             // バックを暗くする
             feedObj(backImage, 1.0f, 0.7f);
+
 
             yield return new WaitForSeconds(1.0f);
 
