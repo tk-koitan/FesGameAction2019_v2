@@ -6003,7 +6003,7 @@ MonoBehaviour:
   stageId: 2
   stageSceneName: CamTestStage
   stageName: NormalStage
-  stageSprite: {fileID: 21300000, guid: c5b1297c2746350469b0bad0ac109df9, type: 3}
+  stageSprite: {fileID: 21300000, guid: 77a96880c3abc40d6b56839e97108d9d, type: 3}
   clearedColor: {r: 1, g: 0.5581, b: 0.5581, a: 1}
   nextStage:
     <upStage>k__BackingField: {fileID: 1077367569}
