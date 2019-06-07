@@ -34,6 +34,8 @@ namespace RocketStage
         private Image leftChara;
         [SerializeField]
         private Image rightChara;
+        [SerializeField]
+        private Image lastBossChara;
 
         private int currentLine = 0; // 現在の行番号
         private string currentText = string.Empty;
@@ -75,6 +77,7 @@ namespace RocketStage
             uiText.text = "";
             leftChara.gameObject.SetActive(false);
             rightChara.gameObject.SetActive(false);
+            lastBossChara.gameObject.SetActive(false);
         }
 
         private void StartText()
@@ -92,6 +95,7 @@ namespace RocketStage
             uiText.text = "";
             leftChara.gameObject.SetActive(false);
             rightChara.gameObject.SetActive(false);
+            lastBossChara.gameObject.SetActive(false);
         }
 
         public void ScenarioUpdate()
@@ -153,6 +157,7 @@ namespace RocketStage
                 isEventing = true;
                 leftChara.gameObject.SetActive(false);
                 rightChara.gameObject.SetActive(false);
+                lastBossChara.gameObject.SetActive(false);
             }
 
             // 想定表示時間と現在の時刻をキャッシュ
@@ -173,15 +178,25 @@ namespace RocketStage
             {
                 leftChara.gameObject.SetActive(true);
                 rightChara.gameObject.SetActive(false);
+                lastBossChara.gameObject.SetActive(false);
                 //by koitan
                 audioSource.pitch = 1.5f;
+            }
+            else if(scenarios[currentLine - 1].charaIndex == 1)
+            {
+                leftChara.gameObject.SetActive(false);
+                rightChara.gameObject.SetActive(true);
+                lastBossChara.gameObject.SetActive(false);
+                //by koitan
+                audioSource.pitch = 3f;
             }
             else
             {
                 leftChara.gameObject.SetActive(false);
-                rightChara.gameObject.SetActive(true);
-                //by koitan
-                audioSource.pitch = 3f;
+                rightChara.gameObject.SetActive(false);
+                lastBossChara.gameObject.SetActive(true);
+
+                audioSource.pitch = 0.8f;
             }
         }
 

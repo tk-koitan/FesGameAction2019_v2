@@ -189,7 +189,7 @@ public class CameraFollow : MonoBehaviour
     {
         
     }
-
+    /*
     private void OnDrawGizmos()
     {
         if (param.borderCheck)
@@ -204,6 +204,6 @@ public class CameraFollow : MonoBehaviour
             GizmosExtensions2D.DrawWireRect2D(param.borderRightBottom.position, 1.0f, 100f);
             GizmosExtensions2D.DrawWireRect2D(param.borderRightBottom.position, 100f, 0.4f);
             */
-        }
-    }
+       /* }
+    }*/
 }

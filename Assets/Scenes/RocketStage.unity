@@ -5582,7 +5582,7 @@ RectTransform:
   m_GameObject: {fileID: 429906822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5414258, y: 1.5414258, z: 1.5414258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1311429917}
   m_RootOrder: 3
@@ -6003,8 +6003,8 @@ MonoBehaviour:
   border: {x: 9, y: 10}
   actionEnabled: 0
   startAnimationTime: 4
-  destroySE: {fileID: 0}
   leftDistance: 10000
+  destroySE: {fileID: 0}
 --- !u!50 &578331749
 Rigidbody2D:
   serializedVersion: 4
@@ -6513,8 +6513,8 @@ MonoBehaviour:
   border: {x: 9, y: 10}
   actionEnabled: 0
   startAnimationTime: 4
-  destroySE: {fileID: 8300000, guid: 6f569b4af1b0243f5bde39ba483d031e, type: 3}
   leftDistance: 10000
+  destroySE: {fileID: 8300000, guid: 6f569b4af1b0243f5bde39ba483d031e, type: 3}
 --- !u!50 &685116505
 Rigidbody2D:
   serializedVersion: 4
@@ -7205,6 +7205,7 @@ MonoBehaviour:
   lifeTime: 2.2
   borderX: 12
   borderY: 11
+  breakEffect: {fileID: 0}
 --- !u!58 &1006649681
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13829,6 +13830,7 @@ MonoBehaviour:
   lifeTime: 2.2
   borderX: 10
   borderY: 5
+  breakEffect: {fileID: 0}
 --- !u!58 &1878641489
 CircleCollider2D:
   m_ObjectHideFlags: 0
