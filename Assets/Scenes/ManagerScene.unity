@@ -344,6 +344,8 @@ MonoBehaviour:
   bgm1: {fileID: 11400000, guid: d69b5d80e7e874c1e9ad3447e3d811c5, type: 2}
   bgm2: {fileID: 11400000, guid: 458662a257c7842abaa991b3ef2b73d7, type: 2}
   bgm3: {fileID: 11400000, guid: 1d334650895414131902d1998ebc38dd, type: 2}
+  bgm4: {fileID: 11400000, guid: cd805d404d2e54b90962c049d43215b6, type: 2}
+  bgm5: {fileID: 0}
   startTime: 0
   endTime: 0
   isIntro: 0

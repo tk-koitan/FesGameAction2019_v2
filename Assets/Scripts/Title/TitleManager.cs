@@ -45,6 +45,7 @@ public class TitleManager : MonoBehaviour
         cursorDefaultPos = cursor.transform.localPosition;
         StartPlacement();
         nowIndex = 0;
+        MusicManager.Play(MusicManager.Instance.bgm4);
     }
 
     // Update is called once per frame

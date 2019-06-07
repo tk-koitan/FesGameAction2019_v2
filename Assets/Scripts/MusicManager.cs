@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     }
 
     public static AudioSource audioSource;
-    public BGMSource bgm1, bgm2, bgm3;
+    public BGMSource bgm1, bgm2, bgm3, bgm4, bgm5;
     public float startTime, endTime;
     private float currentTime;
     public bool isIntro = false;
@@ -27,7 +27,7 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(audioSource.time>=startTime)
+        if (audioSource.time >= startTime)
         {
             isIntro = false;
         }
@@ -36,7 +36,7 @@ public class MusicManager : MonoBehaviour
             audioSource.time = startTime;
             audioSource.Play();
         }
-        if(!isIntro && audioSource.time<=0)
+        if (!isIntro && audioSource.time <= 0)
         {
             audioSource.time = startTime;
             audioSource.Play();
