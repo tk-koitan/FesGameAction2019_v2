@@ -6936,7 +6936,7 @@ MonoBehaviour:
   warningText: {fileID: 429906823}
   leftChara: {fileID: 95839778}
   rightChara: {fileID: 622868229}
-  lastBossChara: {fileID: 0}
+  lastBossChara: {fileID: 988239749}
   messageSE: {fileID: 8300000, guid: 011c29b07db534e3db1348fa530e30b0, type: 3}
   warningSE: {fileID: 0}
 --- !u!4 &769310218
