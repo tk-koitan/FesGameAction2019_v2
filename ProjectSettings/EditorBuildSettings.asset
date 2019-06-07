@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WindStage.unity
     guid: f95dddbb1490c4930bb4958287eb80ba
+  - enabled: 1
+    path: Assets/Scenes/StaffRoll.unity
+    guid: 8efec4de28092604198695b9a35a9609
   m_configObjects: {}

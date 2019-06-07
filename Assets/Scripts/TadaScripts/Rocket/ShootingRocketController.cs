@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RocketStage;
 using TadaLib;
+using DG.Tweening;
 
 namespace RocketStage {
     public class ShootingRocketController : BaseRocketController
@@ -52,9 +53,6 @@ namespace RocketStage {
             // hpMax = coinNum;
             hp = hpMax;
 
-            // hp分コインを表示させる
-            StartCoroutine(ShowHpImage(hp, hpDisplayTime));
-
             laserTimer = new Timer(laserInterval);
         }
 
@@ -91,6 +89,8 @@ namespace RocketStage {
                 chargeEffect.SetActive(false);
                 laserTimer.TimeReset();
             }
+
+            if (isDead) GameOver();
         }
 
         private void CreateNormalLaser()
@@ -114,6 +114,8 @@ namespace RocketStage {
         // ダメージを受ける
         public void ActionDamage(int damage)
         {
+            if (!actionEnabled) return;
+
             if (hp <= 0)
             {
                 return;
@@ -140,7 +142,7 @@ namespace RocketStage {
         private void GameOver()
         {
             GoNextScene();
-            FadeManager.Instance.LoadScene("KawazStageSelect", 2.0f);
+            //FadeManager.Instance.LoadScene("KawazStageSelect", 2.0f);
         }
 
         public bool SetHp(int _hp, int _hpMax)
@@ -158,6 +160,12 @@ namespace RocketStage {
             }
         }
 
+        public void ShowHpImage()
+        {
+            // hp分コインを表示させる
+            StartCoroutine(ShowHpImage(hp, hpDisplayTime));
+        }
+
         private IEnumerator ShowHpImage(int num, float time)
         {
             for(int i = 0; i < num; i++)
@@ -166,6 +174,40 @@ namespace RocketStage {
                 yield return new WaitForSeconds(time / (float)num);
             }
         }
+
+        // クリア後に出て行くアニメーション
+        public void DoEndAnimation()
+        {
+            actionEnabled = false;
+
+            /*DOTween.To(
+                () => transform.eulerAngles,
+                num => transform.eulerAngles = num,
+                new Vector3(0f, 0f, 0f),
+                startAnimationTime / 2f);
+                */
+            transform.DOMoveY(
+                12.0f,
+                startAnimationTime);
+        }
+        /*
+        private IEnumerator EndAnimation()
+        {
+            actionEnabled = false;
+
+            DOTween.To(
+                () => transform.eulerAngles,
+                num => transform.eulerAngles = num,
+                new Vector3(0f, 0f, 0f),
+                startAnimationTime / 2f);
+
+            transform.DOMoveY(
+                1.0f,
+                startAnimationTime);
+
+            yield return new WaitForSeconds(startAnimationTime);
+            //actionEnabled = true;
+        }*/
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

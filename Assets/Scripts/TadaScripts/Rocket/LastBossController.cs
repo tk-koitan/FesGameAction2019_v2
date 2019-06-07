@@ -17,14 +17,20 @@ namespace RocketStage
         [System.NonSerialized] public float hp = 50.0f;
         [System.NonSerialized] public float speed = 6.0f;
         [System.NonSerialized] public bool activeSts = false;
+        [System.NonSerialized] public bool isDead = false;
 
-        [System.NonSerialized] public bool attackEnabled = false;
         [System.NonSerialized] public int attackDamage = 1;
+
+        public bool actionEnabled = false;
+        public float animationSpeed = 1.0f;
 
         [SerializeField]
         private MeteoCreater meteoCreater;
         [SerializeField]
         private Transform[] eclipsePath;
+
+        [SerializeField]
+        protected ParticleSystem explosionEffect;
 
         // === 内部パラメータ =============================================
         private float speedVx = 0.0f;
@@ -33,6 +39,8 @@ namespace RocketStage
 
         // === キャッシュ =================================================
         [System.NonSerialized] public Animator animator;
+
+        Tween moveTween;
 
         // メテオ関係
         [SerializeField]
@@ -64,6 +72,7 @@ namespace RocketStage
 
         private void FixedUpdate()
         {
+            if (!actionEnabled) return;
             //Debug.LogFormat("speedVx:{0}, speedVy{1}", speedVx, speedVy);
             transform.position += new Vector3(speedVx, speedVy, 0f) * Time.fixedDeltaTime;
         }
@@ -105,7 +114,7 @@ namespace RocketStage
                 path[i] = eclipsePath[(index + i) % eclipsePath.Length].transform.position;
             }
 
-            transform.DOPath(path, time, PathType.CatmullRom).SetEase(Ease.OutQuad);
+            moveTween = transform.DOPath(path, time, PathType.CatmullRom).SetEase(Ease.OutQuad);
 
             /*
             if (transform.position.x >= posXMax * 0.9f) dir = -1f;
@@ -181,7 +190,12 @@ namespace RocketStage
             {
                 return;
             }
+            explosionEffect.transform.position = transform.position;
+            explosionEffect.gameObject.SetActive(true);
+
             activeSts = false;
+            isDead = true;
+            moveTween.Kill();
             // animator.SetTrigger("Dead");
         }
 
@@ -190,6 +204,22 @@ namespace RocketStage
             hp = _hp;
             hpMax = _hpMax;
             return (hp <= 0);
+        }
+
+        // 出てくるときのアニメーション
+        public void BeginAnimation()
+        {
+            transform.DOMoveY(
+            4.0f,
+            2.0f / animationSpeed);
+        }
+
+        // 出て行くときのアニメーション
+        public void EndAnimation()
+        {
+            transform.DOMoveY(
+            12.0f,
+            2.0f / animationSpeed);
         }
     }
 }
