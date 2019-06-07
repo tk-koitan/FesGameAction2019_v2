@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
 using StageSelect;
+using UnityEngine.SceneManagement;
 
 namespace StageSelect
 {
@@ -218,7 +219,8 @@ namespace StageSelect
                             menuCtrl.menuState.menuStart();
                             break;
                         case (int)Item.TITLE:
-                            menuCtrl.menuState = new Title();
+                            SceneManager.LoadScene("Title");
+                            //menuCtrl.menuState = new Title();
                             break;
                     }
                 }
