@@ -36,6 +36,8 @@ public class TitleManager : MonoBehaviour
     private float masterVol;
 
     private AudioSource audioSource;
+
+    private int ScreenSizeNum = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -127,6 +129,32 @@ public class TitleManager : MonoBehaviour
     void Option()
     {
         cursor.gameObject.SetActive(true);
+        titleUi.text = "オプション\nがめんせってい\nおんりょうせってい";
+        maxIndex = 2;
+        nowIndex = 0;
+        addIndex = 1;
+        onSelecteds[0] = SetButtonPush(VideoOption);
+        onSelecteds[1] = SetButtonPush(BgmOption);
+        onCancel = StartPlacement;
+        onCancel += () => nowIndex = 2;
+    }
+
+    void VideoOption()
+    {
+        cursor.gameObject.SetActive(true);
+        maxIndex = 2;
+        nowIndex = 0;
+        addIndex = 1;
+        titleUi.text = "がめんせってい\nフルスクリーン\u3000< " + ScreenIsFull() + " >\nかいぞうど < " + ScreenSizeString() + " >";
+        onSelecteds[0] = SetFullScreen();
+        onSelecteds[1] = SetScreenSize();
+        onCancel = Option;
+        onCancel += () => nowIndex = 0;
+    }
+
+    void BgmOption()
+    {
+        cursor.gameObject.SetActive(true);
         maxIndex = 4;
         nowIndex = 0;
         addIndex = 1;
@@ -138,8 +166,8 @@ public class TitleManager : MonoBehaviour
         onSelecteds[1] = SetBGM();
         onSelecteds[2] = SetSE();
         onSelecteds[3] = SetDefault();
-        onCancel = StartPlacement;
-        onCancel += () => nowIndex = 2;
+        onCancel = Option;
+        onCancel += () => nowIndex = 1;
     }
 
     OnSelected SetMaster()
@@ -200,6 +228,82 @@ public class TitleManager : MonoBehaviour
             }
             titleUi.text = "おんりょうせってい … <sprite=7>でへんこう\n全体 < " + (masterVol + 80) + " >\nBGM < " + (bgmVol + 80) + " >\nこうかおん < " + (seVol + 80) + " >\n元にもどす";
         };
+    }
+
+    OnSelected SetFullScreen()
+    {
+        return () =>
+        {
+            if (ActionInput.GetButtonDown(ButtonCode.RightArrow) || ActionInput.GetButtonDown(ButtonCode.LeftArrow))
+            {
+                Screen.fullScreen = !Screen.fullScreen;
+            }
+            titleUi.text = "がめんせってい\nフルスクリーン\u3000< " + ScreenIsFull() + " >\nかいぞうど < " + ScreenSizeString() + " >";
+        };
+    }
+
+    string ScreenIsFull()
+    {
+        if (Screen.fullScreen)
+        {
+            return "ON";
+        }
+        else return "OFF";
+    }
+
+    OnSelected SetScreenSize()
+    {
+        return () =>
+        {
+            if (ActionInput.GetButtonDown(ButtonCode.RightArrow))
+            {
+                ScreenSizeNum++;
+                ScreenSizeNum = (ScreenSizeNum + 4) % 4;
+                ScreenSizeChange();
+            }
+            if(ActionInput.GetButtonDown(ButtonCode.LeftArrow))
+            {
+                ScreenSizeNum--;
+                ScreenSizeNum = (ScreenSizeNum + 4) % 4;
+                ScreenSizeChange();
+            }
+            titleUi.text = "がめんせってい\nフルスクリーン\u3000< " + ScreenIsFull() + " >\nかいぞうど < "+ ScreenSizeString() +" >";
+        };
+    }
+
+    string ScreenSizeString()
+    {
+        switch(ScreenSizeNum)
+        {
+            case 0:
+                return "640 × 360";
+            case 1:
+                return "1280 × 720";
+            case 2:
+                return "1440 × 810";
+            case 3:
+                return "1920 × 1080";
+        }
+        return "";
+    }
+
+    void ScreenSizeChange()
+    {
+        switch (ScreenSizeNum)
+        {
+            case 0:
+                Screen.SetResolution(640, 360, Screen.fullScreen);
+                break;
+            case 1:
+                Screen.SetResolution(1280, 720, Screen.fullScreen);
+                break;
+            case 2:
+                Screen.SetResolution(1440, 810, Screen.fullScreen);
+                break;
+            case 3:
+                Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                break;
+        }
     }
 
     /*
