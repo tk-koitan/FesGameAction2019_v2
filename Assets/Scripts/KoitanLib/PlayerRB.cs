@@ -110,13 +110,29 @@ public class PlayerRB : MonoBehaviour
         if (ActionInput.GetButton(ButtonCode.RightArrow))
         {
             power.x += accelVx * Time.deltaTime * 60;
-            power.x = Mathf.Min(power.x, maxVx);
+            if(power.x>maxVx)
+            {
+                power.x -= accelVx * Time.deltaTime * 60;
+                power.x = Mathf.Max(power.x, maxVx);
+            }
+            else
+            {
+                power.x = Mathf.Min(power.x, maxVx);
+            }
             direction = 1;
         }
         else if (ActionInput.GetButton(ButtonCode.LeftArrow))
         {
             power.x -= accelVx * Time.deltaTime * 60;
-            power.x = Mathf.Max(power.x, -maxVx);
+            if (power.x < -maxVx)
+            {
+                power.x += accelVx * Time.deltaTime * 60;
+                power.x = Mathf.Min(power.x, -maxVx);
+            }
+            else
+            {
+                power.x = Mathf.Max(power.x, -maxVx);
+            }
             direction = -1;
         }
         else
