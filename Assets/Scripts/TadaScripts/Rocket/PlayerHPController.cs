@@ -23,7 +23,7 @@ namespace RocketStage
         {
             //float distance = Vector2.Distance(transform.position, setPosition.position);
             //float time = distance / speed;
-            Debug.Log("この座標にいきます : " + setPosition.position);
+            //Debug.Log("この座標にいきます : " + setPosition.position);
             transform.DOMove(
                 setPosition.position,
                 time

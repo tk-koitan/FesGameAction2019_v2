@@ -54,6 +54,8 @@ namespace RocketStage
 
         public virtual void FixedUpdate()
         {
+            if (!lastBossCtrl.actionEnabled) return;
+
             if (BeginEnemyCommonWork())
             {
                 FixedUpdateAI();
