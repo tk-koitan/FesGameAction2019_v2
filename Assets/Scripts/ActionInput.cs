@@ -28,6 +28,7 @@ public class ActionInput : MonoBehaviour
     private Dictionary<ButtonCode, bool> nowButton = new Dictionary<ButtonCode, bool>();
     private Dictionary<ButtonCode, bool> oldButton = new Dictionary<ButtonCode, bool>();
 
+    private static float deadline = 0.5f;
 
     static ActionInput instance;
     public static ActionInput Instatnce
@@ -313,13 +314,13 @@ public class ActionInput : MonoBehaviour
                     case ButtonCode.Jump:
                         return joycon.GetButton(Joycon.Button.DPAD_LEFT);
                     case ButtonCode.UpArrow:
-                        return joycon.GetStick()[0] > 0;
+                        return joycon.GetStick()[0] > deadline;
                     case ButtonCode.DownArrow:
-                        return joycon.GetStick()[0] < 0;
+                        return joycon.GetStick()[0] < -deadline;
                     case ButtonCode.LeftArrow:
-                        return joycon.GetStick()[1] > 0;
+                        return joycon.GetStick()[1] > deadline;
                     case ButtonCode.RightArrow:
-                        return joycon.GetStick()[1] < 0;
+                        return joycon.GetStick()[1] < -deadline;
                     case ButtonCode.Cancel:
                         return joycon.GetButton(Joycon.Button.DPAD_DOWN);
                 }
@@ -410,13 +411,13 @@ public class ActionInput : MonoBehaviour
                     case ButtonCode.Jump:
                         return joycon.GetButton(Joycon.Button.DPAD_RIGHT);
                     case ButtonCode.UpArrow:
-                        return joycon.GetStick()[0] < 0;
+                        return joycon.GetStick()[0] < -deadline;
                     case ButtonCode.DownArrow:
-                        return joycon.GetStick()[0] > 0;
+                        return joycon.GetStick()[0] > deadline;
                     case ButtonCode.LeftArrow:
-                        return joycon.GetStick()[1] < 0;
+                        return joycon.GetStick()[1] < -deadline;
                     case ButtonCode.RightArrow:
-                        return joycon.GetStick()[1] > 0;
+                        return joycon.GetStick()[1] > deadline;
                     case ButtonCode.Cancel:
                         return joycon.GetButton(Joycon.Button.DPAD_UP);
                 }

@@ -107,7 +107,7 @@ public class PlayerRB : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (ActionInput.GetButton(ButtonCode.RightArrow))
+        if (ActionInput.GetButton(ButtonCode.RightArrow) && !isSquat)
         {
             power.x += accelVx * Time.deltaTime * 60;
             if(power.x>maxVx)
@@ -121,7 +121,7 @@ public class PlayerRB : MonoBehaviour
             }
             direction = 1;
         }
-        else if (ActionInput.GetButton(ButtonCode.LeftArrow))
+        else if (ActionInput.GetButton(ButtonCode.LeftArrow) && !isSquat)
         {
             power.x -= accelVx * Time.deltaTime * 60;
             if (power.x < -maxVx)
