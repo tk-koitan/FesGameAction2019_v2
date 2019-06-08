@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RocketStage;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace RocketStage
 {
@@ -20,7 +21,8 @@ namespace RocketStage
         // Update is called once per frame
         void Update()
         {
-            GetComponent<Image>().fillAmount = lastBossCtrl.hp / lastBossCtrl.hpMax;
+            if(lastBossCtrl.actionEnabled)
+                GetComponent<Image>().fillAmount = lastBossCtrl.hp / lastBossCtrl.hpMax;
         }
     }
 }

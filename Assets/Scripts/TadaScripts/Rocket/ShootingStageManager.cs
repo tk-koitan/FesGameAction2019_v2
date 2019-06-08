@@ -100,6 +100,7 @@ namespace RocketStage
 
             // HPを表示する
             rocketCtrl.GetComponent<ShootingRocketController>().ShowHpImage();
+            lastBossCtrl.ShowHpImage();
 
             yield return new WaitForSeconds(1.0f);
 

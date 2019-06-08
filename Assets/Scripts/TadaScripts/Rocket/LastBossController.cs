@@ -4,6 +4,7 @@ using UnityEngine;
 using RocketStage;
 using DG.Tweening;
 using TadaLib;
+using UnityEngine.UI;
 
 namespace RocketStage
 {
@@ -31,6 +32,9 @@ namespace RocketStage
 
         [SerializeField]
         protected ParticleSystem explosionEffect;
+
+        [SerializeField]
+        private Image hpBar;
 
         // === 内部パラメータ =============================================
         private float speedVx = 0.0f;
@@ -220,6 +224,16 @@ namespace RocketStage
             transform.DOMoveY(
             12.0f,
             2.0f / animationSpeed);
+        }
+
+        // HPを0から最大まで表示する
+        public void ShowHpImage()
+        {
+            DOTween.To(
+                () => hpBar.fillAmount = 0f,
+                num => hpBar.fillAmount = num,
+                1.0f,
+                1.0f);
         }
     }
 }

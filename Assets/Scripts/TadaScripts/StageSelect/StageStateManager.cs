@@ -467,11 +467,11 @@ namespace StageSelect
         {
             ActionInput.actionEnabled = false;
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             firstText1.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(2.2f);
 
             firstText2.gameObject.SetActive(true);
 
