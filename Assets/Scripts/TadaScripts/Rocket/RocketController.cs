@@ -9,6 +9,11 @@ namespace RocketStage
 {
     public class RocketController : BaseRocketController
     {
+        [SerializeField]
+        private HukidashiController hukidashiR;
+        [SerializeField]
+        private HukidashiController hukidashiL;
+
         protected override void Start()
         {
             base.Start();
@@ -24,6 +29,17 @@ namespace RocketStage
 
             if (isDead)
                 GoNextScene();
+
+            if (ActionInput.GetButtonDown(ButtonCode.Cancel))
+            {
+                if(!hukidashiL.isExist)
+                    hukidashiL.FlowStart();
+            }
+            if (ActionInput.GetButtonDown(ButtonCode.Jump))
+            {
+                if (!hukidashiR.isExist)
+                    hukidashiR.FlowStart();
+            }
         }
 
         private void SetLeftDistance()
