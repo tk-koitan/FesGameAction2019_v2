@@ -17,6 +17,6 @@ public class ShadowPuzzleRotator : Mover
 
     protected override void UpdatedAction()
     {
-        transform.Rotate(0f, 0f, 1f);
+        transform.Rotate(0f, 0f, Time.deltaTime * 60f);
     }
 }
